@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVO BRASIL | START THE JOURNEY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root { 
+            --primary: #ff4d00; 
+            --bg: #030303; 
+            --glass: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; cursor: none; }
+        body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; overflow: hidden; }
+
+        /* Cursor Customizado (Consistência Visual) */
+        #cursor { position: fixed; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; pointer-events: none; z-index: 10000; }
+        #cursor-follower { 
+            position: fixed; width: 40px; height: 40px; border: 1px solid var(--primary); 
+            border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.15s ease-out;
+            background: rgba(255, 77, 0, 0.05); backdrop-filter: blur(4px);
+        }
+
+        /* Nav Minimalista */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 35px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+        .logo { font-family: 'Archivo Black'; font-size: 2rem; text-decoration: none; color: white; italic; letter-spacing: -2px; }
+        .logo span { color: var(--primary); }
+
+        /* Layout Split Imersivo */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+
+        /* Lado Esquerdo - Branding & Info */
+        .contact-info { 
+            padding: 150px 10% 50px; display: flex; flex-direction: column; justify-content: center;
+            background: radial-gradient(circle at 0% 50%, #111 0%, var(--bg) 100%);
+        }
+        .contact-info h1 { font-family: 'Archivo Black'; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.85; margin-bottom: 40px; text-transform: uppercase; }
+        .contact-info p { font-size: 1.2rem; color: #555; line-height: 1.6; max-width: 450px; margin-bottom: 50px; font-weight: 300; }
+
+        .contact-details { display: grid; grid-template-columns: 1fr; gap: 40px; }
+        .detail-item h4 { color: var(--primary); letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 10px; }
+        .detail-item p { color: white; font-size: 1.1rem; margin: 0; font-weight: 700; }
+
+        /* Lado Direito - O Formulário High-End */
+        .contact-form-side { 
+            background: #050505; display: flex; align-items: center; justify-content: center; padding: 50px;
+            border-left: 1px solid var(--border);
+        }
+        .form-container { width: 100%; max-width: 550px; }
+
+        .input-group { position: relative; margin-bottom: 60px; }
+        .input-group label { 
+            position: absolute; top: -25px; left: 0; color: #333; 
+            font-size: 0.65rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .input-group input, .input-group textarea { 
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid #111; 
+            padding: 15px 0; color: white; font-size: 1.3rem; outline: none; transition: 0.3s;
+            font-family: 'Outfit', sans-serif;
+        }
+        .input-group input:focus, .input-group textarea:focus { border-bottom-color: var(--primary); }
+        .input-group input:focus + label { color: var(--primary); }
+
+        /* Botão Surreal de Envio */
+        .btn-submit { 
+            width: 100%; padding: 25px; background: transparent; color: white;
+            border: 1px solid var(--primary); font-family: 'Archivo Black'; 
+            text-transform: uppercase; letter-spacing: 5px; cursor: pointer;
+            transition: 0.5s; position: relative; overflow: hidden;
+        }
+        .btn-submit:hover { background: var(--primary); color: black; box-shadow: 0 0 50px rgba(255, 77, 0, 0.3); }
+
+        /* Footer Discreto */
+        .contact-footer { position: absolute; bottom: 40px; width: 100%; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 4px; pointer-events: none; }
+
+        @media (max-width: 1100px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .contact-info { padding-top: 150px; min-height: auto; }
+            .contact-form-side { border-left: none; border-top: 1px solid var(--border); }
+            body { overflow-y: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <nav>
+        <a href="index.html" class="logo">EVO<span>.</span></a>
+        <div style="display: flex; gap: 40px;">
+            <a href="portfolio.html" style="color:white; text-decoration:none; font-weight:900; font-size:0.7rem; letter-spacing:3px;">GALLERY</a>
+            <a href="contato.html" style="color:var(--primary); text-decoration:none; font-weight:900; font-size:0.7rem; letter-spacing:3px;">CONTACT</a>
+        </div>
+    </nav>
+
+    <main class="contact-wrapper">
+        <section class="contact-info reveal">
+            <h1>LET'S<br><span style="color:var(--primary)">CRAFT</span><br>ART.</h1>
+            <p>Seja para um projeto de vitrificação ou um PPF total, cada máquina recebe um tratamento de peça única. Agende sua consultoria técnica.</p>
+            
+            <div class="contact-details">
+                <div class="detail-item">
+                    <h4>Location</h4>
+                    <p>Studio Privativo, São Paulo - SP</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Direct Line</h4>
+                    <p>+55 11 99999-9999</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Instagram</h4>
+                    <p>@evo.brasilofc</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-form-side">
+            <div class="form-container reveal">
+                <form action="#">
+                    <div class="input-group">
+                        <input type="text" required>
+                        <label>Name / Organization</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" required>
+                        <label>Email Address</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" required>
+                        <label>Vehicle Model / Year</label>
+                    </div>
+                    <div class="input-group">
+                        <textarea rows="4" required></textarea>
+                        <label>What do you envision for your car?</label>
+                    </div>
+                    <button type="submit" class="btn-submit">Request Experience</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div class="contact-footer">EVO BRASIL AUTOMOTIVE STYLING © 2026 - ALL RIGHTS RESERVED</div>
+
+    <script>
+        ScrollReveal().reveal('.reveal', { distance: '60px', duration: 1500, interval: 200, origin: 'bottom' });
+        
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX - 20 + 'px';
+            follower.style.top = e.clientY - 20 + 'px';
+        });
+    </script>
+</body>
+</html>

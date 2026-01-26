@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVO BRASIL | THE ULTIMATE AUTOMOTIVE EXPERIENCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root { 
+            --primary: #ff4d00; 
+            --bg: #030303; 
+            --accent: #111111;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; cursor: none; }
+        body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+        /* Custom Cursor */
+        #cursor { position: fixed; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; pointer-events: none; z-index: 10000; }
+        #cursor-follower { 
+            position: fixed; width: 40px; height: 40px; border: 1px solid var(--primary); 
+            border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.15s ease-out;
+            background: rgba(255, 77, 0, 0.05); backdrop-filter: blur(4px);
+        }
+
+        /* Nav Modern */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 30px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+        .logo { font-family: 'Archivo Black'; font-size: 2rem; text-decoration: none; color: white; italic; letter-spacing: -2px; }
+        .logo span { color: var(--primary); }
+
+        /* Hero Cinema */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 120%;
+            background: linear-gradient(rgba(0,0,0,0.4), var(--bg)), url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070');
+            background-size: cover; background-position: center; background-attachment: fixed; z-index: -1;
+        }
+        .hero-content h1 { font-family: 'Archivo Black'; font-size: clamp(4rem, 15vw, 11rem); line-height: 0.8; letter-spacing: -8px; italic; text-align: center; }
+
+        /* Seção de Números / Impacto */
+        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); padding: 100px 10%; background: #000; border-bottom: 1px solid #111; }
+        .stat-item h2 { font-family: 'Archivo Black'; font-size: 3rem; color: var(--primary); }
+        .stat-item p { font-size: 0.7rem; letter-spacing: 3px; color: #444; text-transform: uppercase; font-weight: 900; }
+
+        /* The Method - Long Section */
+        .methodology { padding: 150px 10%; }
+        .method-step { display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; margin-bottom: 200px; align-items: center; }
+        .method-step:nth-child(even) { direction: rtl; }
+        .method-step:nth-child(even) .step-text { direction: ltr; }
+
+        .step-number { font-family: 'Archivo Black'; font-size: 15rem; color: rgba(255,255,255,0.02); position: absolute; z-index: -1; margin-top: -100px; }
+        .step-text h3 { font-family: 'Archivo Black'; font-size: 4rem; margin-bottom: 30px; line-height: 0.9; }
+        .step-text p { font-size: 1.3rem; color: #888; font-weight: 300; line-height: 1.8; }
+        .step-img { height: 600px; overflow: hidden; border: 1px solid #222; }
+        .step-img img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s; }
+        .step-img:hover img { transform: scale(1.1); }
+
+        /* Bento Grid Services */
+        .bento-services { padding: 100px 5%; display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 20px; }
+        .bento-item { background: var(--surface); border: 1px solid #111; padding: 40px; display: flex; flex-direction: column; justify-content: flex-end; transition: 0.5s; }
+        .bento-item:hover { border-color: var(--primary); background: #080808; }
+        .bento-item.wide { grid-column: span 2; }
+        .bento-item.tall { grid-row: span 2; }
+        .bento-item h4 { font-family: 'Archivo Black'; font-size: 1.8rem; margin-bottom: 10px; }
+
+        /* Testimonials Glass */
+        .testimonials { padding: 150px 10%; background: radial-gradient(circle at center, #0a0a0a 0%, #030303 100%); }
+        .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .test-card { background: var(--glass); backdrop-filter: blur(10px); padding: 50px; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; }
+        .test-card p { font-style: italic; font-size: 1.1rem; color: #ccc; margin-bottom: 30px; }
+        .test-card span { font-weight: 900; color: var(--primary); letter-spacing: 2px; font-size: 0.8rem; }
+
+        /* Final CTA Big */
+        .mega-cta { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: #000; position: relative; overflow: hidden; }
+        .mega-cta h2 { font-family: 'Archivo Black'; font-size: 12vw; -webkit-text-stroke: 1px #222; color: transparent; text-transform: uppercase; transition: 0.5s; }
+        .mega-cta:hover h2 { color: white; -webkit-text-stroke: 0px; }
+        .cta-button-wrap { position: absolute; z-index: 10; }
+
+        footer { padding: 100px 10%; border-top: 1px solid #111; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <nav>
+        <a href="#" class="logo">EVO<span>.</span></a>
+        <div style="display: flex; gap: 40px;">
+            <a href="portfolio.html" style="color:white; text-decoration:none; font-weight:900; font-size:0.7rem; letter-spacing:3px;">GALLERY</a>
+            <a href="contato.html" style="color:white; text-decoration:none; font-weight:900; font-size:0.7rem; letter-spacing:3px;">EXPERIENCE</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="reveal">CRAFTING<br><span style="color:var(--primary)">LEGENDS.</span></h1>
+            <p class="reveal" style="letter-spacing: 15px; text-align: center; margin-top: 40px;">THE PINNACLE OF DETAILING</p>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat-item reveal"><h2>12</h2><p>Anos de Maestria</p></div>
+        <div class="stat-item reveal"><h2>850+</h2><p>Projetos Entregues</p></div>
+        <div class="stat-item reveal"><h2>9H</h2><p>Dureza de Proteção</p></div>
+        <div class="stat-item reveal"><h2>∞</h2><p>Paixão Automotiva</p></div>
+    </div>
+
+    <section class="methodology">
+        <div class="method-step reveal">
+            <div class="step-text">
+                <span class="step-number">01</span>
+                <h3>ANÁLISE<br>FORENSE</h3>
+                <p>Nossa jornada começa onde o olho humano falha. Utilizamos luzes de espectro total para mapear cada micro-risco e imperfeição na superfície do verniz.</p>
+            </div>
+            <div class="step-img"><img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1000"></div>
+        </div>
+
+        <div class="method-step reveal">
+            <div class="step-text">
+                <span class="step-number">02</span>
+                <h3>CORREÇÃO<br>CIRÚRGICA</h3>
+                <p>Não apenas polimos. Nivelamos o verniz molecularmente para atingir o reflexo perfeito, eliminando casca de laranja e hologramas com precisão alemã.</p>
+            </div>
+            <div class="step-img"><img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1000"></div>
+        </div>
+    </section>
+
+    <section class="bento-services">
+        <div class="bento-item wide tall reveal" style="background: url('https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?q=80&w=1000') center/cover;">
+            <h4>FULL PPF</h4>
+            <p>Blindagem invisível contra o mundo.</p>
+        </div>
+        <div class="bento-item reveal"><h4>VITRIFICAÇÃO</h4><p>Brilho eterno.</p></div>
+        <div class="bento-item reveal"><h4>INTERIOR</h4><p>Padrão Concours.</p></div>
+        <div class="bento-item wide reveal"><h4>WHEEL COATING</h4><p>Proteção térmica extrema para rodas.</p></div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="reveal" style="font-family:'Archivo Black'; font-size: 3rem; margin-bottom: 100px; text-align: center;">TRUSTED BY <span style="color:var(--primary)">COLLECTORS</span></h2>
+        <div class="test-grid">
+            <div class="test-card reveal">
+                <p>"O nível de detalhamento da EVO é algo que eu só vi em estúdios da Europa. Meu Porsche saiu melhor que zero."</p>
+                <span>RICARDO M. - COLECIONADOR</span>
+            </div>
+            <div class="test-card reveal">
+                <p>"A transparência do PPF deles é absurda. Você não vê que o carro está protegido, mas sente a segurança."</p>
+                <span>ANDRÉ S. - PROPRIETÁRIO GT3</span>
+            </div>
+            <div class="test-card reveal">
+                <p>"Incrível. O atendimento e a tecnologia envolvida justificam cada centavo do investimento."</p>
+                <span>FABIO L. - FERRARI F8</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="mega-cta">
+        <h2 class="reveal">TIME TO<br>SHINE</h2>
+        <div class="cta-button-wrap reveal">
+            <a href="contato.html" style="background:var(--primary); color:black; padding: 25px 60px; text-decoration:none; font-weight:900; letter-spacing:5px; text-transform:uppercase; border-radius:50px; font-size:1.2rem;">Get Started</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <div class="logo">EVO<span>.</span></div>
+            <p style="color:#444; margin-top:20px;">The next level of automotive aesthetics.</p>
+        </div>
+        <div><h5 style="color:var(--primary); margin-bottom:20px;">EXPLORE</h5><p>The Lab</p><p>Heritage</p></div>
+        <div><h5 style="color:var(--primary); margin-bottom:20px;">CONNECT</h5><p>Instagram</p><p>WhatsApp</p></div>
+    </footer>
+
+    <script>
+        ScrollReveal().reveal('.reveal', { distance: '80px', duration: 1500, interval: 200, origin: 'bottom' });
+        
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX - 20 + 'px';
+            follower.style.top = e.clientY - 20 + 'px';
+        });
+    </script>
+</body>
+</html>
