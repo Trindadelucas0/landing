@@ -3,90 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVO BRASIL | START THE JOURNEY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <title>EVO BRASIL | Private Consultation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <style>
         :root { 
             --primary: #ff4d00; 
-            --bg: #030303; 
-            --glass: rgba(255, 255, 255, 0.02);
-            --border: rgba(255, 255, 255, 0.08);
+            --bg: #000000; 
+            --text-dim: #666;
+            --border: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; cursor: none; }
-        body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; overflow: hidden; }
+        body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
 
-        /* Cursor Customizado (Consistência Visual) */
-        #cursor { position: fixed; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; pointer-events: none; z-index: 10000; }
+        /* Cursor Elegante (Fino e discreto) */
+        #cursor { position: fixed; width: 4px; height: 4px; background: white; border-radius: 50%; pointer-events: none; z-index: 10000; }
         #cursor-follower { 
-            position: fixed; width: 40px; height: 40px; border: 1px solid var(--primary); 
-            border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.15s ease-out;
-            background: rgba(255, 77, 0, 0.05); backdrop-filter: blur(4px);
+            position: fixed; width: 40px; height: 40px; border: 0.5px solid rgba(255, 255, 255, 0.2); 
+            border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.2s ease-out;
         }
 
-        /* Nav Minimalista */
+        /* Nav Minimalista (Arquitetônica) */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 35px 6%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
+            position: fixed; top: 0; width: 100%; padding: 40px 6%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
-        .logo { font-family: 'Archivo Black'; font-size: 2rem; text-decoration: none; color: white; italic; letter-spacing: -2px; }
+        .logo { font-weight: 600; font-size: 1.2rem; letter-spacing: 4px; text-decoration: none; color: white; text-transform: uppercase; }
         .logo span { color: var(--primary); }
+        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 40px; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; transition: 0.4s; }
+        .nav-links a:hover { color: white; }
 
-        /* Layout Split Imersivo */
-        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
-
-        /* Lado Esquerdo - Branding & Info */
-        .contact-info { 
-            padding: 150px 10% 50px; display: flex; flex-direction: column; justify-content: center;
-            background: radial-gradient(circle at 0% 50%, #111 0%, var(--bg) 100%);
+        /* Layout de Galeria de Arte */
+        .main-wrapper { 
+            display: flex; flex-direction: column; align-items: center; padding-top: 200px;
         }
-        .contact-info h1 { font-family: 'Archivo Black'; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.85; margin-bottom: 40px; text-transform: uppercase; }
-        .contact-info p { font-size: 1.2rem; color: #555; line-height: 1.6; max-width: 450px; margin-bottom: 50px; font-weight: 300; }
 
-        .contact-details { display: grid; grid-template-columns: 1fr; gap: 40px; }
-        .detail-item h4 { color: var(--primary); letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 10px; }
-        .detail-item p { color: white; font-size: 1.1rem; margin: 0; font-weight: 700; }
+        .header-text { text-align: center; max-width: 800px; margin-bottom: 120px; }
+        .header-text span { color: var(--primary); text-transform: uppercase; letter-spacing: 8px; font-size: 0.7rem; font-weight: 600; margin-bottom: 20px; display: block; }
+        .header-text h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 100; line-height: 1.1; letter-spacing: -2px; }
 
-        /* Lado Direito - O Formulário High-End */
-        .contact-form-side { 
-            background: #050505; display: flex; align-items: center; justify-content: center; padding: 50px;
-            border-left: 1px solid var(--border);
+        /* Formulário Invisível */
+        .form-section { width: 100%; max-width: 700px; padding: 0 20px 200px; }
+        
+        .field { position: relative; margin-bottom: 80px; border-bottom: 1px solid var(--border); transition: 0.5s; }
+        .field:focus-within { border-bottom-color: white; }
+        
+        .field label { 
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-dim);
+            display: block; margin-bottom: 15px; transition: 0.4s;
         }
-        .form-container { width: 100%; max-width: 550px; }
+        .field:focus-within label { color: var(--primary); }
 
-        .input-group { position: relative; margin-bottom: 60px; }
-        .input-group label { 
-            position: absolute; top: -25px; left: 0; color: #333; 
-            font-size: 0.65rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
-            transition: 0.3s;
+        .field input, .field textarea {
+            width: 100%; background: transparent; border: none; padding: 10px 0 20px;
+            color: white; font-size: 1.1rem; font-family: 'Outfit', sans-serif; outline: none;
+            font-weight: 300;
         }
-        .input-group input, .input-group textarea { 
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid #111; 
-            padding: 15px 0; color: white; font-size: 1.3rem; outline: none; transition: 0.3s;
-            font-family: 'Outfit', sans-serif;
+
+        /* Botão de Alta-Costura */
+        .submit-wrap { display: flex; justify-content: center; margin-top: 40px; }
+        .btn-send {
+            background: white; color: black; padding: 25px 80px; border: none;
+            text-transform: uppercase; font-weight: 600; letter-spacing: 4px; font-size: 0.7rem;
+            cursor: pointer; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .input-group input:focus, .input-group textarea:focus { border-bottom-color: var(--primary); }
-        .input-group input:focus + label { color: var(--primary); }
+        .btn-send:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(255,255,255,0.1); background: var(--primary); color: white; }
 
-        /* Botão Surreal de Envio */
-        .btn-submit { 
-            width: 100%; padding: 25px; background: transparent; color: white;
-            border: 1px solid var(--primary); font-family: 'Archivo Black'; 
-            text-transform: uppercase; letter-spacing: 5px; cursor: pointer;
-            transition: 0.5s; position: relative; overflow: hidden;
+        /* Footer Estilo Editorial */
+        footer {
+            width: 100%; padding: 80px 6%; border-top: 1px solid var(--border);
+            display: grid; grid-template-columns: 1fr 1fr; align-items: center;
         }
-        .btn-submit:hover { background: var(--primary); color: black; box-shadow: 0 0 50px rgba(255, 77, 0, 0.3); }
+        .footer-info { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px; line-height: 2; text-transform: uppercase; }
+        .footer-social { text-align: right; }
+        .footer-social a { color: white; text-decoration: none; font-size: 0.7rem; margin-left: 30px; letter-spacing: 2px; }
 
-        /* Footer Discreto */
-        .contact-footer { position: absolute; bottom: 40px; width: 100%; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 4px; pointer-events: none; }
-
-        @media (max-width: 1100px) {
-            .contact-wrapper { grid-template-columns: 1fr; }
-            .contact-info { padding-top: 150px; min-height: auto; }
-            .contact-form-side { border-left: none; border-top: 1px solid var(--border); }
-            body { overflow-y: auto; }
+        @media (max-width: 768px) {
+            nav { padding: 30px 6%; }
+            .nav-links { display: none; }
+            footer { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .footer-social { text-align: center; }
         }
     </style>
 </head>
@@ -97,62 +94,63 @@
 
     <nav>
         <a href="index.html" class="logo">EVO<span>.</span></a>
-        <div style="display: flex; gap: 40px;">
-            <a href="portfolio.html" style="color:white; text-decoration:none; font-weight:900; font-size:0.7rem; letter-spacing:3px;">GALLERY</a>
-            <a href="contato.html" style="color:var(--primary); text-decoration:none; font-weight:900; font-size:0.7rem; letter-spacing:3px;">CONTACT</a>
+        <div class="nav-links">
+            <a href="portfolio.html">Works</a>
+            <a href="contato.html" style="color:white">Inquire</a>
         </div>
     </nav>
 
-    <main class="contact-wrapper">
-        <section class="contact-info reveal">
-            <h1>LET'S<br><span style="color:var(--primary)">CRAFT</span><br>ART.</h1>
-            <p>Seja para um projeto de vitrificação ou um PPF total, cada máquina recebe um tratamento de peça única. Agende sua consultoria técnica.</p>
-            
-            <div class="contact-details">
-                <div class="detail-item">
-                    <h4>Location</h4>
-                    <p>Studio Privativo, São Paulo - SP</p>
-                </div>
-                <div class="detail-item">
-                    <h4>Direct Line</h4>
-                    <p>+55 11 99999-9999</p>
-                </div>
-                <div class="detail-item">
-                    <h4>Instagram</h4>
-                    <p>@evo.brasilofc</p>
-                </div>
-            </div>
-        </section>
+    <main class="main-wrapper">
+        <div class="header-text reveal">
+            <span>The Journey Begins</span>
+            <h1>Sua máquina merece um novo padrão de existência. Entre em contato para uma consultoria privada.</h1>
+        </div>
 
-        <section class="contact-form-side">
-            <div class="form-container reveal">
-                <form action="#">
-                    <div class="input-group">
-                        <input type="text" required>
-                        <label>Name / Organization</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" required>
-                        <label>Email Address</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" required>
-                        <label>Vehicle Model / Year</label>
-                    </div>
-                    <div class="input-group">
-                        <textarea rows="4" required></textarea>
-                        <label>What do you envision for your car?</label>
-                    </div>
-                    <button type="submit" class="btn-submit">Request Experience</button>
-                </form>
-            </div>
+        <section class="form-section reveal">
+            <form action="#">
+                <div class="field">
+                    <label>Seu Nome</label>
+                    <input type="text" placeholder="Como devemos chamá-lo?">
+                </div>
+                <div class="field">
+                    <label>O Veículo</label>
+                    <input type="text" placeholder="Modelo, Ano e Cor">
+                </div>
+                <div class="field">
+                    <label>O Objetivo</label>
+                    <input type="text" placeholder="PPF, Vitrificação ou Detalhamento Completo?">
+                </div>
+                <div class="field">
+                    <label>Observações Privadas</label>
+                    <textarea rows="2" placeholder="Algum detalhe específico que devemos saber?"></textarea>
+                </div>
+                
+                <div class="submit-wrap">
+                    <button type="submit" class="btn-send">Solicitar Consultoria</button>
+                </div>
+            </form>
         </section>
     </main>
 
-    <div class="contact-footer">EVO BRASIL AUTOMOTIVE STYLING © 2026 - ALL RIGHTS RESERVED</div>
+    <footer>
+        <div class="footer-info">
+            EVO BRASIL — ESTÉTICA AUTOMOTIVA DE ELITE<br>
+            SÃO PAULO, BRASIL
+        </div>
+        <div class="footer-social">
+            <a href="#">Instagram</a>
+            <a href="#">WhatsApp</a>
+        </div>
+    </footer>
 
     <script>
-        ScrollReveal().reveal('.reveal', { distance: '60px', duration: 1500, interval: 200, origin: 'bottom' });
+        ScrollReveal().reveal('.reveal', { 
+            distance: '40px', 
+            duration: 2000, 
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            interval: 300,
+            origin: 'bottom' 
+        });
         
         const cursor = document.getElementById('cursor');
         const follower = document.getElementById('cursor-follower');
