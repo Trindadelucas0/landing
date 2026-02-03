@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,93 +8,250 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <style>
-        :root { 
-            --primary: #ff4d00; 
-            --bg: #000000; 
+        :root {
+            --primary: #ff4d00;
+            --bg: #000000;
             --text-dim: #666;
             --border: rgba(255, 255, 255, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; cursor: none; }
-        body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        body {
+            background: var(--bg);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
 
         /* Cursor Elegante (Fino e discreto) */
-        #cursor { position: fixed; width: 4px; height: 4px; background: white; border-radius: 50%; pointer-events: none; z-index: 10000; }
-        #cursor-follower { 
-            position: fixed; width: 40px; height: 40px; border: 0.5px solid rgba(255, 255, 255, 0.2); 
-            border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.2s ease-out;
+        #cursor {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        #cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 0.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: 0.2s ease-out;
         }
 
         /* Nav Minimalista (Arquitetônica) */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 40px 6%;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 40px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
         }
-        .logo { font-weight: 600; font-size: 1.2rem; letter-spacing: 4px; text-decoration: none; color: white; text-transform: uppercase; }
-        .logo span { color: var(--primary); }
-        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 40px; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; transition: 0.4s; }
-        .nav-links a:hover { color: white; }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 40px;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: 0.4s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
 
         /* Layout de Galeria de Arte */
-        .main-wrapper { 
-            display: flex; flex-direction: column; align-items: center; padding-top: 200px;
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 200px;
         }
 
-        .header-text { text-align: center; max-width: 800px; margin-bottom: 120px; }
-        .header-text span { color: var(--primary); text-transform: uppercase; letter-spacing: 8px; font-size: 0.7rem; font-weight: 600; margin-bottom: 20px; display: block; }
-        .header-text h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 100; line-height: 1.1; letter-spacing: -2px; }
+        .header-text {
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 120px;
+        }
+
+        .header-text span {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .header-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 100;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
 
         /* Formulário Invisível */
-        .form-section { width: 100%; max-width: 700px; padding: 0 20px 200px; }
-        
-        .field { position: relative; margin-bottom: 80px; border-bottom: 1px solid var(--border); transition: 0.5s; }
-        .field:focus-within { border-bottom-color: white; }
-        
-        .field label { 
-            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-dim);
-            display: block; margin-bottom: 15px; transition: 0.4s;
+        .form-section {
+            width: 100%;
+            max-width: 700px;
+            padding: 0 20px 200px;
         }
-        .field:focus-within label { color: var(--primary); }
 
-        .field input, .field textarea {
-            width: 100%; background: transparent; border: none; padding: 10px 0 20px;
-            color: white; font-size: 1.1rem; font-family: 'Outfit', sans-serif; outline: none;
+        .field {
+            position: relative;
+            margin-bottom: 80px;
+            border-bottom: 1px solid var(--border);
+            transition: 0.5s;
+        }
+
+        .field:focus-within {
+            border-bottom-color: white;
+        }
+
+        .field label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 15px;
+            transition: 0.4s;
+        }
+
+        .field:focus-within label {
+            color: var(--primary);
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 10px 0 20px;
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            outline: none;
             font-weight: 300;
         }
 
         /* Botão de Alta-Costura */
-        .submit-wrap { display: flex; justify-content: center; margin-top: 40px; }
-        .btn-send {
-            background: white; color: black; padding: 25px 80px; border: none;
-            text-transform: uppercase; font-weight: 600; letter-spacing: 4px; font-size: 0.7rem;
-            cursor: pointer; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .submit-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
         }
-        .btn-send:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(255,255,255,0.1); background: var(--primary); color: white; }
+
+        .btn-send {
+            background: white;
+            color: black;
+            padding: 25px 80px;
+            border: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-send:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            background: var(--primary);
+            color: white;
+        }
 
         /* Footer Estilo Editorial */
         footer {
-            width: 100%; padding: 80px 6%; border-top: 1px solid var(--border);
-            display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+            width: 100%;
+            padding: 80px 6%;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
         }
-        .footer-info { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px; line-height: 2; text-transform: uppercase; }
-        .footer-social { text-align: right; }
-        .footer-social a { color: white; text-decoration: none; font-size: 0.7rem; margin-left: 30px; letter-spacing: 2px; }
+
+        .footer-info {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            line-height: 2;
+            text-transform: uppercase;
+        }
+
+        .footer-social {
+            text-align: right;
+        }
+
+        .footer-social a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.7rem;
+            margin-left: 30px;
+            letter-spacing: 2px;
+        }
 
         @media (max-width: 768px) {
-            nav { padding: 30px 6%; }
-            .nav-links { display: none; }
-            footer { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-            .footer-social { text-align: center; }
+            nav {
+                padding: 30px 6%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-social {
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
     <nav>
-        <a href="index.html" class="logo">EVO<span>.</span></a>
+        <a href="index.html" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
         <div class="nav-links">
             <a href="portfolio.html">Works</a>
             <a href="contato.html" style="color:white">Inquire</a>
@@ -124,7 +282,7 @@
                     <label>Observações Privadas</label>
                     <textarea rows="2" placeholder="Algum detalhe específico que devemos saber?"></textarea>
                 </div>
-                
+
                 <div class="submit-wrap">
                     <button type="submit" class="btn-send">Solicitar Consultoria</button>
                 </div>
@@ -144,14 +302,14 @@
     </footer>
 
     <script>
-        ScrollReveal().reveal('.reveal', { 
-            distance: '40px', 
-            duration: 2000, 
+        ScrollReveal().reveal('.reveal', {
+            distance: '40px',
+            duration: 2000,
             easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
             interval: 300,
-            origin: 'bottom' 
+            origin: 'bottom'
         });
-        
+
         const cursor = document.getElementById('cursor');
         const follower = document.getElementById('cursor-follower');
 
@@ -163,4 +321,5 @@
         });
     </script>
 </body>
+
 </html>
