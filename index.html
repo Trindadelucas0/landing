@@ -69,6 +69,50 @@
         }
 
         /* Hero - motor atrás do EVO com parallax */
+        @keyframes hero-parallax-fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 0.22;
+            }
+        }
+
+        @keyframes hero-parallax-fade-mobile {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 0.18;
+            }
+        }
+
+        @keyframes hero-logo-entrance {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes hero-tagline-entrance {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -86,15 +130,15 @@
             background: url('img/motor/imagem-motor01.png') center center no-repeat;
             background-size: 55%;
             background-attachment: fixed;
-            opacity: 0.22;
             pointer-events: none;
+            animation: hero-parallax-fade 1.4s ease-out forwards;
         }
 
         @media (max-width: 768px) {
             .hero-motor-parallax {
                 background-attachment: scroll;
                 background-size: 70%;
-                opacity: 0.18;
+                animation: hero-parallax-fade-mobile 1.4s ease-out forwards;
             }
         }
 
@@ -123,6 +167,7 @@
             height: auto;
             display: block;
             filter: drop-shadow(0 0 60px rgba(255, 77, 0, 0.25));
+            animation: hero-logo-entrance 1s ease-out 0.35s both;
         }
 
         .hero-content .tagline {
@@ -140,6 +185,7 @@
             line-height: 1.3;
             text-align: center;
             z-index: 2;
+            animation: hero-tagline-entrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
         }
 
         @media (max-width: 768px) {
