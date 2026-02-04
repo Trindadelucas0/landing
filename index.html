@@ -687,8 +687,23 @@
             }
         }
 
+        .portas-destaque-card {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 48px 44px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .portas-destaque-card:hover {
+            border-color: rgba(255, 77, 0, 0.35);
+            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 77, 0, 0.08);
+        }
+
         .portas-destaque-texto {
-            padding-right: 24px;
+            padding: 0;
         }
 
         .portas-destaque-texto .portas-destaque-titulo {
@@ -714,84 +729,143 @@
         }
 
         .portas-destaque-texto .portas-destaque-sub {
-            font-size: clamp(1rem, 1.1vw, 1.12rem);
-            color: rgba(255, 255, 255, 0.65);
-            font-weight: 400;
-            line-height: 1.65;
-            letter-spacing: 0.5px;
-            max-width: 420px;
+            font-size: clamp(1rem, 1.05vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            letter-spacing: 0.03em;
         }
 
-        .portas-destaque-galeria {
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            grid-template-rows: repeat(4, 1fr);
-            gap: 14px;
-            min-height: 380px;
-        }
-
-        .portas-destaque-galeria .porta-destaque-item {
+        .portas-destaque-carousel {
             position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .portas-destaque-galeria .porta-destaque-item::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.2) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .portas-destaque-galeria .porta-destaque-item:hover {
-            border-color: rgba(255, 77, 0, 0.45);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 77, 0, 0.1);
-            transform: translateY(-6px) scale(1.02);
-        }
-
-        .portas-destaque-galeria .porta-destaque-item img {
             width: 100%;
-            height: 100%;
-            min-height: 140px;
+            max-width: 560px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .portas-destaque-carousel-inner {
+            display: flex;
+            width: 500%;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .porta-destaque-slide {
+            flex: 0 0 20%;
+            width: 20%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .porta-destaque-slide-card {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.3);
+            background: #0a0a0a;
+        }
+
+        .porta-destaque-slide-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
             object-fit: cover;
             display: block;
         }
 
-        .portas-destaque-galeria .porta-destaque-item:nth-child(1) {
-            grid-column: 1;
-            grid-row: 1 / 5;
+        .porta-destaque-slide-caption {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
+            letter-spacing: 0.03em;
+            max-width: 420px;
         }
 
-        .portas-destaque-galeria .porta-destaque-item:nth-child(2),
-        .portas-destaque-galeria .porta-destaque-item:nth-child(3),
-        .portas-destaque-galeria .porta-destaque-item:nth-child(4),
-        .portas-destaque-galeria .porta-destaque-item:nth-child(5) {
-            grid-column: 2;
+        .portas-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 1.8rem;
+            line-height: 1;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            z-index: 3;
+        }
+
+        .portas-carousel-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #000;
+        }
+
+        .portas-carousel-prev {
+            left: -12px;
+        }
+
+        .portas-carousel-next {
+            right: -12px;
+        }
+
+        .portas-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .portas-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .portas-dot:hover {
+            border-color: var(--primary);
+            background: rgba(255, 77, 0, 0.3);
+        }
+
+        .portas-dot.active {
+            background: var(--primary);
+            border-color: var(--primary);
         }
 
         @media (max-width: 600px) {
-            .portas-destaque-galeria {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                min-height: 0;
+            .portas-destaque-carousel {
+                max-width: 100%;
             }
 
-            .portas-destaque-galeria .porta-destaque-item:nth-child(1),
-            .portas-destaque-galeria .porta-destaque-item:nth-child(2),
-            .portas-destaque-galeria .porta-destaque-item:nth-child(3),
-            .portas-destaque-galeria .porta-destaque-item:nth-child(4),
-            .portas-destaque-galeria .porta-destaque-item:nth-child(5) {
-                grid-column: auto;
-                grid-row: auto;
+            .portas-carousel-prev {
+                left: 8px;
             }
 
-            .portas-destaque-galeria .porta-destaque-item img {
-                min-height: 0;
-                height: 220px;
+            .portas-carousel-next {
+                right: 8px;
+            }
+
+            .portas-carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+
+            .portas-destaque-card {
+                padding: 36px 28px;
             }
         }
 
@@ -1170,23 +1244,66 @@
 
             </div>
         </div>
-    
+
     </section>
 
     <section class="portas" id="portas">
         <h2 class="section-title reveal">PORTAS</h2>
         <div class="portas-destaque">
-            <div class="portas-destaque-texto">
-                <h3 class="portas-destaque-titulo">Portas que fecham <span>com qualidade</span></h3>
-                <p class="portas-destaque-sub">Acabamento, durabilidade e segurança. Cada modelo EVO foi pensado para
-                    valorizar sua obra e resistir ao tempo.</p>
+            <div class="portas-destaque-card">
+                <div class="portas-destaque-texto">
+                    <h3 class="portas-destaque-titulo">Portas que fecham <span>com qualidade</span></h3>
+                    <p class="portas-destaque-sub">Acabamento, durabilidade e segurança. Cada modelo EVO foi pensado
+                        para valorizar sua obra e resistir ao tempo.</p>
+                </div>
             </div>
-            <div class="portas-destaque-galeria">
-                <div class="porta-destaque-item"><img src="img/portas/porta01.png" alt="Porta enrolar destaque"></div>
-                <div class="porta-destaque-item"><img src="img/portas/porta02.png" alt="Porta enrolar destaque"></div>
-                <div class="porta-destaque-item"><img src="img/portas/porta03.png" alt="Porta enrolar destaque"></div>
-                <div class="porta-destaque-item"><img src="img/portas/porta04.png" alt="Porta enrolar destaque"></div>
-                <div class="porta-destaque-item"><img src="img/portas/porta05.png" alt="Porta enrolar destaque"></div>
+            <div class="portas-destaque-carousel">
+                <div class="portas-destaque-carousel-inner">
+                    <div class="porta-destaque-slide" data-index="0">
+                        <div class="porta-destaque-slide-card">
+                            <img src="img/portas/porta01.png" alt="Porta enrolar modelo 01">
+                        </div>
+                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 01 — Acabamento premium e
+                            resistência para sua obra.</p>
+                    </div>
+                    <div class="porta-destaque-slide" data-index="1">
+                        <div class="porta-destaque-slide-card">
+                            <img src="img/portas/porta02.png" alt="Porta enrolar modelo 02">
+                        </div>
+                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 02 — Segurança e durabilidade EVO.
+                        </p>
+                    </div>
+                    <div class="porta-destaque-slide" data-index="2">
+                        <div class="porta-destaque-slide-card">
+                            <img src="img/portas/porta03.png" alt="Porta enrolar modelo 03">
+                        </div>
+                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 03 — Design que valoriza qualquer
+                            ambiente.</p>
+                    </div>
+                    <div class="porta-destaque-slide" data-index="3">
+                        <div class="porta-destaque-slide-card">
+                            <img src="img/portas/porta04.png" alt="Porta enrolar modelo 04">
+                        </div>
+                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 04 — Qualidade que resiste ao
+                            tempo.</p>
+                    </div>
+                    <div class="porta-destaque-slide" data-index="4">
+                        <div class="porta-destaque-slide-card">
+                            <img src="img/portas/porta05.png" alt="Porta enrolar modelo 05">
+                        </div>
+                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 05 — Soluções EVO para o seu
+                            negócio.</p>
+                    </div>
+                </div>
+                <button type="button" class="portas-carousel-btn portas-carousel-prev" aria-label="Anterior">‹</button>
+                <button type="button" class="portas-carousel-btn portas-carousel-next" aria-label="Próxima">›</button>
+                <div class="portas-carousel-dots" role="tablist">
+                    <button type="button" class="portas-dot active" aria-label="Slide 1" data-index="0"></button>
+                    <button type="button" class="portas-dot" aria-label="Slide 2" data-index="1"></button>
+                    <button type="button" class="portas-dot" aria-label="Slide 3" data-index="2"></button>
+                    <button type="button" class="portas-dot" aria-label="Slide 4" data-index="3"></button>
+                    <button type="button" class="portas-dot" aria-label="Slide 5" data-index="4"></button>
+                </div>
             </div>
         </div>
         <div class="portas-carousel-wrap">
@@ -1295,7 +1412,35 @@
         });
         ScrollReveal().reveal('.portas-destaque-texto .portas-destaque-titulo', { origin: 'left', distance: '50px', duration: 1000, opacity: 0.7, viewFactor: 0.3 });
         ScrollReveal().reveal('.portas-destaque-sub', { origin: 'left', distance: '40px', duration: 900, delay: 120, opacity: 0.6, viewFactor: 0.3 });
-        ScrollReveal().reveal('.portas-destaque-galeria .porta-destaque-item', { interval: 80, origin: 'right', distance: '40px', duration: 800, opacity: 0.5, viewFactor: 0.2 });
+        ScrollReveal().reveal('.portas-destaque-carousel', { origin: 'right', distance: '40px', duration: 800, opacity: 0.6, viewFactor: 0.2 });
+
+        (function () {
+            var carousel = document.querySelector('.portas-destaque-carousel');
+            if (!carousel) return;
+            var inner = carousel.querySelector('.portas-destaque-carousel-inner');
+            var slides = carousel.querySelectorAll('.porta-destaque-slide');
+            var dots = carousel.querySelectorAll('.portas-dot');
+            var prev = carousel.querySelector('.portas-carousel-prev');
+            var next = carousel.querySelector('.portas-carousel-next');
+            var total = slides.length;
+            var index = 0;
+
+            function goTo(i) {
+                index = (i + total) % total;
+                inner.style.transform = 'translateX(-' + (index * 20) + '%)';
+                for (var j = 0; j < dots.length; j++) {
+                    dots[j].classList.toggle('active', j === index);
+                }
+            }
+
+            if (prev) prev.addEventListener('click', function () { goTo(index - 1); });
+            if (next) next.addEventListener('click', function () { goTo(index + 1); });
+            for (var k = 0; k < dots.length; k++) {
+                (function (idx) {
+                    dots[idx].addEventListener('click', function () { goTo(idx); });
+                })(k);
+            }
+        })();
     </script>
 </body>
 
