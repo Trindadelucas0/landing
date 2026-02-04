@@ -60,13 +60,24 @@
         nav {
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
-            padding: 30px 6%;
+            padding: 20px 6%;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        nav:hover {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
+            border-bottom-color: rgba(255, 77, 0, 0.15);
         }
 
         .logo {
@@ -76,19 +87,45 @@
         }
 
         .logo img {
-            height: 42px;
+            height: 118px;
             width: auto;
             display: block;
+            transition: opacity 0.25s ease;
+        }
+
+        .logo:hover img {
+            opacity: 0.95;
         }
 
         .nav-links a {
-            color: white;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            margin-left: 35px;
+            margin-left: 32px;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 3px;
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Header Portfolio */
@@ -112,26 +149,55 @@
         }
 
         /* Filtros de Categoria (Luxury Tabs) */
-        .filters {
-            padding: 50px 10%;
+        /* Stats — faixa igual ao index */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+            min-height: 200px;
+            padding: 88px 8%;
+            background: #000;
+            border-top: 1px solid rgba(255, 77, 0, 0.25);
+            border-bottom: 1px solid rgba(255, 77, 0, 0.25);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
             display: flex;
-            gap: 30px;
-            border-bottom: 1px solid #111;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .filter-btn {
-            color: #444;
-            text-transform: uppercase;
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 64px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
+        }
+
+        .stat-item h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
             font-weight: 900;
-            letter-spacing: 3px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.3s;
+            color: var(--primary);
+            letter-spacing: 0.02em;
+            line-height: 1.1;
         }
 
-        .filter-btn:hover,
-        .filter-btn.active {
-            color: var(--primary);
+        .stat-item p {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 14px;
         }
 
         /* Grid de Projetos Surreal */
@@ -315,6 +381,204 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 768px) {
+            nav .logo img {
+                height: 56px;
+            }
+
+            .nav-links a {
+                margin-left: 20px;
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+            }
+
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px 24px;
+                min-height: 240px;
+                padding: 64px 6%;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-item h2 {
+                font-size: 2.2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .logo img {
+                height: 48px;
+            }
+
+            .stats-bar {
+                padding: 48px 5%;
+                gap: 36px 16px;
+                min-height: 200px;
+            }
+
+            .stat-item h2 {
+                font-size: 1.9rem;
+            }
+        }
+
+        /* Footer completo */
+        footer {
+            padding: 88px 8% 64px;
+            padding-bottom: max(64px, env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(255, 77, 0, 0.18);
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px 32px;
+            align-items: start;
+            background: linear-gradient(180deg, #040404 0%, #030303 100%);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.7;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.7;
+            max-width: 340px;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        footer h5 {
+            color: var(--primary);
+            font-size: 0.72rem;
+            letter-spacing: 0.28em;
+            margin-bottom: 22px;
+            font-weight: 700;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            letter-spacing: 0.05em;
+            transition: color 0.25s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+        }
+
+        .footer-contact-item a {
+            margin-bottom: 0;
+            display: inline;
+        }
+
+        .footer-contact-item span {
+            color: var(--primary);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            min-width: 52px;
+        }
+
+        .footer-social {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 77, 0, 0.08);
+        }
+
+        .footer-copy {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 56px 5% max(40px, env(safe-area-inset-bottom));
+                gap: 40px;
+            }
+
+            footer p {
+                max-width: none;
+            }
+
+            .footer-contact-item {
+                justify-content: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -328,6 +592,7 @@
         <div class="nav-links">
             <a href="index.html">INICIO</a>
             <a href="portfolio.html" style="color:var(--primary)">PRODUTOS</a>
+            <a href="quem-somos.html">QUEM SOMOS</a>
             <a href="contato.html">CONTATO</a>
         </div>
     </nav>
@@ -336,11 +601,23 @@
         <h1 class="reveal">THE<br><span style="color:var(--primary)">ULTIMATE</span><br>COLLECTION.</h1>
     </header>
 
-    <div class="filters reveal">
-        <div class="filter-btn active">Todos</div>
-        <div class="filter-btn">Porsche</div>
-        <div class="filter-btn">Supercars</div>
-        <div class="filter-btn">Restoration</div>
+    <div class="stats-bar">
+        <div class="stat-item reveal">
+            <h2>50+</h2>
+            <p>Produtos</p>
+        </div>
+        <div class="stat-item reveal">
+            <h2>AC & DC</h2>
+            <p>Automatizadores</p>
+        </div>
+        <div class="stat-item reveal">
+            <h2>Portas</h2>
+            <p>Enroláveis e Mais</p>
+        </div>
+        <div class="stat-item reveal">
+            <h2>Brasil</h2>
+            <p>Cobertura Nacional</p>
+        </div>
     </div>
 
     <section class="project-section">
@@ -407,6 +684,31 @@
             style="background:var(--primary); color:black; padding: 25px 60px; text-decoration:none; font-weight:900; letter-spacing:5px; margin-top:50px; text-transform:uppercase;">Start
             a Project</a>
     </div>
+
+    <footer>
+        <div class="footer-brand">
+            <p>Automatizadores e portas. Qualidade que faz a diferença.</p>
+        </div>
+        <div class="footer-nav">
+            <h5>NAVEGAR</h5>
+            <a href="index.html#automatizadores">Automatizadores</a>
+            <a href="index.html#portas">Portas</a>
+            <a href="portfolio.html">Galeria</a>
+            <a href="quem-somos.html">Quem Somos</a>
+        </div>
+        <div class="footer-contact">
+            <h5>CONTATO</h5>
+            <div class="footer-contact-item"><span>E-mail</span><a
+                    href="mailto:contato@evobrasil.com.br">contato@evobrasil.com.br</a></div>
+            <div class="footer-contact-item"><span>Tel</span><a href="tel:+5511999999999">(11) 99999-9999</a></div>
+            <div class="footer-social">
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+                <a href="https://instagram.com/evobrasil" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+                <a href="https://facebook.com/evobrasil" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2025 EVO Brasil. Qualidade que abre portas — todos os direitos reservados.</p>
+    </footer>
 
     <script>
         ScrollReveal().reveal('.reveal', { distance: '80px', duration: 1500, interval: 200, origin: 'bottom' });

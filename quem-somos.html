@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EVO BRASIL | Quem Somos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root {
+            --primary: #ff4d00;
+            --bg: #030303;
+            --accent: #111111;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 20px 6%;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        nav:hover {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
+            border-bottom-color: rgba(255, 77, 0, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 118px;
+            width: auto;
+            display: block;
+            transition: opacity 0.25s ease;
+        }
+
+        .logo:hover img {
+            opacity: 0.95;
+        }
+
+        nav a:not(.logo) {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+
+        nav a:not(.logo):hover {
+            color: var(--primary);
+        }
+
+        nav a:not(.logo)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.25s ease;
+        }
+
+        nav a:not(.logo):hover::after {
+            width: 100%;
+        }
+
+        nav a.ativo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        /* Hero Quem Somos */
+        .qs-hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 160px 6% 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qs-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255, 77, 0, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .qs-hero-badge {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qs-hero h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            color: #fff;
+            letter-spacing: 0.15em;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .qs-hero h1::after {
+            content: '';
+            display: block;
+            width: 64px;
+            height: 2px;
+            background: var(--primary);
+            margin: 24px auto 0;
+        }
+
+        .qs-hero p {
+            max-width: 560px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.03em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Seção História */
+        .qs-section {
+            padding: 100px 6% 100px;
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .qs-section-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .qs-section-badge {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .qs-section h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: #fff;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            line-height: 1.25;
+        }
+
+        .qs-section h2::after {
+            content: '';
+            display: block;
+            width: 48px;
+            height: 2px;
+            background: var(--primary);
+            margin-top: 16px;
+        }
+
+        .qs-section p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.02em;
+            margin-bottom: 20px;
+        }
+
+        .qs-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Cards Valores */
+        .qs-valores {
+            padding: 100px 6% 120px;
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .qs-valores-header {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 64px;
+        }
+
+        .qs-valores-badge {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .qs-valores-header h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+            color: #fff;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+
+        .qs-valores-header h2::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            margin: 20px auto 0;
+        }
+
+        .qs-valores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .qs-valor-card {
+            background: linear-gradient(165deg, #0e0e0e 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            border-radius: 12px;
+            padding: 40px 32px;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        .qs-valor-card:hover {
+            border-color: rgba(255, 77, 0, 0.45);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .qs-valor-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            color: var(--primary);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-weight: 900;
+        }
+
+        .qs-valor-card p {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.02em;
+        }
+
+        /* Bloco Citação */
+        .qs-citacao {
+            padding: 100px 6%;
+            text-align: center;
+            position: relative;
+        }
+
+        .qs-citacao-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 56px 48px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.2) 100%);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .qs-citacao-inner p {
+            font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.06em;
+            font-weight: 400;
+        }
+
+        .qs-citacao-inner strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* CTA */
+        .qs-cta {
+            padding: 80px 6% 100px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .qs-cta p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 28px;
+            letter-spacing: 0.04em;
+        }
+
+        .qs-cta a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #fff;
+            padding: 20px 48px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+        }
+
+        .qs-cta a:hover {
+            background: #ff6b2c;
+            box-shadow: 0 12px 40px rgba(255, 77, 0, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Fotos da empresa — cards */
+        .qs-fotos {
+            padding: 100px 6% 100px;
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .qs-fotos-header {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 56px;
+        }
+
+        .qs-fotos-badge {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .qs-fotos-header h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+            color: #fff;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+
+        .qs-fotos-header h2::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            margin: 20px auto 0;
+        }
+
+        .qs-fotos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .qs-foto-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 77, 0, 0.2);
+            aspect-ratio: 4/3;
+            background: #0a0a0a;
+        }
+
+        .qs-foto-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .qs-foto-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Carrossel caminhões e serviços */
+        .qs-carousel-section {
+            padding: 100px 6% 120px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .qs-carousel-header {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 56px;
+        }
+
+        .qs-carousel-badge {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+
+        .qs-carousel-header h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+            color: #fff;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            line-height: 1.25;
+        }
+
+        .qs-carousel-header h2::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            margin: 20px auto 0;
+        }
+
+        .qs-carousel-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qs-carousel-inner {
+            display: flex;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.35);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .qs-carousel-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            position: relative;
+        }
+
+        .qs-carousel-slide img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            display: block;
+        }
+
+        .qs-carousel-slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 24px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: 0.04em;
+        }
+
+        .qs-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 2;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .qs-carousel-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .qs-carousel-prev {
+            left: -20px;
+        }
+
+        .qs-carousel-next {
+            right: -20px;
+        }
+
+        .qs-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .qs-carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .qs-carousel-dot:hover,
+        .qs-carousel-dot.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 88px 8% 64px;
+            padding-bottom: max(64px, env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(255, 77, 0, 0.18);
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 56px 64px;
+            align-items: start;
+            background: linear-gradient(180deg, #040404 0%, #030303 100%);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.7;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.7;
+            max-width: 340px;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        footer h5 {
+            color: var(--primary);
+            font-size: 0.72rem;
+            letter-spacing: 0.28em;
+            margin-bottom: 22px;
+            font-weight: 700;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            letter-spacing: 0.05em;
+            transition: color 0.25s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+        }
+
+        .footer-contact-item a {
+            margin-bottom: 0;
+            display: inline;
+        }
+
+        .footer-contact-item span {
+            color: var(--primary);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            min-width: 52px;
+        }
+
+        .footer-social {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 77, 0, 0.08);
+        }
+
+        .footer-copy {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            .qs-valores-grid {
+                grid-template-columns: 1fr;
+                max-width: 520px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .qs-fotos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav .logo img {
+                height: 56px;
+            }
+
+            .qs-hero {
+                padding: 130px 5% 80px;
+                min-height: 60vh;
+            }
+
+            .qs-hero h1 {
+                font-size: 1.75rem;
+                letter-spacing: 0.1em;
+            }
+
+            .qs-section {
+                padding: 72px 5% 72px;
+            }
+
+            .qs-valores {
+                padding: 72px 5% 88px;
+            }
+
+            .qs-valores-header {
+                margin-bottom: 48px;
+            }
+
+            .qs-valor-card {
+                padding: 32px 28px;
+            }
+
+            .qs-citacao-inner {
+                padding: 40px 28px;
+                margin: 0 5%;
+            }
+
+            .qs-cta {
+                padding: 64px 5% 80px;
+            }
+
+            .qs-fotos {
+                padding: 72px 5% 72px;
+            }
+
+            .qs-fotos-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .qs-carousel-section {
+                padding: 72px 5% 88px;
+            }
+
+            .qs-carousel-prev {
+                left: 8px;
+            }
+
+            .qs-carousel-next {
+                right: 8px;
+            }
+
+            .qs-carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 56px 5% max(40px, env(safe-area-inset-bottom));
+                gap: 40px;
+            }
+
+            footer p {
+                max-width: none;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .footer-contact-item {
+                justify-content: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .logo img {
+                height: 48px;
+            }
+
+            nav a:not(.logo) {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+
+            .qs-hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .qs-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .qs-valor-card h3 {
+                font-size: 0.9rem;
+                letter-spacing: 0.12em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
+        <div class="nav-links">
+            <a href="index.html">INÍCIO</a>
+            <a href="portfolio.html">PRODUTOS</a>
+            <a href="quem-somos.html" class="ativo">QUEM SOMOS</a>
+            <a href="contato.html">CONTATO</a>
+        </div>
+    </nav>
+    <header class="qs-hero">
+        <span class="qs-hero-badge reveal">A EVO</span>
+        <h1 class="reveal">Quem Somos</h1>
+        <p class="reveal">Somos uma marca dedicada a automatizadores e portas de alta qualidade. Tecnologia,
+            confiabilidade e atendimento que fazem a diferença na sua obra.</p>
+    </header>
+
+    <section class="qs-section reveal">
+        <div class="qs-section-inner">
+            <span class="qs-section-badge">Nossa história</span>
+            <h2>Compromisso com a qualidade</h2>
+            <p>A EVO nasceu da vontade de oferecer soluções robustas e acessíveis em automatizadores e portas para o
+                mercado brasileiro. Acreditamos que cada projeto merece produtos que unam durabilidade, segurança e
+                acabamento premium.</p>
+            <p>Atuamos com linha completa de motores AC e DC, portas enroláveis e acessórios, sempre com foco em
+                facilitar a vida do instalador e do cliente final. Nossa equipe trabalha para que a marca EVO seja
+                sinônimo de confiança e resultado.</p>
+        </div>
+    </section>
+
+    <section class="qs-valores">
+        <header class="qs-valores-header reveal">
+            <span class="qs-valores-badge">Diferenciais</span>
+            <h2>O que nos move</h2>
+        </header>
+        <div class="qs-valores-grid">
+            <div class="qs-valor-card reveal">
+                <h3>Qualidade</h3>
+                <p>Materiais selecionados e processos rigorosos para garantir produtos que resistem ao tempo e ao uso.
+                </p>
+            </div>
+            <div class="qs-valor-card reveal">
+                <h3>Tecnologia</h3>
+                <p>Linha AC e DC com recursos que atendem desde instalações residenciais até projetos comerciais e
+                    industriais.</p>
+            </div>
+            <div class="qs-valor-card reveal">
+                <h3>Atendimento</h3>
+                <p>Suporte técnico e comercial para ajudar na escolha do modelo ideal e no pós-venda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotos da empresa: troque os src por img/empresa/foto1.jpg, foto2.jpg, etc. -->
+    <section class="qs-fotos">
+        <header class="qs-fotos-header reveal">
+            <span class="qs-fotos-badge">Galeria</span>
+            <h2>Fotos da empresa</h2>
+        </header>
+        <div class="qs-fotos-grid">
+            <div class="qs-foto-card reveal">
+                <img src="img/portas/porta01.png" alt="EVO - Instalação">
+            </div>
+            <div class="qs-foto-card reveal">
+                <img src="img/portas/porta02.png" alt="EVO - Ambiente">
+            </div>
+            <div class="qs-foto-card reveal">
+                <img src="img/portas/porta03.png" alt="EVO - Produtos">
+            </div>
+            <div class="qs-foto-card reveal">
+                <img src="img/portas/porta04.png" alt="EVO - Equipe">
+            </div>
+            <div class="qs-foto-card reveal">
+                <img src="img/portas/porta05.png" alt="EVO - Estrutura">
+            </div>
+            <div class="qs-foto-card reveal">
+                <img src="img/motor/imagem-motor01.png" alt="EVO - Automatizadores">
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrossel caminhões e serviços: troque os src por img/servicos/1.jpg, 2.jpg, etc. -->
+    <section class="qs-carousel-section">
+        <header class="qs-carousel-header reveal">
+            <span class="qs-carousel-badge">Frota e serviços</span>
+            <h2>Caminhões e serviços</h2>
+        </header>
+        <div class="qs-carousel-wrap reveal">
+            <button type="button" class="qs-carousel-btn qs-carousel-prev" aria-label="Anterior">‹</button>
+            <button type="button" class="qs-carousel-btn qs-carousel-next" aria-label="Próxima">›</button>
+            <div class="qs-carousel-inner">
+                <div class="qs-carousel-slide" data-index="0">
+                    <img src="img/portas/porta03.png" alt="Entrega e logística EVO">
+                    <div class="qs-carousel-slide-caption">Entrega e logística — sua obra no prazo.</div>
+                </div>
+                <div class="qs-carousel-slide" data-index="1">
+                    <img src="img/portas/porta01.png" alt="Instalação profissional">
+                    <div class="qs-carousel-slide-caption">Instalação e suporte técnico.</div>
+                </div>
+                <div class="qs-carousel-slide" data-index="2">
+                    <img src="img/portas/porta04.png" alt="Serviços EVO">
+                    <div class="qs-carousel-slide-caption">Soluções completas para sua obra.</div>
+                </div>
+            </div>
+            <div class="qs-carousel-dots" role="tablist">
+                <button type="button" class="qs-carousel-dot active" aria-label="Slide 1" data-index="0"></button>
+                <button type="button" class="qs-carousel-dot" aria-label="Slide 2" data-index="1"></button>
+                <button type="button" class="qs-carousel-dot" aria-label="Slide 3" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="qs-citacao reveal">
+        <div class="qs-citacao-inner">
+            <p><strong>Qualidade que abre portas</strong> — é mais que um slogan. É o compromisso da EVO em entregar
+                soluções que valorizam sua obra e garantem segurança e durabilidade para você e seu negócio.</p>
+        </div>
+    </section>
+
+    <section class="qs-cta reveal">
+        <p>Conheça nossa linha de automatizadores e portas.</p>
+        <a href="index.html#automatizadores">Ver produtos</a>
+    </section>
+
+    <footer>
+        <div class="footer-brand">
+            <p>Automatizadores e portas. Qualidade que faz a diferença.</p>
+        </div>
+        <div class="footer-nav">
+            <h5>NAVEGAR</h5>
+            <a href="index.html#automatizadores">Automatizadores</a>
+            <a href="index.html#portas">Portas</a>
+            <a href="portfolio.html">Galeria</a>
+            <a href="quem-somos.html">Quem Somos</a>
+        </div>
+        <div class="footer-contact">
+            <h5>CONTATO</h5>
+            <div class="footer-contact-item"><span>E-mail</span><a
+                    href="mailto:contato@evobrasil.com.br">contato@evobrasil.com.br</a></div>
+            <div class="footer-contact-item"><span>Tel</span><a href="tel:+5511999999999">(11) 99999-9999</a></div>
+            <div class="footer-social">
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+                <a href="https://instagram.com/evobrasil" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+                <a href="https://facebook.com/evobrasil" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+            </div>
+        </div>
+        <p class="footer-copy">© 2025 EVO Brasil. Qualidade que abre portas — todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        ScrollReveal().reveal('.reveal', { distance: '40px', duration: 600, interval: 120, origin: 'bottom' });
+
+        (function () {
+            var wrap = document.querySelector('.qs-carousel-wrap');
+            if (!wrap) return;
+            var inner = wrap.querySelector('.qs-carousel-inner');
+            var slides = wrap.querySelectorAll('.qs-carousel-slide');
+            var dots = wrap.querySelectorAll('.qs-carousel-dot');
+            var prev = wrap.querySelector('.qs-carousel-prev');
+            var next = wrap.querySelector('.qs-carousel-next');
+            var total = slides.length;
+            var index = 0;
+
+            function goTo(i) {
+                index = (i + total) % total;
+                inner.style.transform = 'translateX(-' + (index * 100) + '%)';
+                dots.forEach(function (d, j) { d.classList.toggle('active', j === index); });
+            }
+
+            if (prev) prev.addEventListener('click', function () { goTo(index - 1); });
+            if (next) next.addEventListener('click', function () { goTo(index + 1); });
+            dots.forEach(function (d, k) {
+                d.addEventListener('click', function () { goTo(parseInt(d.getAttribute('data-index'), 10)); });
+            });
+        })();
+    </script>
+</body>
+
+</html>

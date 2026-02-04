@@ -32,20 +32,28 @@
             padding-right: env(safe-area-inset-right);
         }
 
-        /* Nav — igual ao index */
+        /* Nav */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             width: 100%;
-            padding: 24px 6%;
-            padding-top: max(24px, env(safe-area-inset-top));
+            padding: 20px 6%;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        nav:hover {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
+            border-bottom-color: rgba(255, 77, 0, 0.15);
         }
 
         .logo {
@@ -55,22 +63,43 @@
         }
 
         .logo img {
-            height: 88px;
+            height: 118px;
             width: auto;
             display: block;
+            transition: opacity 0.25s ease;
+        }
+
+        .logo:hover img {
+            opacity: 0.95;
         }
 
         nav a:not(.logo) {
-            color: #fff;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            transition: color 0.2s;
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            transition: color 0.25s ease;
+            position: relative;
         }
 
         nav a:not(.logo):hover {
             color: var(--primary);
+        }
+
+        nav a:not(.logo)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.25s ease;
+        }
+
+        nav a:not(.logo):hover::after {
+            width: 100%;
         }
 
         nav a.ativo {
@@ -230,13 +259,14 @@
 
         /* Footer — igual ao index */
         footer {
-            padding: 72px 8% 56px;
-            padding-bottom: max(56px, env(safe-area-inset-bottom));
-            border-top: 1px solid rgba(255, 77, 0, 0.2);
+            padding: 88px 8% 64px;
+            padding-bottom: max(64px, env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(255, 77, 0, 0.18);
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 48px;
-            background: #030303;
+            gap: 40px 32px;
+            align-items: start;
+            background: linear-gradient(180deg, #040404 0%, #030303 100%);
             position: relative;
         }
 
@@ -246,45 +276,47 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
+            width: 160px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
-        footer .logo {
-            display: inline-flex;
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        footer .logo img {
-            height: 180px;
-            width: auto;
-            opacity: 0.95;
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.7;
+            max-width: 340px;
         }
 
         footer p {
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.95rem;
-            margin-top: 12px;
-            line-height: 1.6;
-            max-width: 320px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         footer h5 {
             color: var(--primary);
-            font-size: 0.7rem;
-            letter-spacing: 0.25em;
-            margin-bottom: 20px;
+            font-size: 0.72rem;
+            letter-spacing: 0.28em;
+            margin-bottom: 22px;
             font-weight: 700;
         }
 
         footer a {
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             display: block;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            letter-spacing: 0.05em;
             transition: color 0.25s ease;
         }
 
@@ -292,12 +324,75 @@
             color: var(--primary);
         }
 
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+        }
+
+        .footer-contact-item a {
+            margin-bottom: 0;
+            display: inline;
+        }
+
+        .footer-contact-item span {
+            color: var(--primary);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            min-width: 52px;
+        }
+
+        .footer-social {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 77, 0, 0.08);
+        }
+
+        .footer-copy {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 16px 5%;
             }
 
-            .logo img {
+            nav nav .logo img {
                 height: 56px;
             }
 
@@ -338,7 +433,7 @@
         }
 
         @media (max-width: 480px) {
-            .logo img {
+            nav .logo img {
                 height: 48px;
             }
 
@@ -368,6 +463,7 @@
         <a href="index.html" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
         <div style="display: flex; gap: 32px;">
             <a href="portfolio.html">PRODUTOS</a>
+            <a href="quem-somos.html">QUEM SOMOS</a>
             <a href="contato.html" class="ativo">CONTATO</a>
         </div>
     </nav>
@@ -411,20 +507,28 @@
     </main>
 
     <footer>
-        <div>
-            <a href="index.html" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
+        <div class="footer-brand">
             <p>Automatizadores e portas. Qualidade que faz a diferença.</p>
         </div>
-        <div>
+        <div class="footer-nav">
             <h5>NAVEGAR</h5>
             <a href="index.html#automatizadores">Automatizadores</a>
             <a href="index.html#portas">Portas</a>
             <a href="portfolio.html">Galeria</a>
+            <a href="quem-somos.html">Quem Somos</a>
         </div>
-        <div>
+        <div class="footer-contact">
             <h5>CONTATO</h5>
-            <a href="contato.html">Experiência / Contato</a>
+            <div class="footer-contact-item"><span>E-mail</span><a
+                    href="mailto:contato@evobrasil.com.br">contato@evobrasil.com.br</a></div>
+            <div class="footer-contact-item"><span>Tel</span><a href="tel:+5511999999999">(11) 99999-9999</a></div>
+            <div class="footer-social">
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+                <a href="https://instagram.com/evobrasil" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+                <a href="https://facebook.com/evobrasil" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+            </div>
         </div>
+        <p class="footer-copy">© 2025 EVO Brasil. Qualidade que abre portas — todos os direitos reservados.</p>
     </footer>
 
     <script>

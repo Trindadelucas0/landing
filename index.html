@@ -39,13 +39,21 @@
             left: 0;
             right: 0;
             width: 100%;
-            padding: 24px 6%;
-            padding-top: max(24px, env(safe-area-inset-top));
+            padding: 20px 6%;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        nav:hover {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
+            border-bottom-color: rgba(255, 77, 0, 0.15);
         }
 
         .logo {
@@ -55,22 +63,43 @@
         }
 
         .logo img {
-            height: 88px;
+            height: 118px;
             width: auto;
             display: block;
+            transition: opacity 0.25s ease;
+        }
+
+        .logo:hover img {
+            opacity: 0.95;
         }
 
         nav a:not(.logo) {
-            color: #fff;
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            transition: color 0.2s;
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            transition: color 0.25s ease;
+            position: relative;
         }
 
         nav a:not(.logo):hover {
             color: var(--primary);
+        }
+
+        nav a:not(.logo)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.25s ease;
+        }
+
+        nav a:not(.logo):hover::after {
+            width: 100%;
         }
 
         /* Hero - motor atrás do EVO com parallax */
@@ -164,6 +193,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transform: translateY(-26vh);
         }
 
         .hero-content .hero-logo {
@@ -213,6 +243,10 @@
 
             .hero-inner {
                 padding: 0 5%;
+            }
+
+            .hero-content {
+                transform: translateY(-18vh);
             }
 
             .hero-content .hero-logo {
@@ -351,7 +385,37 @@
             height: 1px;
             margin: 22px auto 24px;
             background: var(--primary);
-            animation: title-line-expand 0.5s ease-out 0.25s forwards;
+            transform: translateZ(0);
+        }
+
+        .automatizadores-header .automatizadores-badge,
+        .automatizadores-header .automatizadores-title,
+        .automatizadores-header .automatizadores-intro {
+            opacity: 0;
+            transform: translateX(-36px);
+        }
+
+        .automatizadores-header.in-view .automatizadores-badge {
+            animation: auto-header-slide-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .automatizadores-header.in-view .automatizadores-title {
+            animation: auto-header-slide-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+        }
+
+        .automatizadores-header.in-view .automatizadores-title::after {
+            animation: title-line-expand 0.5s ease-out 0.5s forwards;
+        }
+
+        .automatizadores-header.in-view .automatizadores-intro {
+            animation: auto-header-slide-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+        }
+
+        @keyframes auto-header-slide-in {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @keyframes title-line-expand {
@@ -1370,13 +1434,14 @@
 
         /* Footer — premium */
         footer {
-            padding: 72px 8% 56px;
-            padding-bottom: max(56px, env(safe-area-inset-bottom));
-            border-top: 1px solid rgba(255, 77, 0, 0.2);
+            padding: 88px 8% 64px;
+            padding-bottom: max(64px, env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(255, 77, 0, 0.18);
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 48px;
-            background: #030303;
+            gap: 40px 32px;
+            align-items: start;
+            background: linear-gradient(180deg, #040404 0%, #030303 100%);
             position: relative;
         }
 
@@ -1386,50 +1451,115 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
+            width: 160px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
-        footer .logo {
-            display: inline-flex;
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        footer .logo img {
-            height: 180px;
-            width: auto;
-            opacity: 0.95;
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.7;
+            max-width: 340px;
         }
 
         footer p {
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.95rem;
-            margin-top: 12px;
-            line-height: 1.6;
-            max-width: 320px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         footer h5 {
             color: var(--primary);
-            font-size: 0.7rem;
-            letter-spacing: 0.25em;
-            margin-bottom: 20px;
+            font-size: 0.72rem;
+            letter-spacing: 0.28em;
+            margin-bottom: 22px;
             font-weight: 700;
         }
 
         footer a {
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             display: block;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            letter-spacing: 0.05em;
             transition: color 0.25s ease;
         }
 
         footer a:hover {
             color: var(--primary);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+        }
+
+        .footer-contact-item a {
+            margin-bottom: 0;
+            display: inline;
+        }
+
+        .footer-contact-item span {
+            color: var(--primary);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            min-width: 52px;
+        }
+
+        .footer-social {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 77, 0, 0.08);
+        }
+
+        .footer-copy {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
         }
 
         @media (max-width: 700px) {
@@ -1478,10 +1608,6 @@
                 padding: 12px 4%;
             }
 
-            .logo img {
-                height: 48px;
-            }
-
             nav>div {
                 gap: 16px !important;
             }
@@ -1489,6 +1615,10 @@
             nav a:not(.logo) {
                 font-size: 0.65rem;
                 letter-spacing: 1px;
+            }
+
+            .logo img {
+                height: 56px;
             }
 
             .hero-content .hero-logo {
@@ -1596,6 +1726,7 @@
         <a href="#" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
         <div style="display: flex; gap: 32px;">
             <a href="portfolio.html">PRODUTOS</a>
+            <a href="quem-somos.html">QUEM SOMOS</a>
             <a href="contato.html">CONTATO</a>
         </div>
     </nav>
@@ -1633,45 +1764,12 @@
         <header class="automatizadores-header">
             <span class="automatizadores-badge">Produtos</span>
             <h2 class="section-title automatizadores-title">LINHA DE AUTOMATIZADORES</h2>
-            <p class="automatizadores-intro reveal">Soluções em tecnologia e confiabilidade para portas residenciais e
+            <p class="automatizadores-intro">Soluções em tecnologia e confiabilidade para portas residenciais e
                 comerciais. Linha AC e DC com acabamento premium, segurança e durabilidade garantidas.</p>
         </header>
         <div class="produtos-grid">
             <div class="produto-card-block">
                 <div class="produto-card automatizador-slide-left">
-                    <span class="card-shine" aria-hidden="true"></span>
-                    <div class="produto-img-wrap">
-                        <img src="img/motor/imagem-apenasbordamotor.png" alt="Automatizador AC - Esquema">
-                    </div>
-                    <div class="produto-card-content">
-                        <div class="produto-header">
-                            <div class="logo-evo-wrap"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"
-                                    class="logo-evo-img"></div>
-                            <h3>AUTOMATIZADOR AC</h3>
-                        </div>
-                        <ul>
-                            <li>Freio</li>
-                            <li>Inversão de lado</li>
-                            <li>Motor elétrico</li>
-                            <li>Central elétrica</li>
-                            <li>Fim de curso - Limitador de abertura e fechamento</li>
-                            <li>Acionamento manual</li>
-                            <li>Central de comando</li>
-                            <li>Controles sem fio</li>
-                        </ul>
-                        <div class="modelos">
-                            <p>Modelos AC</p>
-                            <div class="modelos-list">
-                                <span>AC200</span><span>AC300</span><span>AC400</span><span>AC500</span>
-                                <span>AC600</span><span>AC700</span><span>AC800</span><span>AC1000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="produto-card-block">
-                <div class="produto-card automatizador-slide-right">
                     <span class="card-shine" aria-hidden="true"></span>
                     <div class="produto-img-wrap foto-motor">
                         <img src="img/motor/imagem-motor01.png" alt="Automatizador DC - Motor EVO">
@@ -1702,7 +1800,38 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="produto-card-block">
+                <div class="produto-card automatizador-slide-right">
+                    <span class="card-shine" aria-hidden="true"></span>
+                    <div class="produto-img-wrap">
+                        <img src="img/motor/imagem-apenasbordamotor.png" alt="Automatizador AC - Esquema">
+                    </div>
+                    <div class="produto-card-content">
+                        <div class="produto-header">
+                            <div class="logo-evo-wrap"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"
+                                    class="logo-evo-img"></div>
+                            <h3>AUTOMATIZADOR AC</h3>
+                        </div>
+                        <ul>
+                            <li>Freio</li>
+                            <li>Inversão de lado</li>
+                            <li>Motor elétrico</li>
+                            <li>Central elétrica</li>
+                            <li>Fim de curso - Limitador de abertura e fechamento</li>
+                            <li>Acionamento manual</li>
+                            <li>Central de comando</li>
+                            <li>Controles sem fio</li>
+                        </ul>
+                        <div class="modelos">
+                            <p>Modelos AC</p>
+                            <div class="modelos-list">
+                                <span>AC200</span><span>AC300</span><span>AC400</span><span>AC500</span>
+                                <span>AC600</span><span>AC700</span><span>AC800</span><span>AC1000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="automatizadores-cta reveal">
@@ -1818,31 +1947,47 @@
     </section>
 
     <footer>
-        <div>
-            <a href="#" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
+        <div class="footer-brand">
             <p>Automatizadores e portas. Qualidade que faz a diferença.</p>
         </div>
-        <div>
+        <div class="footer-nav">
             <h5>NAVEGAR</h5>
             <a href="#automatizadores">Automatizadores</a>
             <a href="#portas">Portas</a>
             <a href="portfolio.html">Galeria</a>
+            <a href="quem-somos.html">Quem Somos</a>
         </div>
-        <div>
+        <div class="footer-contact">
             <h5>CONTATO</h5>
-            <a href="contato.html">Experiência / Contato</a>
+            <div class="footer-contact-item"><span>E-mail</span><a
+                    href="mailto:contato@evobrasil.com.br">contato@evobrasil.com.br</a></div>
+            <div class="footer-contact-item"><span>Tel</span><a href="tel:+5511999999999">(11) 99999-9999</a></div>
+            <div class="footer-social">
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+                <a href="https://instagram.com/evobrasil" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+                <a href="https://facebook.com/evobrasil" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+            </div>
         </div>
+        <p class="footer-copy">© 2025 EVO Brasil. Qualidade que abre portas — todos os direitos reservados.</p>
     </footer>
 
     <script>
         ScrollReveal().reveal('.reveal', { distance: '50px', duration: 700, interval: 80, origin: 'bottom' });
-        ScrollReveal().reveal('.automatizadores-title', {
-            duration: 600,
-            opacity: 0,
-            scale: 0.97,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            viewFactor: 0.3
-        });
+
+        (function () {
+            var header = document.querySelector('.automatizadores-header');
+            if (!header) return;
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('in-view');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+            io.observe(header);
+        })();
+
         ScrollReveal().reveal('.automatizador-slide-left', {
             origin: 'left',
             distance: '80px',
