@@ -127,8 +127,8 @@
             position: absolute;
             inset: 0;
             z-index: 0;
-            background: url('img/motor/imagem-motor01.png') center center no-repeat;
-            background-size: 55%;
+            background: url('img/portas/porta03.png') center center no-repeat;
+            background-size: cover;
             background-attachment: fixed;
             pointer-events: none;
             animation: hero-parallax-fade 1.4s ease-out forwards;
@@ -137,7 +137,7 @@
         @media (max-width: 768px) {
             .hero-motor-parallax {
                 background-attachment: scroll;
-                background-size: 70%;
+                background-size: cover;
                 animation: hero-parallax-fade-mobile 1.4s ease-out forwards;
             }
         }
@@ -363,7 +363,6 @@
         .produto-card {
             background: #0c0c0c;
             border: 1px solid rgba(255, 77, 0, 0.3);
-            border-left: 4px solid var(--primary);
             border-radius: 6px;
             padding: 0;
             position: relative;
@@ -371,14 +370,13 @@
             display: flex;
             flex-direction: row;
             align-items: stretch;
-            transition: border-left-color 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+            transition: background 0.4s ease, border-color 0.4s ease;
             z-index: 1;
         }
 
         .produto-card:hover {
             background: #0f0f0f;
             border-color: rgba(255, 77, 0, 0.4);
-            border-left-color: var(--primary);
         }
 
         .produto-card .card-shine {
