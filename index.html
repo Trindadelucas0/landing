@@ -75,7 +75,7 @@
             }
 
             to {
-                opacity: 0.22;
+                opacity: 0.14;
             }
         }
 
@@ -85,7 +85,7 @@
             }
 
             to {
-                opacity: 0.18;
+                opacity: 0.12;
             }
         }
 
@@ -120,7 +120,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(ellipse 100% 100% at 50% 50%, #1a1a1a 0%, #0a0a0a 70%, var(--bg) 100%);
+            background: radial-gradient(ellipse 100% 100% at 50% 50%, #0c0c0c 0%, #050505 60%, #000 100%);
         }
 
         .hero-motor-parallax {
@@ -163,7 +163,7 @@
 
         .hero-content .hero-logo {
             width: 100%;
-            max-width: 400px;
+            max-width: 620px;
             height: auto;
             display: block;
             filter: drop-shadow(0 0 60px rgba(255, 77, 0, 0.25));
@@ -178,9 +178,9 @@
             margin: 0;
             padding: 0;
             letter-spacing: 10px;
-            font-size: 0.85rem;
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.9);
-            font-weight: 400;
+            font-weight: 600;
             text-transform: uppercase;
             line-height: 1.3;
             text-align: center;
@@ -190,13 +190,14 @@
 
         @media (max-width: 768px) {
             .hero-content .hero-logo {
-                max-width: 280px;
+                max-width: 380px;
             }
 
             .hero-content .tagline {
                 bottom: 32%;
                 letter-spacing: 5px;
-                font-size: 0.72rem;
+                font-size: 0.88rem;
+                font-weight: 600;
             }
         }
 
@@ -261,14 +262,16 @@
             color: #fff;
         }
 
-        /* —— Automatizadores: design premium —— */
+        /* —— Automatizadores: landing premium —— */
         .automatizadores {
-            padding: 120px 6% 100px;
-            background: #050505;
+            padding: 140px 6% 120px;
+            background: #060606;
             position: relative;
             overflow: hidden;
-            border-top: 1px solid rgba(255, 77, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 77, 0, 0.2);
+            border-top: 1px solid rgba(255, 77, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 77, 0, 0.15);
+            background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 77, 0, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255, 77, 0, 0.04) 0%, transparent 50%);
         }
 
         .automatizadores::before {
@@ -278,13 +281,32 @@
             left: 50%;
             transform: translateX(-50%);
             width: 1px;
-            height: 48px;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12));
-            opacity: 0.6;
+            height: 64px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 77, 0, 0.25));
+            opacity: 0.8;
+        }
+
+        .automatizadores-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 64px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .automatizadores-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-weight: 600;
+            opacity: 0.95;
         }
 
         .automatizadores .section-title {
-            margin-bottom: 72px;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
         }
@@ -299,32 +321,41 @@
             background: none;
         }
 
+        .automatizadores-intro {
+            font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-top: 8px;
+        }
+
         .automatizadores .section-title::after {
             content: '';
             display: block;
             width: 0;
-            height: 1px;
-            margin: 20px auto 0;
-            background: var(--primary);
-            animation: title-line-expand 0.4s ease-out 0.2s forwards;
+            height: 2px;
+            margin: 24px auto 0;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: title-line-expand 0.5s ease-out 0.25s forwards;
         }
 
         @keyframes title-line-expand {
             to {
-                width: 48px;
+                width: 80px;
             }
         }
 
         .produtos-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 28px;
-            max-width: 960px;
+            gap: 32px;
+            max-width: 980px;
             margin: 0 auto;
             overflow: visible;
-            padding: 0 4px;
-            border-left: 1px solid rgba(255, 77, 0, 0.15);
-            border-right: 1px solid rgba(255, 77, 0, 0.15);
+            padding: 0 8px;
+            position: relative;
+            z-index: 1;
         }
 
         .produto-card-block {
@@ -332,10 +363,11 @@
             flex-direction: column;
             align-items: center;
             gap: 0;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 6px;
-            padding: 2px;
-            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 0;
+            background: transparent;
+            position: relative;
+            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
 
         .produto-card-footer {
@@ -361,26 +393,41 @@
         }
 
         .produto-card {
-            background: #0c0c0c;
-            border: 1px solid rgba(255, 77, 0, 0.3);
-            border-radius: 6px;
+            background: linear-gradient(165deg, #0e0e0e 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 77, 0, 0.22);
+            border-radius: 12px;
             padding: 0;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: row;
             align-items: stretch;
-            transition: background 0.4s ease, border-color 0.4s ease;
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.35s ease;
             z-index: 1;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .produto-card:hover {
-            background: #0f0f0f;
-            border-color: rgba(255, 77, 0, 0.4);
+            background: linear-gradient(165deg, #111 0%, #0c0c0c 100%);
+            border-color: rgba(255, 77, 0, 0.38);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 77, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
 
         .produto-card .card-shine {
-            display: none;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            z-index: 2;
+            pointer-events: none;
+            transition: left 0.6s ease;
+        }
+
+        .produto-card:hover .card-shine {
+            left: 100%;
         }
 
         .produto-card-content {
@@ -554,10 +601,10 @@
 
         /* Imagem à esquerda — área escura minimal */
         .produto-img-wrap {
-            flex: 0 0 50%;
-            min-width: 320px;
+            flex: 0 0 52%;
+            min-width: 380px;
             margin: 0;
-            padding: 56px 48px;
+            padding: 48px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -571,18 +618,57 @@
 
         .produto-img-wrap img {
             max-width: 100%;
-            max-height: 340px;
+            max-height: 460px;
             width: auto;
             object-fit: contain;
             transition: opacity 0.4s ease;
         }
 
         .produto-img-wrap.foto-motor img {
-            max-height: 380px;
+            max-height: 520px;
         }
 
         .produto-card:hover .produto-img-wrap img {
             opacity: 0.92;
+        }
+
+        .automatizadores-cta {
+            text-align: center;
+            margin-top: 56px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .automatizadores-cta p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        .automatizadores-cta a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid rgba(255, 77, 0, 0.5);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .automatizadores-cta a:hover {
+            background: rgba(255, 77, 0, 0.12);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 24px rgba(255, 77, 0, 0.15);
         }
 
         @media (max-width: 900px) {
@@ -1203,7 +1289,12 @@
     </div>
 
     <section class="automatizadores" id="automatizadores">
-        <h2 class="section-title automatizadores-title">LINHA DE AUTOMATIZADORES</h2>
+        <header class="automatizadores-header">
+            <span class="automatizadores-badge">Produtos</span>
+            <h2 class="section-title automatizadores-title">LINHA DE AUTOMATIZADORES</h2>
+            <p class="automatizadores-intro reveal">Tecnologia e confiabilidade para portas residenciais e comerciais.
+                Motores AC e DC com acabamento premium e recursos que garantem segurança e durabilidade.</p>
+        </header>
         <div class="produtos-grid">
             <div class="produto-card-block">
                 <div class="produto-card automatizador-slide-left">
@@ -1273,7 +1364,10 @@
 
             </div>
         </div>
-
+        <div class="automatizadores-cta reveal">
+            <p>Encontre o modelo ideal para sua obra.</p>
+            <a href="contato.html">Solicitar orçamento</a>
+        </div>
     </section>
 
     <section class="portas" id="portas">
