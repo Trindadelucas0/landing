@@ -228,7 +228,7 @@
             margin-top: 4px;
         }
 
-        /* Seção Automatizadores */
+        /* Seção Automatizadores - Premium */
         .section-title {
             font-family: 'Archivo Black';
             font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -238,110 +238,266 @@
             color: #fff;
         }
 
+        /* —— Automatizadores: design premium (Porsche / Rolex) —— */
         .automatizadores {
-            padding: 100px 6%;
-            background: var(--bg);
+            padding: 120px 6% 100px;
+            background: #050505;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .automatizadores::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12));
+            opacity: 0.6;
         }
 
         .automatizadores .section-title {
-            margin-bottom: 80px;
+            margin-bottom: 72px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .automatizadores .section-title.automatizadores-title {
+            font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+            color: #fff;
+            letter-spacing: 0.35em;
+            font-weight: 900;
+            text-transform: uppercase;
+            -webkit-text-fill-color: initial;
+            background: none;
+        }
+
+        .automatizadores .section-title::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 1px;
+            margin: 20px auto 0;
+            background: var(--primary);
+            animation: title-line-expand 0.9s ease-out 0.4s forwards;
+        }
+
+        @keyframes title-line-expand {
+            to {
+                width: 48px;
+            }
         }
 
         .produtos-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-            max-width: 1200px;
+            grid-template-columns: 1fr;
+            gap: 28px;
+            max-width: 960px;
             margin: 0 auto;
-            overflow: hidden;
+            overflow: visible;
         }
 
-        @media (max-width: 900px) {
-            .produtos-grid {
-                grid-template-columns: 1fr;
-            }
+        .produto-card-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
         }
 
-        /* Entrada dos cards: esquerda e direita (ScrollReveal + easing suave) */
+        .produto-card-footer {
+            width: 100%;
+            padding: 20px 0 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 77, 0, 0.2);
+            margin-top: -1px;
+        }
+
+        .produto-card-footer img {
+            max-width: 180px;
+            max-height: 56px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
         .produto-card.automatizador-slide-left,
         .produto-card.automatizador-slide-right {
             will-change: transform, opacity;
         }
 
         .produto-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid #1a1a1a;
-            padding: 40px;
+            background: #0c0c0c;
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            border-left: 3px solid var(--primary);
+            border-radius: 4px;
+            padding: 0;
             position: relative;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            transition: border-left-color 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+            z-index: 1;
         }
 
         .produto-card:hover {
+            background: #0f0f0f;
             border-color: rgba(255, 77, 0, 0.4);
-            box-shadow: 0 0 40px rgba(255, 77, 0, 0.08);
+            border-left-color: var(--primary);
+        }
+
+        .produto-card .card-shine {
+            display: none;
+        }
+
+        .produto-card-content {
+            flex: 1;
+            padding: 56px 56px 56px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
         }
 
         .produto-card .produto-header {
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 16px;
-            margin-bottom: 28px;
+            margin-bottom: 36px;
+            position: relative;
+            z-index: 1;
         }
 
-        .produto-card h3 {
-            color: var(--primary);
-            font-family: 'Archivo Black';
-            font-size: 1.4rem;
-            letter-spacing: 2px;
+        .produto-card .produto-header h3 {
+            color: #fff;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.6rem, 2.2vw, 1.95rem);
+            letter-spacing: 0.2em;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.2;
+            text-align: center;
         }
 
-        .produto-card .logo-evo {
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            border-radius: 50%;
+        .produto-card .logo-evo-wrap {
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Archivo Black';
-            font-size: 0.75rem;
-            color: #000;
+            overflow: visible;
+        }
+
+        .produto-card .logo-evo-img {
+            height: 150px;
+            width: auto;
+            max-width: 320px;
+            object-fit: contain;
+            display: block;
         }
 
         .produto-card ul {
             list-style: none;
+            position: relative;
+            z-index: 1;
         }
 
         .produto-card ul li {
             position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            color: #ccc;
+            padding-left: 0;
+            padding-bottom: 14px;
+            margin-bottom: 0;
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateX(0);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: color 0.25s ease;
+        }
+
+        .produto-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .produto-card.revealed ul li {
+            animation: produto-li-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .produto-card.revealed ul li:nth-child(1) {
+            animation-delay: 0.15s;
+        }
+
+        .produto-card.revealed ul li:nth-child(2) {
+            animation-delay: 0.22s;
+        }
+
+        .produto-card.revealed ul li:nth-child(3) {
+            animation-delay: 0.29s;
+        }
+
+        .produto-card.revealed ul li:nth-child(4) {
+            animation-delay: 0.36s;
+        }
+
+        .produto-card.revealed ul li:nth-child(5) {
+            animation-delay: 0.43s;
+        }
+
+        .produto-card.revealed ul li:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .produto-card.revealed ul li:nth-child(7) {
+            animation-delay: 0.57s;
+        }
+
+        .produto-card.revealed ul li:nth-child(8) {
+            animation-delay: 0.64s;
+        }
+
+        .produto-card.revealed ul li:nth-child(9) {
+            animation-delay: 0.71s;
+        }
+
+        .produto-card.revealed ul li:nth-child(10) {
+            animation-delay: 0.78s;
+        }
+
+        @keyframes produto-li-reveal {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .produto-card ul li:hover {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .produto-card ul li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
+            display: none;
         }
 
         .modelos {
-            margin-top: 24px;
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 1;
         }
 
         .modelos p {
             font-size: 0.75rem;
-            color: #666;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 14px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
         .modelos-list {
@@ -351,68 +507,231 @@
         }
 
         .modelos-list span {
-            background: rgba(255, 77, 0, 0.15);
+            background: rgba(255, 77, 0, 0.08);
             color: var(--primary);
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            padding: 8px 14px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            border: 1px solid rgba(255, 77, 0, 0.35);
+            transition: background 0.25s ease, border-color 0.25s ease;
         }
 
+        .modelos-list span:hover {
+            background: rgba(255, 77, 0, 0.15);
+            border-color: rgba(255, 77, 0, 0.55);
+        }
+
+        /* Imagem à esquerda — área escura minimal */
         .produto-img-wrap {
-            margin-top: 30px;
-            text-align: center;
-            min-height: 200px;
+            flex: 0 0 50%;
+            min-width: 320px;
+            margin: 0;
+            padding: 56px 48px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            background: #080808;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .produto-img-wrap img {
             max-width: 100%;
-            max-height: 220px;
+            max-height: 340px;
+            width: auto;
             object-fit: contain;
+            transition: opacity 0.4s ease;
         }
 
         .produto-img-wrap.foto-motor img {
-            max-height: 280px;
+            max-height: 380px;
+        }
+
+        .produto-card:hover .produto-img-wrap img {
+            opacity: 0.92;
+        }
+
+        @media (max-width: 900px) {
+            .produto-card {
+                flex-direction: column;
+            }
+
+            .produto-img-wrap {
+                flex: 0 0 auto;
+                min-width: 0;
+                width: 100%;
+                padding: 40px 24px 32px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+
+            .produto-card-content {
+                padding: 40px 32px 48px;
+            }
         }
 
         .slogan-evo {
             text-align: center;
-            margin-top: 70px;
+            margin-top: 88px;
+            padding: 0 24px;
             font-size: 1rem;
-            color: #aaa;
-            font-weight: 300;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            position: relative;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 1;
+            background: none;
+            border: none;
+            box-shadow: none;
         }
 
         .slogan-evo strong {
-            color: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.12em;
         }
 
-        /* Seção Portas - carrossel infinito */
+        /* Seção Portas - destaque + carrossel infinito */
         .portas {
-            padding: 100px 0 100px;
+            padding: 0 0 100px;
             background: #0a0a0a;
             border-top: 1px solid #1a1a1a;
             overflow: hidden;
         }
 
         .portas .section-title {
-            margin-bottom: 50px;
-            padding: 0 6%;
+            margin-bottom: 0;
+            padding: 80px 6% 0;
+        }
+
+        /* Bloco destaque: afirmação ao lado das imagens (estilo Porsche/Rolex) */
+        .portas-destaque {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 64px;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 56px 6% 72px;
+        }
+
+        @media (max-width: 900px) {
+            .portas-destaque {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                padding: 40px 6% 56px;
+            }
+        }
+
+        .portas-destaque-texto {
+            padding-right: 24px;
+        }
+
+        .portas-destaque-texto .portas-destaque-titulo {
+            font-family: 'Archivo Black';
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            color: #fff;
+            letter-spacing: 4px;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .portas-destaque-texto .portas-destaque-titulo span {
+            color: var(--primary);
+            text-shadow: 0 0 40px rgba(255, 77, 0, 0.2);
+        }
+
+        .portas-destaque-texto .portas-destaque-sub {
+            font-size: clamp(1rem, 1.1vw, 1.12rem);
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 400;
+            line-height: 1.65;
+            letter-spacing: 0.5px;
+            max-width: 420px;
+        }
+
+        .portas-destaque-galeria {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            grid-template-rows: repeat(4, 1fr);
+            gap: 14px;
+            min-height: 380px;
+        }
+
+        .portas-destaque-galeria .porta-destaque-item {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        .portas-destaque-galeria .porta-destaque-item:hover {
+            border-color: rgba(255, 77, 0, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 77, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .portas-destaque-galeria .porta-destaque-item img {
+            width: 100%;
+            height: 100%;
+            min-height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portas-destaque-galeria .porta-destaque-item:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1 / 5;
+        }
+
+        .portas-destaque-galeria .porta-destaque-item:nth-child(2),
+        .portas-destaque-galeria .porta-destaque-item:nth-child(3),
+        .portas-destaque-galeria .porta-destaque-item:nth-child(4),
+        .portas-destaque-galeria .porta-destaque-item:nth-child(5) {
+            grid-column: 2;
+        }
+
+        @media (max-width: 600px) {
+            .portas-destaque-galeria {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                min-height: 0;
+            }
+
+            .portas-destaque-galeria .porta-destaque-item:nth-child(1),
+            .portas-destaque-galeria .porta-destaque-item:nth-child(2),
+            .portas-destaque-galeria .porta-destaque-item:nth-child(3),
+            .portas-destaque-galeria .porta-destaque-item:nth-child(4),
+            .portas-destaque-galeria .porta-destaque-item:nth-child(5) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .portas-destaque-galeria .porta-destaque-item img {
+                min-height: 0;
+                height: 220px;
+            }
         }
 
         .portas-carousel-wrap {
             overflow: hidden;
-            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
         }
 
         .portas-carousel-track {
             display: flex;
-            gap: 24px;
+            gap: 28px;
             width: max-content;
-            animation: portas-scroll 90s linear infinite;
+            animation: portas-scroll 100s linear infinite;
         }
 
         .portas-carousel-track:hover {
@@ -425,37 +744,39 @@
             }
 
             100% {
-                transform: translateX(-50%);
+                transform: translateX(-33.333%);
             }
         }
 
         .porta-item {
-            flex: 0 0 300px;
-            border: 1px solid #222;
+            flex: 0 0 320px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             overflow: hidden;
-            border-radius: 8px;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
         }
 
         .porta-item:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 32px rgba(255, 77, 0, 0.12);
+            border-color: rgba(255, 77, 0, 0.35);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 40px rgba(255, 77, 0, 0.1);
+            transform: translateY(-6px);
         }
 
         .porta-item img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: cover;
             display: block;
         }
 
         .porta-item .porta-label {
-            padding: 14px;
-            background: #111;
-            font-size: 0.8rem;
-            color: #888;
+            padding: 18px;
+            background: rgba(17, 17, 17, 0.95);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 500;
         }
 
         /* Outros produtos (placeholder para futuro) */
@@ -577,11 +898,11 @@
             }
 
             .porta-item {
-                flex: 0 0 260px;
+                flex: 0 0 280px;
             }
 
             .porta-item img {
-                height: 180px;
+                height: 200px;
             }
         }
     </style>
@@ -627,69 +948,97 @@
     </div>
 
     <section class="automatizadores" id="automatizadores">
-        <h2 class="section-title reveal">LINHA DE AUTOMATIZADORES</h2>
+        <h2 class="section-title automatizadores-title">LINHA DE AUTOMATIZADORES</h2>
         <div class="produtos-grid">
-            <div class="produto-card automatizador-slide-left">
-                <div class="produto-header">
-                    <h3>AUTOMATIZADOR AC</h3>
-                    <span class="logo-evo">evo</span>
-                </div>
-                <ul>
-                    <li>Freio</li>
-                    <li>Inversão de lado</li>
-                    <li>Motor elétrico</li>
-                    <li>Central elétrica</li>
-                    <li>Fim de curso - Limitador de abertura e fechamento</li>
-                    <li>Acionamento manual</li>
-                    <li>Central de comando</li>
-                    <li>Controles sem fio</li>
-                </ul>
-                <div class="modelos">
-                    <p>Modelos AC</p>
-                    <div class="modelos-list">
-                        <span>AC200</span><span>AC300</span><span>AC400</span><span>AC500</span>
-                        <span>AC600</span><span>AC700</span><span>AC800</span><span>AC1000</span>
+            <div class="produto-card-block">
+                <div class="produto-card automatizador-slide-left">
+                    <span class="card-shine" aria-hidden="true"></span>
+                    <div class="produto-img-wrap">
+                        <img src="img/motor/imagem-apenasbordamotor.png" alt="Automatizador AC - Esquema">
+                    </div>
+                    <div class="produto-card-content">
+                        <div class="produto-header">
+                            <div class="logo-evo-wrap"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"
+                                    class="logo-evo-img"></div>
+                            <h3>AUTOMATIZADOR AC</h3>
+                        </div>
+                        <ul>
+                            <li>Freio</li>
+                            <li>Inversão de lado</li>
+                            <li>Motor elétrico</li>
+                            <li>Central elétrica</li>
+                            <li>Fim de curso - Limitador de abertura e fechamento</li>
+                            <li>Acionamento manual</li>
+                            <li>Central de comando</li>
+                            <li>Controles sem fio</li>
+                        </ul>
+                        <div class="modelos">
+                            <p>Modelos AC</p>
+                            <div class="modelos-list">
+                                <span>AC200</span><span>AC300</span><span>AC400</span><span>AC500</span>
+                                <span>AC600</span><span>AC700</span><span>AC800</span><span>AC1000</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="produto-img-wrap">
-                    <img src="img/motor/imagem-apenasbordamotor.png" alt="Automatizador AC - Esquema">
-                </div>
+
             </div>
-            <div class="produto-card automatizador-slide-right">
-                <div class="produto-header">
-                    <h3>AUTOMATIZADOR DC</h3>
-                    <span class="logo-evo">evo</span>
-                </div>
-                <ul>
-                    <li>Freio</li>
-                    <li>Inversão de lado</li>
-                    <li>Motor elétrico</li>
-                    <li>Central elétrica</li>
-                    <li>Fim de curso - Limitador de abertura e fechamento</li>
-                    <li>Acionamento manual</li>
-                    <li>Central de comando</li>
-                    <li>Controles sem fio</li>
-                    <li>Nobreak</li>
-                </ul>
-                <div class="modelos">
-                    <p>Modelos DC</p>
-                    <div class="modelos-list">
-                        <span>DC200</span><span>DC300</span><span>DC400</span><span>DC500</span>
-                        <span>DC600</span><span>DC700</span><span>DC800</span><span>DC1000</span>
+            <div class="produto-card-block">
+                <div class="produto-card automatizador-slide-right">
+                    <span class="card-shine" aria-hidden="true"></span>
+                    <div class="produto-img-wrap foto-motor">
+                        <img src="img/motor/imagem-motor01.png" alt="Automatizador DC - Motor EVO">
+                    </div>
+                    <div class="produto-card-content">
+                        <div class="produto-header">
+                            <div class="logo-evo-wrap"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"
+                                    class="logo-evo-img"></div>
+                            <h3>AUTOMATIZADOR DC</h3>
+                        </div>
+                        <ul>
+                            <li>Freio</li>
+                            <li>Inversão de lado</li>
+                            <li>Motor elétrico</li>
+                            <li>Central elétrica</li>
+                            <li>Fim de curso - Limitador de abertura e fechamento</li>
+                            <li>Acionamento manual</li>
+                            <li>Central de comando</li>
+                            <li>Controles sem fio</li>
+                            <li>Nobreak</li>
+                        </ul>
+                        <div class="modelos">
+                            <p>Modelos DC</p>
+                            <div class="modelos-list">
+                                <span>DC200</span><span>DC300</span><span>DC400</span><span>DC500</span>
+                                <span>DC600</span><span>DC700</span><span>DC800</span><span>DC1000</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="produto-img-wrap foto-motor">
-                    <img src="img/motor/imagem-motor01.png" alt="Automatizador DC - Motor EVO">
-                </div>
+
             </div>
         </div>
-        <p class="slogan-evo reveal">UMA CERTEZA DE UM BOM NEGÓCIO É TER <strong>QUALIDADE EVO</strong></p>
+        <p class="slogan-evo">UMA CERTEZA DE UM BOM NEGÓCIO É TER <strong>QUALIDADE EVO</strong></p>
     </section>
 
     <section class="portas" id="portas">
         <h2 class="section-title reveal">PORTAS</h2>
+        <div class="portas-destaque">
+            <div class="portas-destaque-texto">
+                <h3 class="portas-destaque-titulo">Portas que fecham <span>com qualidade</span></h3>
+                <p class="portas-destaque-sub">Acabamento, durabilidade e segurança. Cada modelo EVO foi pensado para
+                    valorizar sua obra e resistir ao tempo.</p>
+            </div>
+            <div class="portas-destaque-galeria">
+                <div class="porta-destaque-item"><img src="img/portas/porta01.png" alt="Porta enrolar destaque"></div>
+                <div class="porta-destaque-item"><img src="img/portas/porta02.png" alt="Porta enrolar destaque"></div>
+                <div class="porta-destaque-item"><img src="img/portas/porta03.png" alt="Porta enrolar destaque"></div>
+                <div class="porta-destaque-item"><img src="img/portas/porta04.png" alt="Porta enrolar destaque"></div>
+                <div class="porta-destaque-item"><img src="img/portas/porta05.png" alt="Porta enrolar destaque"></div>
+            </div>
+        </div>
         <div class="portas-carousel-wrap">
-            <div class="portas-carousel-track" aria-label="Galeria de portas">
+            <div class="portas-carousel-track" aria-label="Galeria de portas em carrossel">
                 <div class="porta-item"><img src="img/portas/porta01.png" alt="Modelo de porta enrolar 1"><span
                         class="porta-label">Porta 01</span></div>
                 <div class="porta-item"><img src="img/portas/porta02.png" alt="Modelo de porta enrolar 2"><span
@@ -700,7 +1049,16 @@
                         class="porta-label">Porta 04</span></div>
                 <div class="porta-item"><img src="img/portas/porta05.png" alt="Modelo de porta enrolar 5"><span
                         class="porta-label">Porta 05</span></div>
-                <!-- duplicados para loop infinito -->
+                <div class="porta-item"><img src="img/portas/porta01.png" alt=""><span class="porta-label">Porta
+                        01</span></div>
+                <div class="porta-item"><img src="img/portas/porta02.png" alt=""><span class="porta-label">Porta
+                        02</span></div>
+                <div class="porta-item"><img src="img/portas/porta03.png" alt=""><span class="porta-label">Porta
+                        03</span></div>
+                <div class="porta-item"><img src="img/portas/porta04.png" alt=""><span class="porta-label">Porta
+                        04</span></div>
+                <div class="porta-item"><img src="img/portas/porta05.png" alt=""><span class="porta-label">Porta
+                        05</span></div>
                 <div class="porta-item"><img src="img/portas/porta01.png" alt=""><span class="porta-label">Porta
                         01</span></div>
                 <div class="porta-item"><img src="img/portas/porta02.png" alt=""><span class="porta-label">Porta
@@ -746,24 +1104,47 @@
 
     <script>
         ScrollReveal().reveal('.reveal', { distance: '60px', duration: 1200, interval: 150, origin: 'bottom' });
-        ScrollReveal().reveal('.automatizador-slide-left', {
-            origin: 'left',
-            distance: '120px',
+        ScrollReveal().reveal('.automatizadores-title', {
             duration: 1000,
             opacity: 0,
+            scale: 0.92,
+            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            viewFactor: 0.25
+        });
+        ScrollReveal().reveal('.automatizador-slide-left', {
+            origin: 'left',
+            distance: '180px',
+            duration: 1300,
+            opacity: 0,
+            scale: 0.96,
             easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
             delay: 200,
-            viewFactor: 0.25
+            viewFactor: 0.15,
+            afterReveal: function (el) { el.classList.add('revealed'); }
         });
         ScrollReveal().reveal('.automatizador-slide-right', {
             origin: 'right',
-            distance: '120px',
-            duration: 1000,
+            distance: '180px',
+            duration: 1300,
             opacity: 0,
+            scale: 0.96,
             easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            delay: 200,
-            viewFactor: 0.25
+            delay: 350,
+            viewFactor: 0.15,
+            afterReveal: function (el) { el.classList.add('revealed'); }
         });
+        ScrollReveal().reveal('.slogan-evo', {
+            distance: '50px',
+            duration: 1100,
+            opacity: 0.2,
+            origin: 'bottom',
+            delay: 500,
+            viewFactor: 0.2,
+            easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
+        });
+        ScrollReveal().reveal('.portas-destaque-texto .portas-destaque-titulo', { origin: 'left', distance: '50px', duration: 1000, opacity: 0.7, viewFactor: 0.3 });
+        ScrollReveal().reveal('.portas-destaque-sub', { origin: 'left', distance: '40px', duration: 900, delay: 120, opacity: 0.6, viewFactor: 0.3 });
+        ScrollReveal().reveal('.portas-destaque-galeria .porta-destaque-item', { interval: 80, origin: 'right', distance: '40px', duration: 800, opacity: 0.5, viewFactor: 0.2 });
     </script>
 </body>
 
