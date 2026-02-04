@@ -261,12 +261,14 @@
             color: #fff;
         }
 
-        /* —— Automatizadores: design premium (Porsche / Rolex) —— */
+        /* —— Automatizadores: design premium —— */
         .automatizadores {
             padding: 120px 6% 100px;
             background: #050505;
             position: relative;
             overflow: hidden;
+            border-top: 1px solid rgba(255, 77, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 77, 0, 0.2);
         }
 
         .automatizadores::before {
@@ -304,7 +306,7 @@
             height: 1px;
             margin: 20px auto 0;
             background: var(--primary);
-            animation: title-line-expand 0.9s ease-out 0.4s forwards;
+            animation: title-line-expand 0.4s ease-out 0.2s forwards;
         }
 
         @keyframes title-line-expand {
@@ -320,6 +322,9 @@
             max-width: 960px;
             margin: 0 auto;
             overflow: visible;
+            padding: 0 4px;
+            border-left: 1px solid rgba(255, 77, 0, 0.15);
+            border-right: 1px solid rgba(255, 77, 0, 0.15);
         }
 
         .produto-card-block {
@@ -327,6 +332,10 @@
             flex-direction: column;
             align-items: center;
             gap: 0;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            padding: 2px;
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .produto-card-footer {
@@ -353,9 +362,9 @@
 
         .produto-card {
             background: #0c0c0c;
-            border: 1px solid rgba(255, 77, 0, 0.25);
-            border-left: 3px solid var(--primary);
-            border-radius: 4px;
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
             padding: 0;
             position: relative;
             overflow: hidden;
@@ -449,47 +458,47 @@
         }
 
         .produto-card.revealed ul li {
-            animation: produto-li-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: produto-li-reveal 0.25s ease-out forwards;
         }
 
         .produto-card.revealed ul li:nth-child(1) {
-            animation-delay: 0.15s;
+            animation-delay: 0.02s;
         }
 
         .produto-card.revealed ul li:nth-child(2) {
-            animation-delay: 0.22s;
+            animation-delay: 0.05s;
         }
 
         .produto-card.revealed ul li:nth-child(3) {
-            animation-delay: 0.29s;
+            animation-delay: 0.08s;
         }
 
         .produto-card.revealed ul li:nth-child(4) {
-            animation-delay: 0.36s;
+            animation-delay: 0.11s;
         }
 
         .produto-card.revealed ul li:nth-child(5) {
-            animation-delay: 0.43s;
+            animation-delay: 0.14s;
         }
 
         .produto-card.revealed ul li:nth-child(6) {
-            animation-delay: 0.5s;
+            animation-delay: 0.17s;
         }
 
         .produto-card.revealed ul li:nth-child(7) {
-            animation-delay: 0.57s;
+            animation-delay: 0.2s;
         }
 
         .produto-card.revealed ul li:nth-child(8) {
-            animation-delay: 0.64s;
+            animation-delay: 0.23s;
         }
 
         .produto-card.revealed ul li:nth-child(9) {
-            animation-delay: 0.71s;
+            animation-delay: 0.26s;
         }
 
         .produto-card.revealed ul li:nth-child(10) {
-            animation-delay: 0.78s;
+            animation-delay: 0.29s;
         }
 
         @keyframes produto-li-reveal {
@@ -643,30 +652,48 @@
             text-shadow: 0 0 40px rgba(255, 77, 0, 0.2);
         }
 
-        /* Seção Portas — destaque + carrossel infinito (premium) */
+        /* Seção Portas — fundo laranja visível em toda a área */
         .portas {
             padding: 0 0 120px;
-            background: linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%);
-            border-top: 1px solid rgba(255, 77, 0, 0.15);
+            background: #0d0a09;
             overflow: hidden;
             position: relative;
         }
 
+        /* Faixa laranja no topo */
         .portas::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 77, 0, 0.3), transparent);
-            opacity: 0.6;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 77, 0, 0.4) 50%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Fundo laranja em toda a seção — visível */
+        .portas::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(180deg, rgba(255, 77, 0, 0.12) 0%, rgba(255, 77, 0, 0.06) 30%, rgba(255, 77, 0, 0.08) 70%, rgba(255, 77, 0, 0.1) 100%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .portas .section-title {
             margin-bottom: 0;
             padding: 96px 6% 0;
             letter-spacing: 0.35em;
+            position: relative;
+            z-index: 1;
         }
 
         .portas-destaque {
@@ -677,6 +704,8 @@
             max-width: 1320px;
             margin: 0 auto;
             padding: 64px 6% 88px;
+            position: relative;
+            z-index: 1;
         }
 
         @media (max-width: 900px) {
@@ -873,6 +902,8 @@
             overflow: hidden;
             mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+            position: relative;
+            z-index: 1;
         }
 
         .portas-carousel-track {
@@ -1371,48 +1402,48 @@
     </footer>
 
     <script>
-        ScrollReveal().reveal('.reveal', { distance: '60px', duration: 1200, interval: 150, origin: 'bottom' });
+        ScrollReveal().reveal('.reveal', { distance: '50px', duration: 700, interval: 80, origin: 'bottom' });
         ScrollReveal().reveal('.automatizadores-title', {
-            duration: 1000,
+            duration: 600,
             opacity: 0,
-            scale: 0.92,
+            scale: 0.97,
             easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            viewFactor: 0.25
+            viewFactor: 0.3
         });
         ScrollReveal().reveal('.automatizador-slide-left', {
             origin: 'left',
-            distance: '180px',
-            duration: 1300,
+            distance: '80px',
+            duration: 650,
             opacity: 0,
-            scale: 0.96,
+            scale: 0.98,
             easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            delay: 200,
-            viewFactor: 0.15,
+            delay: 50,
+            viewFactor: 0.2,
             afterReveal: function (el) { el.classList.add('revealed'); }
         });
         ScrollReveal().reveal('.automatizador-slide-right', {
             origin: 'right',
-            distance: '180px',
-            duration: 1300,
+            distance: '80px',
+            duration: 650,
             opacity: 0,
-            scale: 0.96,
+            scale: 0.98,
             easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            delay: 350,
-            viewFactor: 0.15,
+            delay: 100,
+            viewFactor: 0.2,
             afterReveal: function (el) { el.classList.add('revealed'); }
         });
         ScrollReveal().reveal('.slogan-evo', {
-            distance: '50px',
-            duration: 1100,
-            opacity: 0.2,
+            distance: '40px',
+            duration: 600,
+            opacity: 0.3,
             origin: 'bottom',
-            delay: 500,
-            viewFactor: 0.2,
+            delay: 150,
+            viewFactor: 0.25,
             easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
         });
-        ScrollReveal().reveal('.portas-destaque-texto .portas-destaque-titulo', { origin: 'left', distance: '50px', duration: 1000, opacity: 0.7, viewFactor: 0.3 });
-        ScrollReveal().reveal('.portas-destaque-sub', { origin: 'left', distance: '40px', duration: 900, delay: 120, opacity: 0.6, viewFactor: 0.3 });
-        ScrollReveal().reveal('.portas-destaque-carousel', { origin: 'right', distance: '40px', duration: 800, opacity: 0.6, viewFactor: 0.2 });
+        ScrollReveal().reveal('.portas-destaque-texto .portas-destaque-titulo', { origin: 'left', distance: '40px', duration: 550, opacity: 0.8, viewFactor: 0.35 });
+        ScrollReveal().reveal('.portas-destaque-sub', { origin: 'left', distance: '30px', duration: 500, delay: 60, opacity: 0.7, viewFactor: 0.35 });
+        ScrollReveal().reveal('.portas-destaque-carousel', { origin: 'right', distance: '35px', duration: 550, opacity: 0.7, viewFactor: 0.25 });
 
         (function () {
             var carousel = document.querySelector('.portas-destaque-carousel');
