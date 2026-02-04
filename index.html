@@ -200,32 +200,55 @@
             }
         }
 
-        /* Stats */
+        /* Stats — faixa premium */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            padding: 60px 10%;
+            width: 100%;
+            min-height: 200px;
+            padding: 88px 8%;
             background: #000;
-            border-bottom: 1px solid #111;
+            border-top: 1px solid rgba(255, 77, 0, 0.25);
+            border-bottom: 1px solid rgba(255, 77, 0, 0.25);
         }
 
         .stat-item {
             text-align: center;
+            padding: 0 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 64px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
         }
 
         .stat-item h2 {
-            font-family: 'Archivo Black';
-            font-size: 2.5rem;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
+            font-weight: 900;
             color: var(--primary);
+            letter-spacing: 0.02em;
+            line-height: 1.1;
         }
 
         .stat-item p {
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
-            font-weight: 900;
-            margin-top: 4px;
+            font-weight: 600;
+            margin-top: 14px;
         }
 
         /* Seção Automatizadores - Premium */
@@ -574,52 +597,86 @@
             }
         }
 
+        /* Slogan EVO — bloco de citação premium */
         .slogan-evo {
             text-align: center;
-            margin-top: 88px;
-            padding: 0 24px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.45);
+            margin-top: 100px;
+            padding: 48px 56px;
+            font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 400;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.12em;
+            line-height: 1.7;
             position: relative;
-            max-width: 520px;
+            max-width: 680px;
             margin-left: auto;
             margin-right: auto;
             z-index: 1;
-            background: none;
-            border: none;
-            box-shadow: none;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.15) 100%);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .slogan-evo::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 28px;
+            font-family: Georgia, serif;
+            font-size: 4rem;
+            color: rgba(255, 77, 0, 0.15);
+            line-height: 1;
+        }
+
+        .slogan-evo:hover {
+            border-color: rgba(255, 77, 0, 0.4);
+            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 77, 0, 0.08);
         }
 
         .slogan-evo strong {
-            color: #fff;
-            font-weight: 600;
-            letter-spacing: 0.12em;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 40px rgba(255, 77, 0, 0.2);
         }
 
-        /* Seção Portas - destaque + carrossel infinito */
+        /* Seção Portas — destaque + carrossel infinito (premium) */
         .portas {
-            padding: 0 0 100px;
-            background: #0a0a0a;
-            border-top: 1px solid #1a1a1a;
+            padding: 0 0 120px;
+            background: linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%);
+            border-top: 1px solid rgba(255, 77, 0, 0.15);
             overflow: hidden;
+            position: relative;
+        }
+
+        .portas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 77, 0, 0.3), transparent);
+            opacity: 0.6;
         }
 
         .portas .section-title {
             margin-bottom: 0;
-            padding: 80px 6% 0;
+            padding: 96px 6% 0;
+            letter-spacing: 0.35em;
         }
 
-        /* Bloco destaque: afirmação ao lado das imagens (estilo Porsche/Rolex) */
         .portas-destaque {
             display: grid;
             grid-template-columns: 1fr 1.15fr;
-            gap: 64px;
+            gap: 72px;
             align-items: center;
-            max-width: 1280px;
+            max-width: 1320px;
             margin: 0 auto;
-            padding: 56px 6% 72px;
+            padding: 64px 6% 88px;
         }
 
         @media (max-width: 900px) {
@@ -646,7 +703,14 @@
 
         .portas-destaque-texto .portas-destaque-titulo span {
             color: var(--primary);
-            text-shadow: 0 0 40px rgba(255, 77, 0, 0.2);
+            text-shadow: 0 0 40px rgba(255, 77, 0, 0.25);
+        }
+
+        .portas .section-title.reveal {
+            background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .portas-destaque-texto .portas-destaque-sub {
@@ -667,16 +731,26 @@
         }
 
         .portas-destaque-galeria .porta-destaque-item {
-            border-radius: 10px;
+            position: relative;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .portas-destaque-galeria .porta-destaque-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .portas-destaque-galeria .porta-destaque-item:hover {
-            border-color: rgba(255, 77, 0, 0.4);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 77, 0, 0.08);
-            transform: translateY(-4px);
+            border-color: rgba(255, 77, 0, 0.45);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 77, 0, 0.1);
+            transform: translateY(-6px) scale(1.02);
         }
 
         .portas-destaque-galeria .porta-destaque-item img {
@@ -779,28 +853,32 @@
             font-weight: 500;
         }
 
-        /* Outros produtos (placeholder para futuro) */
+        /* Outros produtos — bloco premium */
         .outros-produtos {
-            padding: 80px 6%;
-            background: var(--bg);
-            border-top: 1px solid #111;
+            padding: 100px 6%;
+            background: linear-gradient(180deg, #030303 0%, #080808 100%);
+            border-top: 1px solid rgba(255, 77, 0, 0.12);
+            position: relative;
         }
 
         .outros-produtos .section-title {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            letter-spacing: 0.3em;
         }
 
         .outros-produtos p {
             text-align: center;
-            color: #555;
-            font-size: 1rem;
-            max-width: 500px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 520px;
             margin: 0 auto;
+            letter-spacing: 0.04em;
         }
 
-        /* CTA */
+        /* CTA — impacto premium */
         .mega-cta {
-            min-height: 70vh;
+            min-height: 75vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -808,48 +886,110 @@
             text-align: center;
             background: #000;
             position: relative;
-            padding: 80px 20px;
+            padding: 100px 24px;
+            overflow: hidden;
+        }
+
+        .mega-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 77, 0, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .mega-cta::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.5;
         }
 
         .mega-cta h2 {
             font-family: 'Archivo Black';
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            color: #111;
+            font-size: clamp(2.8rem, 9vw, 5.5rem);
+            color: #fff;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            transition: color 0.4s;
-            margin-bottom: 40px;
+            letter-spacing: 0.15em;
+            transition: letter-spacing 0.4s ease, color 0.4s ease;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mega-cta h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            margin: 24px auto 0;
+            transition: width 0.4s ease;
         }
 
         .mega-cta:hover h2 {
-            color: #fff;
+            letter-spacing: 0.2em;
+        }
+
+        .mega-cta:hover h2::after {
+            width: 120px;
+        }
+
+        .mega-cta p {
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 36px;
+            font-size: 1.05rem;
+            letter-spacing: 0.06em;
         }
 
         .mega-cta a {
+            position: relative;
+            z-index: 1;
             background: var(--primary);
             color: #000;
-            padding: 20px 50px;
+            padding: 22px 56px;
             text-decoration: none;
             font-weight: 900;
-            letter-spacing: 4px;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
         }
 
         .mega-cta a:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 77, 0, 0.4);
+            transform: scale(1.04);
+            box-shadow: 0 12px 40px rgba(255, 77, 0, 0.4);
+            background: #ff6b2c;
         }
 
-        /* Footer */
+        /* Footer — premium */
         footer {
-            padding: 60px 10%;
-            border-top: 1px solid #111;
+            padding: 72px 8% 56px;
+            border-top: 1px solid rgba(255, 77, 0, 0.2);
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
+            gap: 48px;
+            background: #030303;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.6;
         }
 
         footer .logo {
@@ -857,29 +997,35 @@
         }
 
         footer .logo img {
-            height: 52px;
+            height: 56px;
             width: auto;
+            opacity: 0.95;
         }
 
         footer p {
-            color: #444;
-            font-size: 0.9rem;
-            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.95rem;
+            margin-top: 12px;
+            line-height: 1.6;
+            max-width: 320px;
         }
 
         footer h5 {
             color: var(--primary);
             font-size: 0.7rem;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
+            letter-spacing: 0.25em;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         footer a {
-            color: #666;
+            color: rgba(255, 255, 255, 0.55);
             text-decoration: none;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            transition: color 0.25s ease;
         }
 
         footer a:hover {
@@ -894,7 +1040,13 @@
 
             .stats-bar {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
+                gap: 48px 24px;
+                min-height: 240px;
+                padding: 64px 6%;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
             }
 
             .porta-item {
@@ -1018,7 +1170,7 @@
 
             </div>
         </div>
-        <p class="slogan-evo">UMA CERTEZA DE UM BOM NEGÓCIO É TER <strong>QUALIDADE EVO</strong></p>
+    
     </section>
 
     <section class="portas" id="portas">
@@ -1080,8 +1232,7 @@
 
     <section class="mega-cta">
         <h2 class="reveal">QUALIDADE EVO</h2>
-        <p class="reveal" style="color:#444; margin-bottom:20px;">Soluções em automatizadores e portas para o seu
-            negócio.</p>
+        <p class="reveal">Soluções em automatizadores e portas para o seu negócio.</p>
         <a href="contato.html" class="reveal">Fale Conosco</a>
     </section>
 
