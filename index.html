@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>EVO BRASIL | Automatizadores e Portas de Qualidade</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;700;900&display=swap"
         rel="stylesheet">
@@ -28,14 +28,19 @@
             color: white;
             font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
 
         /* Nav */
         nav {
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
             padding: 24px 6%;
+            padding-top: max(24px, env(safe-area-inset-top));
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -189,6 +194,27 @@
         }
 
         @media (max-width: 768px) {
+            nav {
+                padding: 16px 5%;
+            }
+
+            .logo img {
+                height: 56px;
+            }
+
+            nav > div {
+                gap: 20px !important;
+            }
+
+            nav a:not(.logo) {
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-inner {
+                padding: 0 5%;
+            }
+
             .hero-content .hero-logo {
                 max-width: 380px;
             }
@@ -265,84 +291,72 @@
         /* —— Automatizadores: landing premium —— */
         .automatizadores {
             padding: 140px 6% 120px;
-            background: #060606;
+            background: #050505;
             position: relative;
             overflow: hidden;
-            border-top: 1px solid rgba(255, 77, 0, 0.15);
-            border-bottom: 1px solid rgba(255, 77, 0, 0.15);
-            background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 77, 0, 0.06) 0%, transparent 55%),
-                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255, 77, 0, 0.04) 0%, transparent 50%);
-        }
-
-        .automatizadores::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 64px;
-            background: linear-gradient(to bottom, transparent, rgba(255, 77, 0, 0.25));
-            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .automatizadores-header {
             text-align: center;
-            max-width: 640px;
-            margin: 0 auto 64px;
+            max-width: 520px;
+            margin: 0 auto 80px;
             position: relative;
             z-index: 1;
         }
 
         .automatizadores-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            letter-spacing: 0.28em;
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.38em;
             text-transform: uppercase;
             color: var(--primary);
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             font-weight: 600;
-            opacity: 0.95;
         }
 
         .automatizadores .section-title {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             position: relative;
             z-index: 1;
         }
 
         .automatizadores .section-title.automatizadores-title {
-            font-size: clamp(1.75rem, 3.5vw, 2.25rem);
-            color: #fff;
-            letter-spacing: 0.35em;
-            font-weight: 900;
+            font-size: clamp(1.5rem, 2.8vw, 1.95rem);
+            color: var(--primary);
+            letter-spacing: 0.22em;
+            font-weight: 800;
             text-transform: uppercase;
             -webkit-text-fill-color: initial;
             background: none;
+            line-height: 1.25;
         }
 
         .automatizadores-intro {
-            font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.55);
-            font-weight: 300;
-            letter-spacing: 0.02em;
-            margin-top: 8px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.58);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            margin-top: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .automatizadores .section-title::after {
             content: '';
             display: block;
             width: 0;
-            height: 2px;
-            margin: 24px auto 0;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            height: 1px;
+            margin: 22px auto 24px;
+            background: var(--primary);
             animation: title-line-expand 0.5s ease-out 0.25s forwards;
         }
 
         @keyframes title-line-expand {
             to {
-                width: 80px;
+                width: 40px;
             }
         }
 
@@ -394,7 +408,7 @@
 
         .produto-card {
             background: linear-gradient(165deg, #0e0e0e 0%, #0a0a0a 100%);
-            border: 1px solid rgba(255, 77, 0, 0.22);
+            border: 3px solid rgba(255, 77, 0, 0.35);
             border-radius: 12px;
             padding: 0;
             position: relative;
@@ -409,8 +423,8 @@
 
         .produto-card:hover {
             background: linear-gradient(165deg, #111 0%, #0c0c0c 100%);
-            border-color: rgba(255, 77, 0, 0.38);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 77, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 77, 0, 0.5);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 77, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
 
         .produto-card .card-shine {
@@ -634,41 +648,48 @@
 
         .automatizadores-cta {
             text-align: center;
-            margin-top: 56px;
+            margin-top: 72px;
+            padding: 48px 32px 52px;
             position: relative;
             z-index: 1;
+            border-top: 1px solid rgba(255, 77, 0, 0.25);
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .automatizadores-cta p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 16px;
-            font-weight: 300;
-            letter-spacing: 0.02em;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 24px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            line-height: 1.5;
         }
 
         .automatizadores-cta a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 32px;
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid rgba(255, 77, 0, 0.5);
+            padding: 18px 44px;
+            background: var(--primary);
+            color: #fff;
+            border: 2px solid var(--primary);
             border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             text-decoration: none;
-            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
         }
 
         .automatizadores-cta a:hover {
-            background: rgba(255, 77, 0, 0.12);
-            border-color: var(--primary);
+            background: #ff7a3d;
+            border-color: #ff7a3d;
             color: #fff;
-            box-shadow: 0 0 24px rgba(255, 77, 0, 0.15);
+            box-shadow: 0 8px 32px rgba(255, 77, 0, 0.35);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 900px) {
@@ -687,6 +708,91 @@
 
             .produto-card-content {
                 padding: 40px 32px 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .automatizadores {
+                padding: 100px 5% 80px;
+            }
+
+            .automatizadores-header {
+                max-width: 100%;
+                margin-bottom: 56px;
+                padding: 0 8px;
+            }
+
+            .automatizadores-badge {
+                font-size: 0.6rem;
+                letter-spacing: 0.3em;
+                margin-bottom: 12px;
+            }
+
+            .automatizadores .section-title.automatizadores-title {
+                font-size: 1.35rem;
+                letter-spacing: 0.15em;
+            }
+
+            .automatizadores-intro {
+                font-size: 0.9rem;
+                line-height: 1.75;
+            }
+
+            .produtos-grid {
+                padding: 0 4px;
+                gap: 24px;
+            }
+
+            .produto-img-wrap {
+                padding: 32px 20px 24px;
+            }
+
+            .produto-img-wrap img {
+                max-height: 280px;
+            }
+
+            .produto-img-wrap.foto-motor img {
+                max-height: 300px;
+            }
+
+            .produto-card-content {
+                padding: 32px 24px 40px;
+            }
+
+            .produto-card .produto-header h3 {
+                font-size: 1.35rem;
+                letter-spacing: 0.12em;
+            }
+
+            .produto-card .logo-evo-img {
+                height: 100px;
+                max-width: 220px;
+            }
+
+            .produto-card ul li {
+                font-size: 0.95rem;
+                padding-bottom: 12px;
+            }
+
+            .modelos-list span {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .automatizadores-cta {
+                margin-top: 56px;
+                padding: 36px 20px 44px;
+            }
+
+            .automatizadores-cta p {
+                font-size: 1.05rem;
+                margin-bottom: 20px;
+            }
+
+            .automatizadores-cta a {
+                padding: 16px 36px;
+                font-size: 0.85rem;
+                letter-spacing: 0.1em;
             }
         }
 
@@ -958,6 +1064,109 @@
             border-color: var(--primary);
         }
 
+        @media (max-width: 768px) {
+            .portas {
+                padding: 0 0 80px;
+            }
+
+            .portas .section-title {
+                padding: 72px 5% 0;
+                font-size: 1.4rem;
+                letter-spacing: 0.2em;
+            }
+
+            .portas-destaque {
+                padding: 40px 5% 48px;
+                gap: 40px;
+            }
+
+            .portas-destaque-card {
+                padding: 36px 24px;
+            }
+
+            .portas-destaque-texto .portas-destaque-titulo {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+
+            .portas-destaque-texto .portas-destaque-sub {
+                font-size: 0.95rem;
+            }
+
+            .porta-destaque-slide-caption {
+                font-size: 0.88rem;
+                margin-top: 14px;
+            }
+
+            .portas-carousel-wrap {
+                padding: 8px 0 20px;
+            }
+
+            .slogan-evo {
+                margin-top: 64px;
+                padding: 36px 24px;
+                font-size: 0.95rem;
+                letter-spacing: 0.08em;
+                margin-left: 5%;
+                margin-right: 5%;
+                max-width: none;
+            }
+
+            .slogan-evo::before {
+                font-size: 3rem;
+                left: 16px;
+                top: 12px;
+            }
+
+            .outros-produtos {
+                padding: 72px 5%;
+            }
+
+            .outros-produtos .section-title {
+                font-size: 1.35rem;
+                letter-spacing: 0.2em;
+            }
+
+            .outros-produtos p {
+                font-size: 0.95rem;
+            }
+
+            .mega-cta {
+                min-height: 70vh;
+                padding: 80px 20px 90px;
+            }
+
+            .mega-cta h2 {
+                font-size: clamp(1.8rem, 8vw, 2.8rem);
+                letter-spacing: 0.1em;
+                margin-bottom: 16px;
+            }
+
+            .mega-cta h2::after {
+                margin: 18px auto 0;
+            }
+
+            .mega-cta p {
+                font-size: 0.95rem;
+                margin-bottom: 28px;
+            }
+
+            .mega-cta a {
+                padding: 18px 40px;
+                font-size: 0.8rem;
+                letter-spacing: 0.18em;
+            }
+
+            footer {
+                padding: 56px 5% max(40px, env(safe-area-inset-bottom));
+                gap: 40px;
+            }
+
+            footer p {
+                max-width: none;
+            }
+        }
+
         @media (max-width: 600px) {
             .portas-destaque-carousel {
                 max-width: 100%;
@@ -978,7 +1187,7 @@
             }
 
             .portas-destaque-card {
-                padding: 36px 28px;
+                padding: 28px 20px;
             }
         }
 
@@ -1101,12 +1310,13 @@
         .mega-cta h2 {
             font-family: 'Archivo Black';
             font-size: clamp(2.8rem, 9vw, 5.5rem);
-            color: #fff;
+            color: #FF6B2C;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             transition: letter-spacing 0.4s ease, color 0.4s ease;
             margin-bottom: 20px;
             position: relative;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
             z-index: 1;
         }
 
@@ -1161,6 +1371,7 @@
         /* Footer — premium */
         footer {
             padding: 72px 8% 56px;
+            padding-bottom: max(56px, env(safe-area-inset-bottom));
             border-top: 1px solid rgba(255, 77, 0, 0.2);
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
@@ -1238,12 +1449,142 @@
                 display: none;
             }
 
+            .stat-item h2 {
+                font-size: 2.2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+            }
+
             .porta-item {
-                flex: 0 0 280px;
+                flex: 0 0 260px;
             }
 
             .porta-item img {
-                height: 200px;
+                height: 180px;
+            }
+
+            .porta-item .porta-label {
+                padding: 14px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Extra pequeno (smartphones) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 12px 4%;
+            }
+
+            .logo img {
+                height: 48px;
+            }
+
+            nav > div {
+                gap: 16px !important;
+            }
+
+            nav a:not(.logo) {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+
+            .hero-content .hero-logo {
+                max-width: 300px;
+            }
+
+            .hero-content .tagline {
+                font-size: 0.78rem;
+                letter-spacing: 3px;
+                bottom: 30%;
+            }
+
+            .stats-bar {
+                padding: 48px 5%;
+                gap: 36px 16px;
+                min-height: 200px;
+            }
+
+            .stat-item h2 {
+                font-size: 1.9rem;
+            }
+
+            .automatizadores {
+                padding: 80px 4% 64px;
+            }
+
+            .automatizadores-header {
+                margin-bottom: 44px;
+            }
+
+            .automatizadores .section-title.automatizadores-title {
+                font-size: 1.2rem;
+                letter-spacing: 0.1em;
+            }
+
+            .automatizadores-intro {
+                font-size: 0.85rem;
+            }
+
+            .produto-card-content {
+                padding: 28px 20px 36px;
+            }
+
+            .produto-card .produto-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .produto-card .logo-evo-img {
+                height: 80px;
+                max-width: 180px;
+            }
+
+            .automatizadores-cta {
+                margin-top: 44px;
+                padding: 28px 16px 36px;
+            }
+
+            .automatizadores-cta p {
+                font-size: 0.95rem;
+            }
+
+            .automatizadores-cta a {
+                padding: 14px 28px;
+                font-size: 0.78rem;
+                letter-spacing: 0.08em;
+            }
+
+            .portas .section-title {
+                padding: 56px 4% 0;
+                font-size: 1.2rem;
+            }
+
+            .portas-destaque {
+                padding: 32px 4% 40px;
+            }
+
+            .portas-destaque-texto .portas-destaque-titulo {
+                font-size: 1.3rem;
+            }
+
+            .mega-cta h2 {
+                font-size: 1.6rem;
+                letter-spacing: 0.08em;
+            }
+
+            .mega-cta a {
+                padding: 16px 32px;
+                font-size: 0.75rem;
+            }
+
+            .porta-item {
+                flex: 0 0 240px;
+            }
+
+            .porta-item img {
+                height: 160px;
             }
         }
     </style>
@@ -1292,8 +1633,8 @@
         <header class="automatizadores-header">
             <span class="automatizadores-badge">Produtos</span>
             <h2 class="section-title automatizadores-title">LINHA DE AUTOMATIZADORES</h2>
-            <p class="automatizadores-intro reveal">Tecnologia e confiabilidade para portas residenciais e comerciais.
-                Motores AC e DC com acabamento premium e recursos que garantem segurança e durabilidade.</p>
+            <p class="automatizadores-intro reveal">Soluções em tecnologia e confiabilidade para portas residenciais e
+                comerciais. Linha AC e DC com acabamento premium, segurança e durabilidade garantidas.</p>
         </header>
         <div class="produtos-grid">
             <div class="produto-card-block">
