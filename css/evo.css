@@ -46,7 +46,29 @@ body {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
-img, video { max-width: 100%; height: auto; display: block; }
+/* Imagens: sempre responsivas no celular */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+img { object-fit: contain; }
+/* Background de imagem (hero etc): adaptado para mobile */
+.hero-bg-img,
+[style*="background-image"] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+@media (max-width: 639px) {
+  .hero-bg-img,
+  section [style*="background-image"] {
+    background-size: cover;
+    background-position: 50% 50%;
+    min-height: 100%;
+    min-width: 100%;
+  }
+}
 
 .font-display { font-family: 'Archivo Black', sans-serif; }
 
@@ -574,4 +596,105 @@ footer .grid {
   .reveal-left { transform: translateX(-30px); }
   .reveal-right { transform: translateX(30px); }
   .reveal-up { transform: translateY(30px); }
+}
+
+/* ========== MOBILE-FIRST (telefone) ========== */
+/* Evitar quebra de layout: nada ultrapassa a tela */
+body, main, section, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl, .max-w-xl {
+  max-width: 100%;
+}
+/* Containers com padding não estouram */
+.max-w-7xl { padding-left: 0; padding-right: 0; }
+section .max-w-7xl,
+section .max-w-6xl,
+section .max-w-5xl,
+section .max-w-3xl,
+section .max-w-xl { width: 100%; }
+
+/* Cards Automatizadores/Portas: texto e tags no celular */
+@media (max-width: 639px) {
+  /* Lista de features: texto não quebra mal */
+  .premium-card ul li { font-size: 0.8125rem; word-break: break-word; line-height: 1.4; }
+  /* Tags de modelos: wrap e menor */
+  .premium-card .flex.flex-wrap.gap-2 span { padding: 0.375rem 0.5rem; font-size: 0.75rem; }
+  .premium-card .text-center.mb-8 h3 { font-size: 1rem; }
+}
+
+/* Carrossel Portas: botões de toque maiores no celular */
+#portas-prev, #portas-next {
+  min-width: 44px;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+@media (max-width: 639px) {
+  #portas-dots button { min-width: 28px; min-height: 28px; }
+}
+
+/* Stats: números não estouram em telas muito pequenas */
+@media (max-width: 380px) {
+  .stat-item span { font-size: 1.5rem !important; }
+}
+
+/* Section title mobile */
+@media (max-width: 639px) {
+  .section-title { font-size: 1.5rem; }
+  .section-title::after { margin-top: 16px; }
+}
+
+/* Quote e blocos de texto: padding e fonte no celular */
+@media (max-width: 639px) {
+  .quote-block { padding: 1.25rem 1rem; }
+  .quote-block p { font-size: 0.9375rem; line-height: 1.6; }
+}
+
+/* Footer: links e texto não quebram mal */
+footer a, footer p { word-break: break-word; overflow-wrap: break-word; }
+@media (max-width: 639px) {
+  footer .text-sm { font-size: 0.8125rem; }
+}
+
+/* Garantir que nenhum filho cause scroll horizontal */
+section { overflow-x: hidden; }
+main { overflow-x: hidden; }
+
+/* Carrossel Portas: legenda não corta no celular */
+.portas-slide-caption {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Faixa infinita de portas: não estoura na tela no mobile */
+.portas-strip-wrap {
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  width: 100%;
+}
+/* Evitar scroll horizontal em qualquer tela */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+.portas-strip-wrap .flex.animate-slide-infinite {
+  max-width: none;
+}
+/* Container do carrossel Portas: largura fixa para não quebrar no mobile */
+.relative.reveal.reveal-right .overflow-hidden.rounded-xl {
+  width: 100%;
+  max-width: 100%;
+}
+/* Slide do carrossel: cada slide = 100% da largura visível */
+#portas-slide {
+  width: 100%;
+  max-width: 100%;
+}
+#portas-slide > div {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
