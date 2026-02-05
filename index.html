@@ -388,29 +388,45 @@
         .automatizadores-header .automatizadores-title,
         .automatizadores-header .automatizadores-intro {
             opacity: 0;
-            transform: translateX(-36px);
+            transform: translateX(-24px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
-        .automatizadores-header.in-view .automatizadores-badge {
-            animation: auto-header-slide-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
+        .automatizadores-header.in-view .automatizadores-badge,
         .automatizadores-header.in-view .automatizadores-title {
-            animation: auto-header-slide-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
-        }
-
-        .automatizadores-header.in-view .automatizadores-title::after {
-            animation: title-line-expand 0.5s ease-out 0.5s forwards;
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .automatizadores-header.in-view .automatizadores-intro {
-            animation: auto-header-slide-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+            transform: translateX(0);
         }
 
-        @keyframes auto-header-slide-in {
-            to {
-                opacity: 1;
-                transform: translateX(0);
+        .automatizadores-header.tw-title-done .automatizadores-intro {
+            opacity: 1;
+        }
+
+        .automatizadores-header.tw-title-done .automatizadores-title::after {
+            animation: title-line-expand 0.5s ease-out forwards;
+        }
+
+        .tw-cursor {
+            display: inline-block;
+            width: 2px;
+            min-height: 0.9em;
+            background: var(--primary);
+            animation: tw-blink 0.75s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        .tw-done .tw-cursor {
+            display: none;
+        }
+
+        @keyframes tw-blink {
+            50% {
+                opacity: 0;
             }
         }
 
@@ -1758,8 +1774,10 @@
 
     <section class="automatizadores" id="automatizadores">
         <header class="automatizadores-header">
-            <span class="automatizadores-badge">Produtos</span>
-            <h2 class="section-title automatizadores-title">LINHA DE AUTOMATIZADORES</h2>
+            <span class="automatizadores-badge"><span class="tw-text">Produtos</span><span class="tw-cursor"
+                    aria-hidden="true"></span></span>
+            <h2 class="section-title automatizadores-title"><span class="tw-text">LINHA DE AUTOMATIZADORES</span><span
+                    class="tw-cursor" aria-hidden="true"></span></h2>
             <p class="automatizadores-intro">Soluções em tecnologia e confiabilidade para portas residenciais e
                 comerciais. Linha AC e DC com acabamento premium, segurança e durabilidade garantidas.</p>
         </header>
@@ -1973,12 +1991,42 @@
         (function () {
             var header = document.querySelector('.automatizadores-header');
             if (!header) return;
+
+            function typewriter(el, speedMs, onDone) {
+                var wrap = el.closest('.automatizadores-badge, .automatizadores-title, .automatizadores-intro');
+                var textEl = el.querySelector ? el.querySelector('.tw-text') : el;
+                if (!textEl) return onDone && onDone();
+                var full = textEl.textContent || '';
+                textEl.textContent = '';
+                var i = 0;
+                function tick() {
+                    if (i < full.length) {
+                        textEl.textContent += full.charAt(i);
+                        i++;
+                        setTimeout(tick, speedMs);
+                    } else {
+                        if (wrap) wrap.classList.add('tw-done');
+                        onDone && onDone();
+                    }
+                }
+                tick();
+            }
+
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (e) {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('in-view');
-                        io.unobserve(e.target);
-                    }
+                    if (!e.isIntersecting) return;
+                    e.target.classList.add('in-view');
+                    io.unobserve(e.target);
+
+                    var badge = e.target.querySelector('.automatizadores-badge');
+                    var title = e.target.querySelector('.automatizadores-title');
+                    setTimeout(function () {
+                        typewriter(badge, 95, function () {
+                            typewriter(title, 75, function () {
+                                e.target.classList.add('tw-title-done');
+                            });
+                        });
+                    }, 200);
                 });
             }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
             io.observe(header);
