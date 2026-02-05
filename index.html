@@ -138,12 +138,12 @@
         @keyframes hero-tagline-entrance {
             from {
                 opacity: 0;
-                transform: translateX(-50%) translateY(24px);
+                transform: translateY(20px);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0);
+                transform: translateY(0);
             }
         }
 
@@ -181,11 +181,12 @@
             z-index: 1;
             width: 100%;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 6%;
+            padding: max(60px, env(safe-area-inset-top)) 6% max(20px, env(safe-area-inset-bottom));
         }
 
         .hero-content {
@@ -193,12 +194,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform: translateY(-26vh);
+            justify-content: center;
+            gap: 8px;
         }
 
         .hero-content .hero-logo {
             width: 100%;
-            max-width: 620px;
+            max-width: min(620px, 85vw);
             height: auto;
             display: block;
             filter: drop-shadow(0 0 60px rgba(255, 77, 0, 0.25));
@@ -206,20 +208,15 @@
         }
 
         .hero-content .tagline {
-            position: absolute;
-            bottom: 38%;
-            left: 50%;
-            transform: translateX(-50%);
             margin: 0;
             padding: 0;
-            letter-spacing: 10px;
-            font-size: 1rem;
+            letter-spacing: clamp(6px, 2vw, 10px);
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
             color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
             text-transform: uppercase;
             line-height: 1.3;
             text-align: center;
-            z-index: 2;
             animation: hero-tagline-entrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
         }
 
@@ -246,17 +243,16 @@
             }
 
             .hero-content {
-                transform: translateY(-18vh);
+                gap: 6px;
             }
 
             .hero-content .hero-logo {
-                max-width: 380px;
+                max-width: min(380px, 90vw);
             }
 
             .hero-content .tagline {
-                bottom: 32%;
                 letter-spacing: 5px;
-                font-size: 0.88rem;
+                font-size: clamp(0.78rem, 3vw, 0.95rem);
                 font-weight: 600;
             }
         }
@@ -1622,11 +1618,11 @@
             }
 
             .hero-content .hero-logo {
-                max-width: 300px;
+                max-width: min(300px, 92vw);
             }
 
             .hero-content .tagline {
-                font-size: 0.78rem;
+                font-size: clamp(0.72rem, 4vw, 0.85rem);
                 letter-spacing: 3px;
                 bottom: 30%;
             }
