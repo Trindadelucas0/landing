@@ -19,6 +19,9 @@
     }
   </script>
   <link rel="stylesheet" href="css/evo.css" />
+  <style>
+    .hero-portfolio h1 { animation: fade-in 0.8s ease-out 0.2s forwards; opacity: 0; transform: translateY(30px); }
+  </style>
 </head>
 <body class="bg-evo-background text-evo-foreground min-h-screen">
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
@@ -52,7 +55,7 @@
   </div>
 
   <main>
-    <section class="min-h-[70vh] flex items-end px-[6%] pb-24 pt-32 relative overflow-hidden bg-evo-gradient-hero">
+    <section class="min-h-[70vh] flex items-end px-[6%] pb-24 pt-32 relative overflow-hidden bg-evo-gradient-hero hero-portfolio">
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_70%,hsl(18_100%_50%/0.08),transparent_60%)]"></div>
       <div class="relative z-10">
         <h1 class="font-display text-5xl sm:text-6xl lg:text-8xl text-white tracking-tight leading-none">
@@ -63,95 +66,83 @@
 
     <section class="w-full py-16 sm:py-20 lg:py-24 px-[6%] bg-black border-y border-primary/25">
       <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-          <div class="stat-item py-6">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">10+</span>
-            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p>
-          </div>
-          <div class="stat-item py-6">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">5000+</span>
-            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p>
-          </div>
-          <div class="stat-item py-6">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">100%</span>
-            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p>
-          </div>
-          <div class="stat-item py-6">
-            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">24h</span>
-            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p>
-          </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 reveal-stagger">
+          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">10+</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">5000+</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">100%</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">24h</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p></div>
         </div>
       </div>
     </section>
 
     <section class="py-20 lg:py-28">
       <div class="grid lg:grid-cols-2 min-h-[70vh] border-b border-evo/30">
-        <div class="relative overflow-hidden group">
+        <div class="relative overflow-hidden group reveal reveal-left">
           <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] to-[#090909] flex items-center justify-center">
             <span class="font-display text-8xl lg:text-9xl text-primary/10 group-hover:text-primary/20 transition-colors duration-700">01</span>
           </div>
         </div>
-        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l border-evo/30">
+        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l border-evo/30 reveal reveal-right">
           <span class="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Automatizador</span>
           <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl text-white uppercase tracking-tight leading-none mb-6">Residencial Premium</h2>
           <p class="text-evo-muted leading-relaxed max-w-md">Portão automatizado com acabamento de alto padrão para residência de luxo.</p>
         </div>
       </div>
       <div class="grid lg:grid-cols-2 min-h-[70vh] border-b border-evo/30 lg:flex-row-reverse">
-        <div class="relative overflow-hidden group lg:order-2">
+        <div class="relative overflow-hidden group lg:order-2 reveal reveal-right">
           <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] to-[#090909] flex items-center justify-center">
             <span class="font-display text-8xl lg:text-9xl text-primary/10 group-hover:text-primary/20 transition-colors duration-700">02</span>
           </div>
         </div>
-        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l lg:border-l-0 lg:border-r border-evo/30 lg:order-1">
+        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l lg:border-l-0 lg:border-r border-evo/30 lg:order-1 reveal reveal-left">
           <span class="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Porta Enrolar</span>
           <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl text-white uppercase tracking-tight leading-none mb-6">Galpão Industrial</h2>
           <p class="text-evo-muted leading-relaxed max-w-md">Solução completa em porta de enrolar para grande galpão industrial.</p>
         </div>
       </div>
       <div class="grid lg:grid-cols-2 min-h-[70vh] border-b border-evo/30">
-        <div class="relative overflow-hidden group">
+        <div class="relative overflow-hidden group reveal reveal-left">
           <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] to-[#090909] flex items-center justify-center">
             <span class="font-display text-8xl lg:text-9xl text-primary/10 group-hover:text-primary/20 transition-colors duration-700">03</span>
           </div>
         </div>
-        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l border-evo/30">
+        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l border-evo/30 reveal reveal-right">
           <span class="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Automatizador</span>
           <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl text-white uppercase tracking-tight leading-none mb-6">Condomínio Fechado</h2>
           <p class="text-evo-muted leading-relaxed max-w-md">Sistema automatizado para entrada principal de condomínio de alto padrão.</p>
         </div>
       </div>
       <div class="grid lg:grid-cols-2 min-h-[70vh] border-b border-evo/30">
-        <div class="relative overflow-hidden group lg:order-2">
+        <div class="relative overflow-hidden group lg:order-2 reveal reveal-right">
           <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] to-[#090909] flex items-center justify-center">
             <span class="font-display text-8xl lg:text-9xl text-primary/10 group-hover:text-primary/20 transition-colors duration-700">04</span>
           </div>
         </div>
-        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l lg:border-l-0 lg:border-r border-evo/30 lg:order-1">
+        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l lg:border-l-0 lg:border-r border-evo/30 lg:order-1 reveal reveal-left">
           <span class="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Porta Enrolar</span>
           <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl text-white uppercase tracking-tight leading-none mb-6">Centro Comercial</h2>
           <p class="text-evo-muted leading-relaxed max-w-md">Múltiplas portas de enrolar para lojas em centro comercial.</p>
         </div>
       </div>
       <div class="grid lg:grid-cols-2 min-h-[70vh] border-b border-evo/30">
-        <div class="relative overflow-hidden group">
+        <div class="relative overflow-hidden group reveal reveal-left">
           <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] to-[#090909] flex items-center justify-center">
             <span class="font-display text-8xl lg:text-9xl text-primary/10 group-hover:text-primary/20 transition-colors duration-700">05</span>
           </div>
         </div>
-        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l border-evo/30">
+        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l border-evo/30 reveal reveal-right">
           <span class="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Automatizador</span>
           <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl text-white uppercase tracking-tight leading-none mb-6">Fazenda Tecnológica</h2>
           <p class="text-evo-muted leading-relaxed max-w-md">Automatização de portões para propriedade rural de grande porte.</p>
         </div>
       </div>
       <div class="grid lg:grid-cols-2 min-h-[70vh] border-b border-evo/30">
-        <div class="relative overflow-hidden group lg:order-2">
+        <div class="relative overflow-hidden group lg:order-2 reveal reveal-right">
           <div class="absolute inset-0 bg-gradient-to-br from-[#0d0d0d] to-[#090909] flex items-center justify-center">
             <span class="font-display text-8xl lg:text-9xl text-primary/10 group-hover:text-primary/20 transition-colors duration-700">06</span>
           </div>
         </div>
-        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l lg:border-l-0 lg:border-r border-evo/30 lg:order-1">
+        <div class="p-12 lg:p-20 flex flex-col justify-center bg-evo-surface border-l lg:border-l-0 lg:border-r border-evo/30 lg:order-1 reveal reveal-left">
           <span class="text-primary font-bold text-xs tracking-[0.3em] uppercase mb-4 block">Porta Enrolar</span>
           <h2 class="font-display text-3xl lg:text-4xl xl:text-5xl text-white uppercase tracking-tight leading-none mb-6">Garagem Coletiva</h2>
           <p class="text-evo-muted leading-relaxed max-w-md">Sistema de portas para estacionamento vertical.</p>
@@ -160,33 +151,33 @@
     </section>
 
     <section class="bg-evo-surface py-2">
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-0.5">
-        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-0.5 reveal-stagger">
+        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer reveal reveal-scale">
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="font-display text-5xl text-primary/10 group-hover:text-primary/30 group-hover:scale-110 transition-all duration-500">01</span>
           </div>
         </div>
-        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer">
+        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer reveal reveal-scale">
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="font-display text-5xl text-primary/10 group-hover:text-primary/30 group-hover:scale-110 transition-all duration-500">02</span>
           </div>
         </div>
-        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer">
+        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer reveal reveal-scale">
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="font-display text-5xl text-primary/10 group-hover:text-primary/30 group-hover:scale-110 transition-all duration-500">03</span>
           </div>
         </div>
-        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer">
+        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer reveal reveal-scale">
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="font-display text-5xl text-primary/10 group-hover:text-primary/30 group-hover:scale-110 transition-all duration-500">04</span>
           </div>
         </div>
-        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer">
+        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer reveal reveal-scale">
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="font-display text-5xl text-primary/10 group-hover:text-primary/30 group-hover:scale-110 transition-all duration-500">05</span>
           </div>
         </div>
-        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer">
+        <div class="aspect-square bg-evo-surface-elevated relative overflow-hidden group cursor-pointer reveal reveal-scale">
           <div class="absolute inset-0 flex items-center justify-center">
             <span class="font-display text-5xl text-primary/10 group-hover:text-primary/30 group-hover:scale-110 transition-all duration-500">06</span>
           </div>
@@ -195,21 +186,21 @@
     </section>
 
     <section class="min-h-[60vh] flex flex-col items-center justify-center text-center px-[6%]">
-      <h2 class="font-display text-4xl sm:text-5xl lg:text-7xl tracking-tight text-white/10 hover:text-white transition-colors duration-500 cursor-default">QUALIDADE <span class="text-primary">EVO</span></h2>
+      <h2 class="font-display text-4xl sm:text-5xl lg:text-7xl tracking-tight text-white/10 hover:text-white transition-colors duration-500 cursor-default reveal reveal-fade">QUALIDADE <span class="text-primary">EVO</span></h2>
     </section>
   </main>
 
   <footer class="relative pt-20 pb-16 px-[6%] border-t border-primary/20 bg-gradient-to-b from-surface to-background">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-70"></div>
     <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-        <div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 reveal-stagger">
+        <div class="reveal reveal-up">
           <a href="index.html" class="inline-block mb-6">
             <span class="font-display text-xl tracking-wider"><span class="text-primary">EVO</span><span class="text-white/90 ml-2">BRASIL</span></span>
           </a>
           <p class="text-evo-muted leading-relaxed max-w-xs">Automatizadores e portas. Qualidade que faz a diferença.</p>
         </div>
-        <div>
+        <div class="reveal reveal-up">
           <h5 class="text-primary text-xs font-bold tracking-[0.25em] mb-6">NAVEGAR</h5>
           <div class="flex flex-col gap-3">
             <a href="index.html#automatizadores" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Automatizadores</a>
@@ -218,7 +209,7 @@
             <a href="quem-somos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Quem Somos</a>
           </div>
         </div>
-        <div>
+        <div class="reveal reveal-up">
           <h5 class="text-primary text-xs font-bold tracking-[0.25em] mb-6">CONTATO</h5>
           <div class="flex flex-col gap-3">
             <div class="flex items-center gap-3 text-sm">
@@ -263,5 +254,6 @@
       }
     })();
   </script>
+  <script src="js/reveal.js"></script>
 </body>
 </html>

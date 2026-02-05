@@ -19,6 +19,12 @@
     }
   </script>
   <link rel="stylesheet" href="css/evo.css" />
+  <style>
+    .hero-q span { animation: fade-in 0.6s ease-out 0.2s forwards; opacity: 0; }
+    .hero-q h1 { animation: fade-in 0.7s ease-out 0.3s forwards; opacity: 0; transform: translateY(20px); }
+    .hero-q .line { animation: lineExpand 0.6s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; transform-origin: center; transform: scaleX(0); }
+    .hero-q p { animation: fade-in 0.7s ease-out 0.6s forwards; opacity: 0; }
+  </style>
 </head>
 <body class="bg-evo-background text-evo-foreground min-h-screen">
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
@@ -52,18 +58,18 @@
   </div>
 
   <main>
-    <section class="min-h-[70vh] flex flex-col items-center justify-center text-center px-[6%] pt-32 pb-20 relative overflow-hidden">
+    <section class="min-h-[70vh] flex flex-col items-center justify-center text-center px-[6%] pt-32 pb-20 relative overflow-hidden hero-q">
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_30%,hsl(18_100%_50%/0.06),transparent_60%)]"></div>
       <span class="badge-premium mb-6 relative z-10">Nossa História</span>
       <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white tracking-[0.1em] uppercase mb-6 relative z-10">Quem Somos</h1>
-      <div class="w-16 h-0.5 bg-primary mb-8"></div>
+      <div class="w-16 h-0.5 bg-primary mb-8 line"></div>
       <p class="text-evo-muted max-w-2xl leading-relaxed relative z-10">
         Há mais de uma década, a EVO BRASIL se dedica a transformar a segurança e a praticidade de portões e acessos em todo o país. Somos referência em automatizadores e portas de qualidade.
       </p>
     </section>
 
     <section class="py-20 px-[6%] border-t border-evo/50">
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto reveal reveal-left">
         <span class="badge-premium mb-4 block">Trajetória</span>
         <h2 class="font-display text-2xl lg:text-3xl text-white tracking-[0.1em] uppercase mb-4">Nossa História</h2>
         <div class="w-12 h-0.5 bg-primary mb-8"></div>
@@ -77,22 +83,15 @@
 
     <section class="py-20 px-[6%] bg-evo-surface-elevated border-y border-evo/50">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16 reveal reveal-up">
           <span class="badge-premium mb-4 block">Princípios</span>
           <h2 class="font-display text-2xl lg:text-3xl text-white tracking-[0.15em] uppercase">Nossos Valores</h2>
           <div class="w-10 h-0.5 bg-primary mx-auto mt-6"></div>
         </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="premium-card p-8 lg:p-10">
-            <h3 class="font-display text-primary text-sm tracking-[0.15em] uppercase mb-4">Excelência</h3>
-            <p class="text-evo-muted leading-relaxed">Buscamos a perfeição em cada detalhe. Nossos produtos passam por rigorosos processos de qualidade.</p>
-          </div>
-          <div class="premium-card p-8 lg:p-10">
-            <h3 class="font-display text-primary text-sm tracking-[0.15em] uppercase mb-4">Inovação</h3>
-            <p class="text-evo-muted leading-relaxed">Investimos constantemente em tecnologia e desenvolvimento para oferecer as melhores soluções.</p>
-          </div>
-          <div class="premium-card p-8 lg:p-10">
-            <h3 class="font-display text-primary text-sm tracking-[0.15em] uppercase mb-4">Compromisso</h3>
+        <div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+          <div class="premium-card p-8 lg:p-10 reveal reveal-up"><h3 class="font-display text-primary text-sm tracking-[0.15em] uppercase mb-4">Excelência</h3><p class="text-evo-muted leading-relaxed">Buscamos a perfeição em cada detalhe. Nossos produtos passam por rigorosos processos de qualidade.</p></div>
+          <div class="premium-card p-8 lg:p-10 reveal reveal-up"><h3 class="font-display text-primary text-sm tracking-[0.15em] uppercase mb-4">Inovação</h3><p class="text-evo-muted leading-relaxed">Investimos constantemente em tecnologia e desenvolvimento para oferecer as melhores soluções.</p></div>
+          <div class="premium-card p-8 lg:p-10 reveal reveal-up"><h3 class="font-display text-primary text-sm tracking-[0.15em] uppercase mb-4">Compromisso</h3>
             <p class="text-evo-muted leading-relaxed">Nosso compromisso com você vai além da venda. Oferecemos suporte completo em toda jornada.</p>
           </div>
         </div>
@@ -100,7 +99,7 @@
     </section>
 
     <section class="py-20 px-[6%]">
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto reveal reveal-scale">
         <div class="quote-block">
           <p class="text-lg lg:text-xl text-white/85 leading-relaxed">
             A <strong class="text-primary font-bold">EVO BRASIL</strong> acredita que cada portão automatizado e cada porta instalada são oportunidades de demonstrar nossa paixão por <strong class="text-primary font-bold">qualidade</strong> e <strong class="text-primary font-bold">inovação</strong>.
@@ -110,8 +109,8 @@
     </section>
 
     <section class="py-16 px-[6%] text-center border-t border-evo/50">
-      <p class="text-lg text-evo-muted mb-8">Quer conhecer nossas soluções de perto?</p>
-      <a href="contato.html" class="btn-primary">Entre em Contato</a>
+      <p class="text-lg text-evo-muted mb-8 reveal reveal-fade">Quer conhecer nossas soluções de perto?</p>
+      <a href="contato.html" class="btn-primary reveal reveal-up">Entre em Contato</a>
     </section>
   </main>
 
@@ -179,5 +178,6 @@
       }
     })();
   </script>
+  <script src="js/reveal.js"></script>
 </body>
 </html>

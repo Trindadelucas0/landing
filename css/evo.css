@@ -293,7 +293,27 @@ body {
 .safe-top { padding-top: max(20px, env(safe-area-inset-top)); }
 .safe-bottom { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
 
-/* Animations */
+/* ========== REVEAL ANIMATIONS (scroll + on load) ========== */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -306,9 +326,90 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
 }
+@keyframes lineExpand {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes textReveal {
+  from { opacity: 0; transform: translateY(1em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.15); }
+}
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Reveal base: invisível até entrar na tela */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: none;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.in-view { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.in-view { opacity: 1; transform: translateX(0); }
+.reveal-up {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-up.in-view { opacity: 1; transform: translateY(0); }
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale.in-view { opacity: 1; transform: scale(1); }
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-fade.in-view { opacity: 1; }
+
+/* Stagger: atraso para filhos */
+.reveal-stagger .reveal { transition-delay: 0s; }
+.reveal-stagger .reveal:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger .reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal-stagger .reveal:nth-child(3) { transition-delay: 0.15s; }
+.reveal-stagger .reveal:nth-child(4) { transition-delay: 0.2s; }
+.reveal-stagger .reveal:nth-child(5) { transition-delay: 0.25s; }
+.reveal-stagger .reveal:nth-child(6) { transition-delay: 0.3s; }
+.reveal-stagger .reveal:nth-child(7) { transition-delay: 0.35s; }
+.reveal-stagger .reveal:nth-child(8) { transition-delay: 0.4s; }
+.reveal-stagger .reveal:nth-child(9) { transition-delay: 0.45s; }
+.reveal-stagger .reveal:nth-child(10) { transition-delay: 0.5s; }
+
+/* Delays por data-attribute */
+.reveal[data-delay="1"] { transition-delay: 0.1s; }
+.reveal[data-delay="2"] { transition-delay: 0.2s; }
+.reveal[data-delay="3"] { transition-delay: 0.3s; }
+.reveal[data-delay="4"] { transition-delay: 0.4s; }
+.reveal[data-delay="5"] { transition-delay: 0.5s; }
+.reveal[data-delay="6"] { transition-delay: 0.6s; }
+
 .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
 .animate-slide-infinite { animation: slide-infinite 30s linear infinite; }
 .animate-bounce-down { animation: bounce-down 1.5s ease-in-out infinite; }
+.animate-glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
+.animate-float-soft { animation: floatSoft 4s ease-in-out infinite; }
 
 /* Mobile menu */
 .mobile-menu {

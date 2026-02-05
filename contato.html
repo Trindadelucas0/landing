@@ -19,6 +19,12 @@
     }
   </script>
   <link rel="stylesheet" href="css/evo.css" />
+  <style>
+    .contato-hero .badge-premium { animation: fade-in 0.5s ease-out 0.1s forwards; opacity: 0; }
+    .contato-hero h1 { animation: fade-in 0.6s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px); }
+    .contato-hero .line { animation: lineExpand 0.5s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; transform-origin: center; transform: scaleX(0); }
+    .contato-hero p { animation: fade-in 0.6s ease-out 0.4s forwards; opacity: 0; }
+  </style>
 </head>
 <body class="bg-evo-background text-evo-foreground min-h-screen">
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
@@ -52,14 +58,14 @@
   </div>
 
   <main class="pt-32 pb-20 px-[6%]">
-    <div class="text-center max-w-xl mx-auto mb-16">
+    <div class="text-center max-w-xl mx-auto mb-16 contato-hero">
       <span class="badge-premium mb-4 block">Fale Conosco</span>
       <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl text-white tracking-[0.15em] uppercase mb-4">Contato</h1>
-      <div class="w-12 h-0.5 bg-primary mx-auto mb-6"></div>
+      <div class="w-12 h-0.5 bg-primary mx-auto mb-6 line"></div>
       <p class="text-evo-muted leading-relaxed">Estamos prontos para atender você. Preencha o formulário abaixo e nossa equipe entrará em contato.</p>
     </div>
 
-    <div class="max-w-xl mx-auto">
+    <div class="max-w-xl mx-auto reveal reveal-up">
       <form id="form-contato" class="glass-card rounded-xl p-8 lg:p-12">
         <div class="form-field">
           <label for="nome">Nome</label>
@@ -83,20 +89,20 @@
       </form>
     </div>
 
-    <div id="form-success" class="max-w-xl mx-auto mt-8 p-6 rounded-xl border border-primary/30 bg-primary/5 text-center hidden">
+    <div id="form-success" class="max-w-xl mx-auto mt-8 p-6 rounded-xl border border-primary/30 bg-primary/5 text-center hidden reveal reveal-scale">
       <p class="text-white font-medium">Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
     </div>
 
-    <div class="max-w-3xl mx-auto mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="premium-card p-6 text-center">
+    <div class="max-w-3xl mx-auto mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
+      <div class="premium-card p-6 text-center reveal reveal-up">
         <h3 class="font-display text-primary text-xs tracking-[0.15em] uppercase mb-3">E-mail</h3>
         <a href="mailto:contato@evobrasil.com.br" class="text-evo-muted hover:text-white transition-colors text-sm">contato@evobrasil.com.br</a>
       </div>
-      <div class="premium-card p-6 text-center">
+      <div class="premium-card p-6 text-center reveal reveal-up">
         <h3 class="font-display text-primary text-xs tracking-[0.15em] uppercase mb-3">Telefone</h3>
         <a href="tel:+5511999999999" class="text-evo-muted hover:text-white transition-colors text-sm">(11) 99999-9999</a>
       </div>
-      <div class="premium-card p-6 text-center sm:col-span-2 lg:col-span-1">
+      <div class="premium-card p-6 text-center sm:col-span-2 lg:col-span-1 reveal reveal-up">
         <h3 class="font-display text-primary text-xs tracking-[0.15em] uppercase mb-3">WhatsApp</h3>
         <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="text-evo-muted hover:text-white transition-colors text-sm">Iniciar Conversa</a>
       </div>
@@ -179,5 +185,6 @@
       }
     })();
   </script>
+  <script src="js/reveal.js"></script>
 </body>
 </html>
