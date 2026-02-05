@@ -1,2100 +1,449 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>EVO BRASIL | Automatizadores e Portas de Qualidade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;700;900&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <style>
-        :root {
-            --primary: #ff4d00;
-            --bg: #030303;
-            --accent: #111111;
-            --glass: rgba(255, 255, 255, 0.03);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: white;
-            font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
-            padding-left: env(safe-area-inset-left);
-            padding-right: env(safe-area-inset-right);
-        }
-
-        /* Nav */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            padding: 20px 6%;
-            padding-top: max(20px, env(safe-area-inset-top));
-            padding-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-
-        nav:hover {
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
-            border-bottom-color: rgba(255, 77, 0, 0.15);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .logo img {
-            height: 118px;
-            width: auto;
-            display: block;
-            transition: opacity 0.25s ease;
-        }
-
-        .logo:hover img {
-            opacity: 0.95;
-        }
-
-        nav a:not(.logo) {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 0.22em;
-            transition: color 0.25s ease;
-            position: relative;
-        }
-
-        nav a:not(.logo):hover {
-            color: var(--primary);
-        }
-
-        nav a:not(.logo)::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--primary);
-            transition: width 0.25s ease;
-        }
-
-        nav a:not(.logo):hover::after {
-            width: 100%;
-        }
-
-        /* Hero - motor atrás do EVO com parallax */
-        @keyframes hero-parallax-fade {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 0.14;
-            }
-        }
-
-        @keyframes hero-parallax-fade-mobile {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 0.12;
-            }
-        }
-
-        @keyframes hero-logo-entrance {
-            from {
-                opacity: 0;
-                transform: scale(0.85);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes hero-tagline-entrance {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: radial-gradient(ellipse 100% 100% at 50% 50%, #0c0c0c 0%, #050505 60%, #000 100%);
-        }
-
-        .hero-motor-parallax {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            background: url('img/portas/porta03.png') center center no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            pointer-events: none;
-            animation: hero-parallax-fade 1.4s ease-out forwards;
-        }
-
-        @media (max-width: 768px) {
-            .hero-motor-parallax {
-                background-attachment: scroll;
-                background-size: cover;
-                animation: hero-parallax-fade-mobile 1.4s ease-out forwards;
-            }
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: max(60px, env(safe-area-inset-top)) 6% max(20px, env(safe-area-inset-bottom));
-        }
-
-        .hero-content {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .hero-content .hero-logo {
-            width: 100%;
-            max-width: min(620px, 85vw);
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 0 60px rgba(255, 77, 0, 0.25));
-            animation: hero-logo-entrance 1s ease-out 0.35s both;
-        }
-
-        .hero-content .tagline {
-            margin: 0;
-            padding: 0;
-            letter-spacing: clamp(6px, 2vw, 10px);
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            text-transform: uppercase;
-            line-height: 1.3;
-            text-align: center;
-            animation: hero-tagline-entrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 16px 5%;
-            }
-
-            .logo img {
-                height: 56px;
-            }
-
-            nav>div {
-                gap: 20px !important;
-            }
-
-            nav a:not(.logo) {
-                font-size: 0.7rem;
-                letter-spacing: 2px;
-            }
-
-            .hero-inner {
-                padding: 0 5%;
-            }
-
-            .hero-content {
-                gap: 6px;
-            }
-
-            .hero-content .hero-logo {
-                max-width: min(380px, 90vw);
-            }
-
-            .hero-content .tagline {
-                letter-spacing: 5px;
-                font-size: clamp(0.78rem, 3vw, 0.95rem);
-                font-weight: 600;
-            }
-        }
-
-        /* Stats — faixa premium */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            width: 100%;
-            min-height: 200px;
-            padding: 88px 8%;
-            background: #000;
-            border-top: 1px solid rgba(255, 77, 0, 0.25);
-            border-bottom: 1px solid rgba(255, 77, 0, 0.25);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 64px;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
-        }
-
-        .stat-item h2 {
-            font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2.8rem, 5vw, 3.8rem);
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: 0.02em;
-            line-height: 1.1;
-        }
-
-        .stat-item p {
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            color: rgba(255, 255, 255, 0.5);
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-top: 14px;
-        }
-
-        /* Seção Automatizadores - Premium */
-        .section-title {
-            font-family: 'Archivo Black';
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            text-align: center;
-            letter-spacing: 4px;
-            margin-bottom: 60px;
-            color: #fff;
-        }
-
-        /* —— Automatizadores: landing premium —— */
-        .automatizadores {
-            padding: 140px 6% 120px;
-            background: #050505;
-            position: relative;
-            overflow: hidden;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .automatizadores-header {
-            text-align: center;
-            max-width: 520px;
-            margin: 0 auto 80px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .automatizadores-badge {
-            display: block;
-            font-size: 0.65rem;
-            letter-spacing: 0.38em;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 18px;
-            font-weight: 600;
-        }
-
-        .automatizadores .section-title {
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .automatizadores .section-title.automatizadores-title {
-            font-size: clamp(1.5rem, 2.8vw, 1.95rem);
-            color: var(--primary);
-            letter-spacing: 0.22em;
-            font-weight: 800;
-            text-transform: uppercase;
-            -webkit-text-fill-color: initial;
-            background: none;
-            line-height: 1.25;
-        }
-
-        .automatizadores-intro {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.58);
-            font-weight: 400;
-            letter-spacing: 0.04em;
-            margin-top: 0;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .automatizadores .section-title::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 1px;
-            margin: 22px auto 24px;
-            background: var(--primary);
-            transform: translateZ(0);
-        }
-
-        .automatizadores-header .automatizadores-badge,
-        .automatizadores-header .automatizadores-title,
-        .automatizadores-header .automatizadores-intro {
-            opacity: 0;
-            transform: translateX(-24px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .automatizadores-header.in-view .automatizadores-badge,
-        .automatizadores-header.in-view .automatizadores-title {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .automatizadores-header.in-view .automatizadores-intro {
-            transform: translateX(0);
-        }
-
-        .automatizadores-header.tw-title-done .automatizadores-intro {
-            opacity: 1;
-        }
-
-        .automatizadores-header.tw-title-done .automatizadores-title::after {
-            animation: title-line-expand 0.5s ease-out forwards;
-        }
-
-        .tw-cursor {
-            display: inline-block;
-            width: 2px;
-            min-height: 0.9em;
-            background: var(--primary);
-            animation: tw-blink 0.75s step-end infinite;
-            vertical-align: text-bottom;
-            margin-left: 2px;
-        }
-
-        .tw-done .tw-cursor {
-            display: none;
-        }
-
-        @keyframes tw-blink {
-            50% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes title-line-expand {
-            to {
-                width: 40px;
-            }
-        }
-
-        .produtos-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
-            max-width: 980px;
-            margin: 0 auto;
-            overflow: visible;
-            padding: 0 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .produto-card-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
-            border-radius: 12px;
-            padding: 0;
-            background: transparent;
-            position: relative;
-            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
-        }
-
-        .produto-card-footer {
-            width: 100%;
-            padding: 20px 0 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 77, 0, 0.2);
-            margin-top: -1px;
-        }
-
-        .produto-card-footer img {
-            max-width: 180px;
-            max-height: 56px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            opacity: 0.9;
-        }
-
-        .produto-card.automatizador-slide-left,
-        .produto-card.automatizador-slide-right {
-            will-change: transform, opacity;
-        }
-
-        .produto-card {
-            background: linear-gradient(165deg, #0e0e0e 0%, #0a0a0a 100%);
-            border: 3px solid rgba(255, 77, 0, 0.35);
-            border-radius: 12px;
-            padding: 0;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.35s ease;
-            z-index: 1;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
-        }
-
-        .produto-card:hover {
-            background: linear-gradient(165deg, #111 0%, #0c0c0c 100%);
-            border-color: rgba(255, 77, 0, 0.5);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 77, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-        }
-
-        .produto-card .card-shine {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-            z-index: 2;
-            pointer-events: none;
-            transition: left 0.6s ease;
-        }
-
-        .produto-card:hover .card-shine {
-            left: 100%;
-        }
-
-        .produto-card-content {
-            flex: 1;
-            padding: 56px 56px 56px 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 0;
-        }
-
-        .produto-card .produto-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 36px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .produto-card .produto-header h3 {
-            color: #fff;
-            font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(1.6rem, 2.2vw, 1.95rem);
-            letter-spacing: 0.2em;
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1.2;
-            text-align: center;
-        }
-
-        .produto-card .logo-evo-wrap {
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: visible;
-        }
-
-        .produto-card .logo-evo-img {
-            height: 150px;
-            width: auto;
-            max-width: 320px;
-            object-fit: contain;
-            display: block;
-        }
-
-        .produto-card ul {
-            list-style: none;
-            position: relative;
-            z-index: 1;
-        }
-
-        .produto-card ul li {
-            position: relative;
-            padding-left: 0;
-            padding-bottom: 14px;
-            margin-bottom: 0;
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 300;
-            line-height: 1.6;
-            letter-spacing: 0.02em;
-            opacity: 0;
-            transform: translateX(0);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: color 0.25s ease;
-        }
-
-        .produto-card ul li:last-child {
-            border-bottom: none;
-        }
-
-        .produto-card.revealed ul li {
-            animation: produto-li-reveal 0.25s ease-out forwards;
-        }
-
-        .produto-card.revealed ul li:nth-child(1) {
-            animation-delay: 0.02s;
-        }
-
-        .produto-card.revealed ul li:nth-child(2) {
-            animation-delay: 0.05s;
-        }
-
-        .produto-card.revealed ul li:nth-child(3) {
-            animation-delay: 0.08s;
-        }
-
-        .produto-card.revealed ul li:nth-child(4) {
-            animation-delay: 0.11s;
-        }
-
-        .produto-card.revealed ul li:nth-child(5) {
-            animation-delay: 0.14s;
-        }
-
-        .produto-card.revealed ul li:nth-child(6) {
-            animation-delay: 0.17s;
-        }
-
-        .produto-card.revealed ul li:nth-child(7) {
-            animation-delay: 0.2s;
-        }
-
-        .produto-card.revealed ul li:nth-child(8) {
-            animation-delay: 0.23s;
-        }
-
-        .produto-card.revealed ul li:nth-child(9) {
-            animation-delay: 0.26s;
-        }
-
-        .produto-card.revealed ul li:nth-child(10) {
-            animation-delay: 0.29s;
-        }
-
-        @keyframes produto-li-reveal {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .produto-card ul li:hover {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .produto-card ul li::before {
-            display: none;
-        }
-
-        .modelos {
-            margin-top: 40px;
-            padding-top: 28px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            position: relative;
-            z-index: 1;
-        }
-
-        .modelos p {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.35);
-            margin-bottom: 14px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .modelos-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .modelos-list span {
-            background: rgba(255, 77, 0, 0.08);
-            color: var(--primary);
-            padding: 8px 14px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            border: 1px solid rgba(255, 77, 0, 0.35);
-            transition: background 0.25s ease, border-color 0.25s ease;
-        }
-
-        .modelos-list span:hover {
-            background: rgba(255, 77, 0, 0.15);
-            border-color: rgba(255, 77, 0, 0.55);
-        }
-
-        /* Imagem à esquerda — área escura minimal */
-        .produto-img-wrap {
-            flex: 0 0 52%;
-            min-width: 380px;
-            margin: 0;
-            padding: 48px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            background: #080808;
-            border-right: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .produto-img-wrap img {
-            max-width: 100%;
-            max-height: 460px;
-            width: auto;
-            object-fit: contain;
-            transition: opacity 0.4s ease;
-        }
-
-        .produto-img-wrap.foto-motor img {
-            max-height: 520px;
-        }
-
-        .produto-card:hover .produto-img-wrap img {
-            opacity: 0.92;
-        }
-
-        .automatizadores-cta {
-            text-align: center;
-            margin-top: 72px;
-            padding: 48px 32px 52px;
-            position: relative;
-            z-index: 1;
-            border-top: 1px solid rgba(255, 77, 0, 0.25);
-            max-width: 640px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .automatizadores-cta p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 24px;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            line-height: 1.5;
-        }
-
-        .automatizadores-cta a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px 44px;
-            background: var(--primary);
-            color: #fff;
-            border: 2px solid var(--primary);
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
-        }
-
-        .automatizadores-cta a:hover {
-            background: #ff7a3d;
-            border-color: #ff7a3d;
-            color: #fff;
-            box-shadow: 0 8px 32px rgba(255, 77, 0, 0.35);
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 900px) {
-            .produto-card {
-                flex-direction: column;
-            }
-
-            .produto-img-wrap {
-                flex: 0 0 auto;
-                min-width: 0;
-                width: 100%;
-                padding: 40px 24px 32px;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            }
-
-            .produto-card-content {
-                padding: 40px 32px 48px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .automatizadores {
-                padding: 100px 5% 80px;
-            }
-
-            .automatizadores-header {
-                max-width: 100%;
-                margin-bottom: 56px;
-                padding: 0 8px;
-            }
-
-            .automatizadores-badge {
-                font-size: 0.6rem;
-                letter-spacing: 0.3em;
-                margin-bottom: 12px;
-            }
-
-            .automatizadores .section-title.automatizadores-title {
-                font-size: 1.35rem;
-                letter-spacing: 0.15em;
-            }
-
-            .automatizadores-intro {
-                font-size: 0.9rem;
-                line-height: 1.75;
-            }
-
-            .produtos-grid {
-                padding: 0 4px;
-                gap: 24px;
-            }
-
-            .produto-img-wrap {
-                padding: 32px 20px 24px;
-            }
-
-            .produto-img-wrap img {
-                max-height: 280px;
-            }
-
-            .produto-img-wrap.foto-motor img {
-                max-height: 300px;
-            }
-
-            .produto-card-content {
-                padding: 32px 24px 40px;
-            }
-
-            .produto-card .produto-header h3 {
-                font-size: 1.35rem;
-                letter-spacing: 0.12em;
-            }
-
-            .produto-card .logo-evo-img {
-                height: 100px;
-                max-width: 220px;
-            }
-
-            .produto-card ul li {
-                font-size: 0.95rem;
-                padding-bottom: 12px;
-            }
-
-            .modelos-list span {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-
-            .automatizadores-cta {
-                margin-top: 56px;
-                padding: 36px 20px 44px;
-            }
-
-            .automatizadores-cta p {
-                font-size: 1.05rem;
-                margin-bottom: 20px;
-            }
-
-            .automatizadores-cta a {
-                padding: 16px 36px;
-                font-size: 0.85rem;
-                letter-spacing: 0.1em;
-            }
-        }
-
-        /* Slogan EVO — bloco de citação premium */
-        .slogan-evo {
-            text-align: center;
-            margin-top: 100px;
-            padding: 48px 56px;
-            font-size: clamp(1.05rem, 1.3vw, 1.2rem);
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 400;
-            letter-spacing: 0.12em;
-            line-height: 1.7;
-            position: relative;
-            max-width: 680px;
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 1;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.15) 100%);
-            border: 1px solid rgba(255, 77, 0, 0.2);
-            border-left: 4px solid var(--primary);
-            border-radius: 0 8px 8px 0;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .slogan-evo::before {
-            content: '"';
-            position: absolute;
-            top: 16px;
-            left: 28px;
-            font-family: Georgia, serif;
-            font-size: 4rem;
-            color: rgba(255, 77, 0, 0.15);
-            line-height: 1;
-        }
-
-        .slogan-evo:hover {
-            border-color: rgba(255, 77, 0, 0.4);
-            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 77, 0, 0.08);
-        }
-
-        .slogan-evo strong {
-            color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-shadow: 0 0 40px rgba(255, 77, 0, 0.2);
-        }
-
-        /* Seção Portas — fundo laranja visível em toda a área */
-        .portas {
-            padding: 0 0 120px;
-            background: #0d0a09;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Faixa laranja no topo */
-        .portas::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 77, 0, 0.4) 50%, transparent 100%);
-            z-index: 1;
-        }
-
-        /* Fundo laranja em toda a seção — visível */
-        .portas::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                linear-gradient(180deg, rgba(255, 77, 0, 0.12) 0%, rgba(255, 77, 0, 0.06) 30%, rgba(255, 77, 0, 0.08) 70%, rgba(255, 77, 0, 0.1) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .portas .section-title {
-            margin-bottom: 0;
-            padding: 96px 6% 0;
-            letter-spacing: 0.35em;
-            position: relative;
-            z-index: 1;
-        }
-
-        .portas-destaque {
-            display: grid;
-            grid-template-columns: 1fr 1.15fr;
-            gap: 72px;
-            align-items: center;
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 64px 6% 88px;
-            position: relative;
-            z-index: 1;
-        }
-
-        @media (max-width: 900px) {
-            .portas-destaque {
-                grid-template-columns: 1fr;
-                gap: 48px;
-                padding: 40px 6% 56px;
-            }
-        }
-
-        .portas-destaque-card {
-            background: linear-gradient(160deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.2) 100%);
-            border: 1px solid rgba(255, 77, 0, 0.2);
-            border-left: 4px solid var(--primary);
-            border-radius: 12px;
-            padding: 48px 44px;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
-            transition: border-color 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .portas-destaque-card:hover {
-            border-color: rgba(255, 77, 0, 0.35);
-            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 77, 0, 0.08);
-        }
-
-        .portas-destaque-texto {
-            padding: 0;
-        }
-
-        .portas-destaque-texto .portas-destaque-titulo {
-            font-family: 'Archivo Black';
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-            color: #fff;
-            letter-spacing: 4px;
-            line-height: 1.25;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .portas-destaque-texto .portas-destaque-titulo span {
-            color: var(--primary);
-            text-shadow: 0 0 40px rgba(255, 77, 0, 0.25);
-        }
-
-        .portas .section-title.reveal {
-            background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .portas-destaque-texto .portas-destaque-sub {
-            font-size: clamp(1rem, 1.05vw, 1.1rem);
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
-            letter-spacing: 0.03em;
-        }
-
-        .portas-destaque-carousel {
-            position: relative;
-            width: 100%;
-            max-width: 560px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .portas-destaque-carousel-inner {
-            display: flex;
-            width: 500%;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .porta-destaque-slide {
-            flex: 0 0 20%;
-            width: 20%;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 8px;
-        }
-
-        .porta-destaque-slide-card {
-            width: 100%;
-            max-width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 77, 0, 0.25);
-            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.3);
-            background: #0a0a0a;
-        }
-
-        .porta-destaque-slide-card img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-            display: block;
-        }
-
-        .porta-destaque-slide-caption {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.75);
-            line-height: 1.5;
-            letter-spacing: 0.03em;
-            max-width: 420px;
-        }
-
-        .portas-carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            font-size: 1.8rem;
-            line-height: 1;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-            z-index: 3;
-        }
-
-        .portas-carousel-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #000;
-        }
-
-        .portas-carousel-prev {
-            left: -12px;
-        }
-
-        .portas-carousel-next {
-            right: -12px;
-        }
-
-        .portas-carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 24px;
-        }
-
-        .portas-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: transparent;
-            cursor: pointer;
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-
-        .portas-dot:hover {
-            border-color: var(--primary);
-            background: rgba(255, 77, 0, 0.3);
-        }
-
-        .portas-dot.active {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        @media (max-width: 768px) {
-            .portas {
-                padding: 0 0 80px;
-            }
-
-            .portas .section-title {
-                padding: 72px 5% 0;
-                font-size: 1.4rem;
-                letter-spacing: 0.2em;
-            }
-
-            .portas-destaque {
-                padding: 40px 5% 48px;
-                gap: 40px;
-            }
-
-            .portas-destaque-card {
-                padding: 36px 24px;
-            }
-
-            .portas-destaque-texto .portas-destaque-titulo {
-                font-size: 1.5rem;
-                margin-bottom: 16px;
-            }
-
-            .portas-destaque-texto .portas-destaque-sub {
-                font-size: 0.95rem;
-            }
-
-            .porta-destaque-slide-caption {
-                font-size: 0.88rem;
-                margin-top: 14px;
-            }
-
-            .portas-carousel-wrap {
-                padding: 8px 0 20px;
-            }
-
-            .slogan-evo {
-                margin-top: 64px;
-                padding: 36px 24px;
-                font-size: 0.95rem;
-                letter-spacing: 0.08em;
-                margin-left: 5%;
-                margin-right: 5%;
-                max-width: none;
-            }
-
-            .slogan-evo::before {
-                font-size: 3rem;
-                left: 16px;
-                top: 12px;
-            }
-
-            .outros-produtos {
-                padding: 72px 5%;
-            }
-
-            .outros-produtos .section-title {
-                font-size: 1.35rem;
-                letter-spacing: 0.2em;
-            }
-
-            .outros-produtos p {
-                font-size: 0.95rem;
-            }
-
-            .mega-cta {
-                min-height: 70vh;
-                padding: 80px 20px 90px;
-            }
-
-            .mega-cta h2 {
-                font-size: clamp(1.8rem, 8vw, 2.8rem);
-                letter-spacing: 0.1em;
-                margin-bottom: 16px;
-            }
-
-            .mega-cta h2::after {
-                margin: 18px auto 0;
-            }
-
-            .mega-cta p {
-                font-size: 0.95rem;
-                margin-bottom: 28px;
-            }
-
-            .mega-cta a {
-                padding: 18px 40px;
-                font-size: 0.8rem;
-                letter-spacing: 0.18em;
-            }
-
-            footer {
-                padding: 56px 5% max(40px, env(safe-area-inset-bottom));
-                gap: 40px;
-            }
-
-            footer p {
-                max-width: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .portas-destaque-carousel {
-                max-width: 100%;
-            }
-
-            .portas-carousel-prev {
-                left: 8px;
-            }
-
-            .portas-carousel-next {
-                right: 8px;
-            }
-
-            .portas-carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5rem;
-            }
-
-            .portas-destaque-card {
-                padding: 28px 20px;
-            }
-        }
-
-        .portas-carousel-wrap {
-            overflow: hidden;
-            mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-            position: relative;
-            z-index: 1;
-        }
-
-        .portas-carousel-track {
-            display: flex;
-            gap: 28px;
-            width: max-content;
-            animation: portas-scroll 100s linear infinite;
-        }
-
-        .portas-carousel-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes portas-scroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-33.333%);
-            }
-        }
-
-        .porta-item {
-            flex: 0 0 320px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            overflow: hidden;
-            border-radius: 10px;
-            transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
-        }
-
-        .porta-item:hover {
-            border-color: rgba(255, 77, 0, 0.35);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 40px rgba(255, 77, 0, 0.1);
-            transform: translateY(-6px);
-        }
-
-        .porta-item img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .porta-item .porta-label {
-            padding: 18px;
-            background: rgba(17, 17, 17, 0.95);
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            letter-spacing: 2px;
-            font-weight: 500;
-        }
-
-        /* Outros produtos — bloco premium */
-        .outros-produtos {
-            padding: 100px 6%;
-            background: linear-gradient(180deg, #030303 0%, #080808 100%);
-            border-top: 1px solid rgba(255, 77, 0, 0.12);
-            position: relative;
-        }
-
-        .outros-produtos .section-title {
-            margin-bottom: 24px;
-            letter-spacing: 0.3em;
-        }
-
-        .outros-produtos p {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            max-width: 520px;
-            margin: 0 auto;
-            letter-spacing: 0.04em;
-        }
-
-        /* CTA — impacto premium */
-        .mega-cta {
-            min-height: 75vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: #000;
-            position: relative;
-            padding: 100px 24px;
-            overflow: hidden;
-        }
-
-        .mega-cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 77, 0, 0.08) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        .mega-cta::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0.5;
-        }
-
-        .mega-cta h2 {
-            font-family: 'Archivo Black';
-            font-size: clamp(2.8rem, 9vw, 5.5rem);
-            color: #FF6B2C;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            transition: letter-spacing 0.4s ease, color 0.4s ease;
-            margin-bottom: 20px;
-            position: relative;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-            z-index: 1;
-        }
-
-        .mega-cta h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: var(--primary);
-            margin: 24px auto 0;
-            transition: width 0.4s ease;
-        }
-
-        .mega-cta:hover h2 {
-            letter-spacing: 0.2em;
-        }
-
-        .mega-cta:hover h2::after {
-            width: 120px;
-        }
-
-        .mega-cta p {
-            position: relative;
-            z-index: 1;
-            color: rgba(255, 255, 255, 0.55);
-            margin-bottom: 36px;
-            font-size: 1.05rem;
-            letter-spacing: 0.06em;
-        }
-
-        .mega-cta a {
-            position: relative;
-            z-index: 1;
-            background: var(--primary);
-            color: #000;
-            padding: 22px 56px;
-            text-decoration: none;
-            font-weight: 900;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
-        }
-
-        .mega-cta a:hover {
-            transform: scale(1.04);
-            box-shadow: 0 12px 40px rgba(255, 77, 0, 0.4);
-            background: #ff6b2c;
-        }
-
-        /* Footer — premium */
-        footer {
-            padding: 88px 8% 64px;
-            padding-bottom: max(64px, env(safe-area-inset-bottom));
-            border-top: 1px solid rgba(255, 77, 0, 0.18);
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px 32px;
-            align-items: start;
-            background: linear-gradient(180deg, #040404 0%, #030303 100%);
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 160px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0.7;
-        }
-
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1rem;
-            margin: 0;
-            line-height: 1.7;
-            max-width: 340px;
-        }
-
-        footer p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        footer h5 {
-            color: var(--primary);
-            font-size: 0.72rem;
-            letter-spacing: 0.28em;
-            margin-bottom: 22px;
-            font-weight: 700;
-        }
-
-        footer a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 12px;
-            font-size: 0.92rem;
-            letter-spacing: 0.05em;
-            transition: color 0.25s ease;
-        }
-
-        footer a:hover {
-            color: var(--primary);
-        }
-
-        .footer-contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.92rem;
-            letter-spacing: 0.04em;
-        }
-
-        .footer-contact-item a {
-            margin-bottom: 0;
-            display: inline;
-        }
-
-        .footer-contact-item span {
-            color: var(--primary);
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            min-width: 52px;
-        }
-
-        .footer-social {
-            margin-top: 24px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .footer-social a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-decoration: none;
-            transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
-        }
-
-        .footer-social a:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(255, 77, 0, 0.08);
-        }
-
-        .footer-copy {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding-top: 40px;
-            margin-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.8rem;
-            letter-spacing: 0.08em;
-        }
-
-        @media (max-width: 700px) {
-            footer {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .stats-bar {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 48px 24px;
-                min-height: 240px;
-                padding: 64px 6%;
-            }
-
-            .stat-item:not(:last-child)::after {
-                display: none;
-            }
-
-            .stat-item h2 {
-                font-size: 2.2rem;
-            }
-
-            .stat-item p {
-                font-size: 0.7rem;
-                letter-spacing: 0.15em;
-            }
-
-            .porta-item {
-                flex: 0 0 260px;
-            }
-
-            .porta-item img {
-                height: 180px;
-            }
-
-            .porta-item .porta-label {
-                padding: 14px 12px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Extra pequeno (smartphones) */
-        @media (max-width: 480px) {
-            nav {
-                padding: 12px 4%;
-            }
-
-            nav>div {
-                gap: 16px !important;
-            }
-
-            nav a:not(.logo) {
-                font-size: 0.65rem;
-                letter-spacing: 1px;
-            }
-
-            .logo img {
-                height: 56px;
-            }
-
-            .hero-content .hero-logo {
-                max-width: min(300px, 92vw);
-            }
-
-            .hero-content .tagline {
-                font-size: clamp(0.72rem, 4vw, 0.85rem);
-                letter-spacing: 3px;
-                bottom: 30%;
-            }
-
-            .stats-bar {
-                padding: 48px 5%;
-                gap: 36px 16px;
-                min-height: 200px;
-            }
-
-            .stat-item h2 {
-                font-size: 1.9rem;
-            }
-
-            .automatizadores {
-                padding: 80px 4% 64px;
-            }
-
-            .automatizadores-header {
-                margin-bottom: 44px;
-            }
-
-            .automatizadores .section-title.automatizadores-title {
-                font-size: 1.2rem;
-                letter-spacing: 0.1em;
-            }
-
-            .automatizadores-intro {
-                font-size: 0.85rem;
-            }
-
-            .produto-card-content {
-                padding: 28px 20px 36px;
-            }
-
-            .produto-card .produto-header h3 {
-                font-size: 1.2rem;
-            }
-
-            .produto-card .logo-evo-img {
-                height: 80px;
-                max-width: 180px;
-            }
-
-            .automatizadores-cta {
-                margin-top: 44px;
-                padding: 28px 16px 36px;
-            }
-
-            .automatizadores-cta p {
-                font-size: 0.95rem;
-            }
-
-            .automatizadores-cta a {
-                padding: 14px 28px;
-                font-size: 0.78rem;
-                letter-spacing: 0.08em;
-            }
-
-            .portas .section-title {
-                padding: 56px 4% 0;
-                font-size: 1.2rem;
-            }
-
-            .portas-destaque {
-                padding: 32px 4% 40px;
-            }
-
-            .portas-destaque-texto .portas-destaque-titulo {
-                font-size: 1.3rem;
-            }
-
-            .mega-cta h2 {
-                font-size: 1.6rem;
-                letter-spacing: 0.08em;
-            }
-
-            .mega-cta a {
-                padding: 16px 32px;
-                font-size: 0.75rem;
-            }
-
-            .porta-item {
-                flex: 0 0 240px;
-            }
-
-            .porta-item img {
-                height: 160px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <title>EVO BRASIL | Automatizadores e Portas de Qualidade</title>
+  <meta name="description" content="EVO BRASIL - Automatizadores e portas de qualidade premium. Soluções em automação de portões e portas de enrolar." />
+  <meta name="theme-color" content="#ff4d00" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['Archivo Black', 'sans-serif'], body: ['Outfit', 'sans-serif'] },
+          colors: {
+            primary: '#ff4d00',
+            background: '#030303',
+            surface: '#090909',
+            'surface-elevated': '#0d0d0d',
+            foreground: '#fafafa',
+            muted: 'hsl(0, 0%, 55%)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/evo.css" />
 </head>
-
-<body>
-
-    <nav>
-        <a href="#" class="logo"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"></a>
-        <div style="display: flex; gap: 32px;">
-            <a href="portfolio.html">PRODUTOS</a>
-            <a href="quem-somos.html">QUEM SOMOS</a>
-            <a href="contato.html">CONTATO</a>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-motor-parallax" aria-hidden="true"></div>
-        <div class="hero-inner">
-            <div class="hero-content">
-                <img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO Brasil" class="hero-logo">
-                <p class="tagline">Qualidade que abre portas</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="stats-bar">
-        <div class="stat-item reveal">
-            <h2>+</h2>
-            <p>Anos no Mercado</p>
-        </div>
-        <div class="stat-item reveal">
-            <h2>AC/DC</h2>
-            <p>Linha Completa</p>
-        </div>
-        <div class="stat-item reveal">
-            <h2>100%</h2>
-            <p>Qualidade EVO</p>
-        </div>
-        <div class="stat-item reveal">
-            <h2>∞</h2>
-            <p>Soluções para Você</p>
-        </div>
+<body class="bg-evo-background text-evo-foreground min-h-screen">
+  <!-- Header -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
+    <div class="max-w-7xl mx-auto px-[6%] py-5 flex items-center justify-between">
+      <a href="index.html" class="flex items-center group">
+        <span class="font-display text-2xl md:text-3xl tracking-wider">
+          <span class="text-primary">EVO</span>
+          <span class="text-white/90 ml-2">BRASIL</span>
+        </span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="quem-somos.html" class="nav-link">Quem Somos</a>
+        <a href="portfolio.html" class="nav-link">Galeria</a>
+        <a href="contato.html" class="nav-link">Contato</a>
+      </div>
+      <button type="button" id="menu-toggle" class="md:hidden relative z-50 p-2 text-white" aria-label="Abrir menu">
+        <svg id="icon-menu" class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-6 h-6 text-primary hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
     </div>
+  </nav>
 
-    <section class="automatizadores" id="automatizadores">
-        <header class="automatizadores-header">
-            <span class="automatizadores-badge"><span class="tw-text">Produtos</span><span class="tw-cursor"
-                    aria-hidden="true"></span></span>
-            <h2 class="section-title automatizadores-title"><span class="tw-text">LINHA DE AUTOMATIZADORES</span><span
-                    class="tw-cursor" aria-hidden="true"></span></h2>
-            <p class="automatizadores-intro">Soluções em tecnologia e confiabilidade para portas residenciais e
-                comerciais. Linha AC e DC com acabamento premium, segurança e durabilidade garantidas.</p>
-        </header>
-        <div class="produtos-grid">
-            <div class="produto-card-block">
-                <div class="produto-card automatizador-slide-left">
-                    <span class="card-shine" aria-hidden="true"></span>
-                    <div class="produto-img-wrap foto-motor">
-                        <img src="img/motor/imagem-motor01.png" alt="Automatizador DC - Motor EVO">
-                    </div>
-                    <div class="produto-card-content">
-                        <div class="produto-header">
-                            <div class="logo-evo-wrap"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"
-                                    class="logo-evo-img"></div>
-                            <h3>AUTOMATIZADOR DC</h3>
-                        </div>
-                        <ul>
-                            <li>Freio</li>
-                            <li>Inversão de lado</li>
-                            <li>Motor elétrico</li>
-                            <li>Central elétrica</li>
-                            <li>Fim de curso - Limitador de abertura e fechamento</li>
-                            <li>Acionamento manual</li>
-                            <li>Central de comando</li>
-                            <li>Controles sem fio</li>
-                            <li>Nobreak</li>
-                        </ul>
-                        <div class="modelos">
-                            <p>Modelos DC</p>
-                            <div class="modelos-list">
-                                <span>DC200</span><span>DC300</span><span>DC400</span><span>DC500</span>
-                                <span>DC600</span><span>DC700</span><span>DC800</span><span>DC1000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="produto-card-block">
-                <div class="produto-card automatizador-slide-right">
-                    <span class="card-shine" aria-hidden="true"></span>
-                    <div class="produto-img-wrap">
-                        <img src="img/motor/imagem-apenasbordamotor.png" alt="Automatizador AC - Esquema">
-                    </div>
-                    <div class="produto-card-content">
-                        <div class="produto-header">
-                            <div class="logo-evo-wrap"><img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO"
-                                    class="logo-evo-img"></div>
-                            <h3>AUTOMATIZADOR AC</h3>
-                        </div>
-                        <ul>
-                            <li>Freio</li>
-                            <li>Inversão de lado</li>
-                            <li>Motor elétrico</li>
-                            <li>Central elétrica</li>
-                            <li>Fim de curso - Limitador de abertura e fechamento</li>
-                            <li>Acionamento manual</li>
-                            <li>Central de comando</li>
-                            <li>Controles sem fio</li>
-                        </ul>
-                        <div class="modelos">
-                            <p>Modelos AC</p>
-                            <div class="modelos-list">
-                                <span>AC200</span><span>AC300</span><span>AC400</span><span>AC500</span>
-                                <span>AC600</span><span>AC700</span><span>AC800</span><span>AC1000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div id="mobile-menu" class="mobile-menu hidden">
+    <div class="flex flex-col gap-6">
+      <a href="index.html" class="active">Home</a>
+      <a href="quem-somos.html">Quem Somos</a>
+      <a href="portfolio.html">Galeria</a>
+      <a href="contato.html">Contato</a>
+    </div>
+    <p class="absolute bottom-12 left-8 right-8 text-evo-muted text-sm tracking-wider">Qualidade que faz a diferença</p>
+  </div>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-evo-gradient-hero">
+      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('img/motor/imagem-motor01.png');"></div>
+      <div class="absolute inset-0 bg-evo-glow"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent"></div>
+      <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <span class="badge-premium mb-8 block animate-fade-in">Automatizadores & Portas</span>
+        <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight mb-6">
+          <span class="text-primary drop-shadow-[0_0_60px_rgba(255,77,0,0.4)]">EVO</span>
+          <span class="text-white ml-4">BRASIL</span>
+        </h1>
+        <p class="text-sm sm:text-base md:text-lg text-white/80 font-semibold tracking-[0.3em] uppercase animate-fade-in">Qualidade que faz a diferença</p>
+        <div class="mt-12 mx-auto w-24 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        <div class="mt-12">
+          <a href="#automatizadores" class="btn-primary">Conhecer Produtos</a>
         </div>
-        <div class="automatizadores-cta reveal">
-            <p>Encontre o modelo ideal para sua obra.</p>
-            <a href="contato.html">Solicitar orçamento</a>
-        </div>
+      </div>
+      <a href="#stats" class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/50 hover:text-primary transition-colors animate-bounce-down" aria-label="Rolar para baixo">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      </a>
     </section>
 
-    <section class="portas" id="portas">
-        <h2 class="section-title reveal">PORTAS</h2>
-        <div class="portas-destaque">
-            <div class="portas-destaque-card">
-                <div class="portas-destaque-texto">
-                    <h3 class="portas-destaque-titulo">Portas que fecham <span>com qualidade</span></h3>
-                    <p class="portas-destaque-sub">Acabamento, durabilidade e segurança. Cada modelo EVO foi pensado
-                        para valorizar sua obra e resistir ao tempo.</p>
-                </div>
-            </div>
-            <div class="portas-destaque-carousel">
-                <div class="portas-destaque-carousel-inner">
-                    <div class="porta-destaque-slide" data-index="0">
-                        <div class="porta-destaque-slide-card">
-                            <img src="img/portas/porta01.png" alt="Porta enrolar modelo 01">
-                        </div>
-                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 01 — Acabamento premium e
-                            resistência para sua obra.</p>
-                    </div>
-                    <div class="porta-destaque-slide" data-index="1">
-                        <div class="porta-destaque-slide-card">
-                            <img src="img/portas/porta02.png" alt="Porta enrolar modelo 02">
-                        </div>
-                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 02 — Segurança e durabilidade EVO.
-                        </p>
-                    </div>
-                    <div class="porta-destaque-slide" data-index="2">
-                        <div class="porta-destaque-slide-card">
-                            <img src="img/portas/porta03.png" alt="Porta enrolar modelo 03">
-                        </div>
-                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 03 — Design que valoriza qualquer
-                            ambiente.</p>
-                    </div>
-                    <div class="porta-destaque-slide" data-index="3">
-                        <div class="porta-destaque-slide-card">
-                            <img src="img/portas/porta04.png" alt="Porta enrolar modelo 04">
-                        </div>
-                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 04 — Qualidade que resiste ao
-                            tempo.</p>
-                    </div>
-                    <div class="porta-destaque-slide" data-index="4">
-                        <div class="porta-destaque-slide-card">
-                            <img src="img/portas/porta05.png" alt="Porta enrolar modelo 05">
-                        </div>
-                        <p class="porta-destaque-slide-caption">Porta Enrolar Modelo 05 — Soluções EVO para o seu
-                            negócio.</p>
-                    </div>
-                </div>
-                <button type="button" class="portas-carousel-btn portas-carousel-prev" aria-label="Anterior">‹</button>
-                <button type="button" class="portas-carousel-btn portas-carousel-next" aria-label="Próxima">›</button>
-                <div class="portas-carousel-dots" role="tablist">
-                    <button type="button" class="portas-dot active" aria-label="Slide 1" data-index="0"></button>
-                    <button type="button" class="portas-dot" aria-label="Slide 2" data-index="1"></button>
-                    <button type="button" class="portas-dot" aria-label="Slide 3" data-index="2"></button>
-                    <button type="button" class="portas-dot" aria-label="Slide 4" data-index="3"></button>
-                    <button type="button" class="portas-dot" aria-label="Slide 5" data-index="4"></button>
-                </div>
-            </div>
+    <!-- Stats -->
+    <section id="stats" class="w-full py-16 sm:py-20 lg:py-24 px-[6%] bg-black border-y border-primary/25">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+          <div class="stat-item py-6">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">10+</span>
+            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p>
+          </div>
+          <div class="stat-item py-6">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">5000+</span>
+            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p>
+          </div>
+          <div class="stat-item py-6">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">100%</span>
+            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p>
+          </div>
+          <div class="stat-item py-6">
+            <span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">24h</span>
+            <p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p>
+          </div>
         </div>
-        <div class="portas-carousel-wrap">
-            <div class="portas-carousel-track" aria-label="Galeria de portas em carrossel">
-                <div class="porta-item"><img src="img/portas/porta01.png" alt="Modelo de porta enrolar 1"><span
-                        class="porta-label">Porta 01</span></div>
-                <div class="porta-item"><img src="img/portas/porta02.png" alt="Modelo de porta enrolar 2"><span
-                        class="porta-label">Porta 02</span></div>
-                <div class="porta-item"><img src="img/portas/porta03.png" alt="Modelo de porta enrolar 3"><span
-                        class="porta-label">Porta 03</span></div>
-                <div class="porta-item"><img src="img/portas/porta04.png" alt="Modelo de porta enrolar 4"><span
-                        class="porta-label">Porta 04</span></div>
-                <div class="porta-item"><img src="img/portas/porta05.png" alt="Modelo de porta enrolar 5"><span
-                        class="porta-label">Porta 05</span></div>
-                <div class="porta-item"><img src="img/portas/porta01.png" alt=""><span class="porta-label">Porta
-                        01</span></div>
-                <div class="porta-item"><img src="img/portas/porta02.png" alt=""><span class="porta-label">Porta
-                        02</span></div>
-                <div class="porta-item"><img src="img/portas/porta03.png" alt=""><span class="porta-label">Porta
-                        03</span></div>
-                <div class="porta-item"><img src="img/portas/porta04.png" alt=""><span class="porta-label">Porta
-                        04</span></div>
-                <div class="porta-item"><img src="img/portas/porta05.png" alt=""><span class="porta-label">Porta
-                        05</span></div>
-                <div class="porta-item"><img src="img/portas/porta01.png" alt=""><span class="porta-label">Porta
-                        01</span></div>
-                <div class="porta-item"><img src="img/portas/porta02.png" alt=""><span class="porta-label">Porta
-                        02</span></div>
-                <div class="porta-item"><img src="img/portas/porta03.png" alt=""><span class="porta-label">Porta
-                        03</span></div>
-                <div class="porta-item"><img src="img/portas/porta04.png" alt=""><span class="porta-label">Porta
-                        04</span></div>
-                <div class="porta-item"><img src="img/portas/porta05.png" alt=""><span class="porta-label">Porta
-                        05</span></div>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <section class="outros-produtos">
-        <h2 class="section-title reveal">OUTROS PRODUTOS</h2>
-        <p class="reveal">Em breve mais linhas de produtos. Acompanhe nossa página ou entre em contato.</p>
-    </section>
-
-    <section class="mega-cta">
-        <h2 class="reveal">QUALIDADE EVO</h2>
-        <p class="reveal">Soluções em automatizadores e portas para o seu negócio.</p>
-        <a href="contato.html" class="reveal">Fale Conosco</a>
-    </section>
-
-    <footer>
-        <div class="footer-brand">
-            <p>Automatizadores e portas. Qualidade que faz a diferença.</p>
+    <!-- Automatizadores -->
+    <section id="automatizadores" class="py-24 lg:py-32 px-[6%] bg-evo-surface-elevated border-y border-evo/50 relative overflow-hidden">
+      <div class="absolute inset-0 bg-evo-glow opacity-50"></div>
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16 lg:mb-20">
+          <span class="badge-premium mb-6 block">Linha Premium</span>
+          <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl text-primary tracking-[0.2em] uppercase mb-6">Automatizadores</h2>
+          <div class="w-12 h-0.5 bg-primary mx-auto mb-6"></div>
+          <p class="text-evo-muted max-w-xl mx-auto leading-relaxed">Tecnologia de ponta e durabilidade para automatizar seu portão com segurança e praticidade.</p>
         </div>
-        <div class="footer-nav">
-            <h5>NAVEGAR</h5>
-            <a href="#automatizadores">Automatizadores</a>
-            <a href="#portas">Portas</a>
-            <a href="portfolio.html">Galeria</a>
-            <a href="quem-somos.html">Quem Somos</a>
-        </div>
-        <div class="footer-contact">
-            <h5>CONTATO</h5>
-            <div class="footer-contact-item"><span>E-mail</span><a
-                    href="mailto:contato@evobrasil.com.br">contato@evobrasil.com.br</a></div>
-            <div class="footer-contact-item"><span>Tel</span><a href="tel:+5511999999999">(11) 99999-9999</a></div>
-            <div class="footer-social">
-                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
-                <a href="https://instagram.com/evobrasil" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-                <a href="https://facebook.com/evobrasil" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+        <div class="space-y-8">
+          <div class="premium-card">
+            <div class="flex flex-col lg:flex-row">
+              <div class="lg:w-1/2 p-8 lg:p-12 bg-evo-surface flex items-center justify-center border-b lg:border-b-0 lg:border-r border-evo/30">
+                <div class="w-64 h-64 lg:w-80 lg:h-80 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <span class="font-display text-6xl lg:text-7xl text-primary/30">DC</span>
+                </div>
+              </div>
+              <div class="lg:w-1/2 p-8 lg:p-12">
+                <div class="text-center mb-8">
+                  <span class="font-display text-2xl text-primary tracking-wider">EVO</span>
+                  <h3 class="font-display text-xl lg:text-2xl text-white tracking-[0.15em] uppercase mt-2">Automatizador DC</h3>
+                </div>
+                <ul class="space-y-3 mb-8 text-evo-muted text-sm lg:text-base">
+                  <li class="py-2 border-b border-evo/30">Freio</li>
+                  <li class="py-2 border-b border-evo/30">Inversão de lado</li>
+                  <li class="py-2 border-b border-evo/30">Motor elétrico</li>
+                  <li class="py-2 border-b border-evo/30">Central elétrica</li>
+                  <li class="py-2 border-b border-evo/30">Fim de curso - Limitador de abertura e fechamento</li>
+                  <li class="py-2 border-b border-evo/30">Acionamento manual</li>
+                  <li class="py-2 border-b border-evo/30">Central de comando</li>
+                  <li class="py-2 border-b border-evo/30">Controles sem fio</li>
+                  <li class="py-2 border-b-0">Nobreak</li>
+                </ul>
+                <div class="pt-6 border-t border-evo/50">
+                  <p class="text-xs text-evo-muted tracking-[0.2em] uppercase font-bold mb-4">Modelos DC</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC200</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC300</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC400</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC500</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC600</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC700</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC800</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">DC1000</span>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="premium-card">
+            <div class="flex flex-col lg:flex-row">
+              <div class="lg:w-1/2 p-8 lg:p-12 bg-evo-surface flex items-center justify-center border-b lg:border-b-0 lg:border-r border-evo/30">
+                <div class="w-64 h-64 lg:w-80 lg:h-80 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <span class="font-display text-6xl lg:text-7xl text-primary/30">AC</span>
+                </div>
+              </div>
+              <div class="lg:w-1/2 p-8 lg:p-12">
+                <div class="text-center mb-8">
+                  <span class="font-display text-2xl text-primary tracking-wider">EVO</span>
+                  <h3 class="font-display text-xl lg:text-2xl text-white tracking-[0.15em] uppercase mt-2">Automatizador AC</h3>
+                </div>
+                <ul class="space-y-3 mb-8 text-evo-muted text-sm lg:text-base">
+                  <li class="py-2 border-b border-evo/30">Freio</li>
+                  <li class="py-2 border-b border-evo/30">Inversão de lado</li>
+                  <li class="py-2 border-b border-evo/30">Motor elétrico</li>
+                  <li class="py-2 border-b border-evo/30">Central elétrica</li>
+                  <li class="py-2 border-b border-evo/30">Fim de curso - Limitador de abertura e fechamento</li>
+                  <li class="py-2 border-b border-evo/30">Acionamento manual</li>
+                  <li class="py-2 border-b border-evo/30">Central de comando</li>
+                  <li class="py-2 border-b-0">Controles sem fio</li>
+                </ul>
+                <div class="pt-6 border-t border-evo/50">
+                  <p class="text-xs text-evo-muted tracking-[0.2em] uppercase font-bold mb-4">Modelos AC</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC200</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC300</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC400</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC500</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC600</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC700</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC800</span>
+                    <span class="px-3 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/30 rounded">AC1000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="footer-copy">© 2025 EVO Brasil. Qualidade que abre portas — todos os direitos reservados.</p>
-    </footer>
+        <div class="text-center mt-16 pt-12 border-t border-primary/20 max-w-xl mx-auto">
+          <p class="text-lg text-white/90 mb-6 font-medium">Encontre o modelo ideal para sua obra.</p>
+          <a href="contato.html" class="btn-primary">Solicitar Orçamento</a>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        ScrollReveal().reveal('.reveal', { distance: '50px', duration: 700, interval: 80, origin: 'bottom' });
+    <!-- Quote / Slogan -->
+    <section class="py-20 lg:py-28 px-[6%] bg-evo-surface">
+      <div class="max-w-3xl mx-auto">
+        <div class="quote-block">
+          <p class="text-lg lg:text-xl text-white/85 leading-relaxed tracking-wide font-light">
+            Na <strong class="text-primary font-bold">EVO BRASIL</strong>, cada automatizador e cada porta são sinônimos de <strong class="text-primary font-bold">excelência</strong>. Investimos em tecnologia, design e durabilidade para entregar <strong class="text-primary font-bold">qualidade</strong> que você pode ver — e confiar.
+          </p>
+        </div>
+      </div>
+    </section>
 
-        (function () {
-            var header = document.querySelector('.automatizadores-header');
-            if (!header) return;
+    <!-- Portas -->
+    <section id="portas" class="py-24 lg:py-32 relative overflow-hidden bg-evo-gradient-orange">
+      <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+      <div class="max-w-7xl mx-auto px-[6%] relative z-10">
+        <h2 class="section-title mb-16">Portas</h2>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+          <div class="premium-card accent-border-left p-8 lg:p-12">
+            <h3 class="font-display text-2xl lg:text-3xl text-white mb-4 leading-tight">Portas que fecham <span class="text-primary">com qualidade</span></h3>
+            <p class="text-evo-muted leading-relaxed">Acabamento, durabilidade e segurança. Cada modelo EVO foi pensado para valorizar sua obra e resistir ao tempo.</p>
+          </div>
+          <div class="relative">
+            <div class="overflow-hidden rounded-xl">
+              <div id="portas-slide" class="flex transition-transform duration-500 ease-out">
+                <div class="w-full flex-shrink-0">
+                  <div class="aspect-[4/3] bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-xl flex items-center justify-center border border-evo/30">
+                    <div class="text-center p-8">
+                      <span class="font-display text-5xl text-primary/30 block mb-4">01</span>
+                      <h4 class="font-display text-lg text-white tracking-wider">Porta Enrolar 01</h4>
+                    </div>
+                  </div>
+                  <p class="text-evo-muted text-sm text-center mt-4 px-4">Acabamento premium e resistência para sua obra.</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                  <div class="aspect-[4/3] bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-xl flex items-center justify-center border border-evo/30">
+                    <div class="text-center p-8">
+                      <span class="font-display text-5xl text-primary/30 block mb-4">02</span>
+                      <h4 class="font-display text-lg text-white tracking-wider">Porta Enrolar 02</h4>
+                    </div>
+                  </div>
+                  <p class="text-evo-muted text-sm text-center mt-4 px-4">Segurança e durabilidade EVO.</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                  <div class="aspect-[4/3] bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-xl flex items-center justify-center border border-evo/30">
+                    <div class="text-center p-8">
+                      <span class="font-display text-5xl text-primary/30 block mb-4">03</span>
+                      <h4 class="font-display text-lg text-white tracking-wider">Porta Enrolar 03</h4>
+                    </div>
+                  </div>
+                  <p class="text-evo-muted text-sm text-center mt-4 px-4">Design que valoriza qualquer ambiente.</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                  <div class="aspect-[4/3] bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-xl flex items-center justify-center border border-evo/30">
+                    <div class="text-center p-8">
+                      <span class="font-display text-5xl text-primary/30 block mb-4">04</span>
+                      <h4 class="font-display text-lg text-white tracking-wider">Porta Enrolar 04</h4>
+                    </div>
+                  </div>
+                  <p class="text-evo-muted text-sm text-center mt-4 px-4">Qualidade que resiste ao tempo.</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                  <div class="aspect-[4/3] bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-xl flex items-center justify-center border border-evo/30">
+                    <div class="text-center p-8">
+                      <span class="font-display text-5xl text-primary/30 block mb-4">05</span>
+                      <h4 class="font-display text-lg text-white tracking-wider">Porta Enrolar 05</h4>
+                    </div>
+                  </div>
+                  <p class="text-evo-muted text-sm text-center mt-4 px-4">Soluções EVO para o seu negócio.</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-center gap-4 mt-6">
+              <button type="button" id="portas-prev" class="w-10 h-10 rounded-full border border-evo hover:border-primary hover:text-primary transition-all flex items-center justify-center" aria-label="Anterior">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="flex gap-2" id="portas-dots"></div>
+              <button type="button" id="portas-next" class="w-10 h-10 rounded-full border border-evo hover:border-primary hover:text-primary transition-all flex items-center justify-center" aria-label="Próximo">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="relative overflow-hidden py-8">
+          <div class="flex animate-slide-infinite">
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">01</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 01</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">02</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 02</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">03</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 03</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">04</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 04</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">05</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 05</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">01</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 01</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">02</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 02</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">03</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 03</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">04</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 04</p>
+            </div>
+            <div class="flex flex-shrink-0 w-48 sm:w-56 lg:w-64 mx-2 group">
+              <div class="aspect-square bg-gradient-to-br from-[#0d0d0d] to-[#090909] rounded-lg flex items-center justify-center border border-evo/20 group-hover:border-primary/40 transition-all"><span class="font-display text-4xl text-primary/20 group-hover:text-primary/40">05</span></div>
+              <p class="text-xs text-center mt-2 text-evo-muted">Porta 05</p>
+            </div>
+          </div>
+          <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#030303] to-transparent pointer-events-none"></div>
+          <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#030303] to-transparent pointer-events-none"></div>
+        </div>
+      </div>
+    </section>
 
-            function typewriter(el, speedMs, onDone) {
-                var wrap = el.closest('.automatizadores-badge, .automatizadores-title, .automatizadores-intro');
-                var textEl = el.querySelector ? el.querySelector('.tw-text') : el;
-                if (!textEl) return onDone && onDone();
-                var full = textEl.textContent || '';
-                textEl.textContent = '';
-                var i = 0;
-                function tick() {
-                    if (i < full.length) {
-                        textEl.textContent += full.charAt(i);
-                        i++;
-                        setTimeout(tick, speedMs);
-                    } else {
-                        if (wrap) wrap.classList.add('tw-done');
-                        onDone && onDone();
-                    }
-                }
-                tick();
-            }
+    <!-- Outros Produtos -->
+    <section class="py-20 px-[6%] text-center border-t border-evo/50">
+      <h2 class="section-title mb-8">Outros Produtos</h2>
+      <p class="text-evo-muted max-w-xl mx-auto">Em breve mais linhas de produtos. Acompanhe nossa página ou entre em contato.</p>
+    </section>
 
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) {
-                    if (!e.isIntersecting) return;
-                    e.target.classList.add('in-view');
-                    io.unobserve(e.target);
+    <!-- Mega CTA -->
+    <section class="py-24 lg:py-32 px-[6%] text-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(18_100%_50%/0.08),transparent_70%)]"></div>
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white tracking-wider mb-6">QUALIDADE <span class="text-primary drop-shadow-[0_0_30px_rgba(255,77,0,0.4)]">EVO</span></h2>
+        <p class="text-lg lg:text-xl text-evo-muted mb-10">Soluções em automatizadores e portas para o seu negócio.</p>
+        <a href="contato.html" class="btn-primary text-base px-10 py-5">Fale Conosco</a>
+      </div>
+    </section>
+  </main>
 
-                    var badge = e.target.querySelector('.automatizadores-badge');
-                    var title = e.target.querySelector('.automatizadores-title');
-                    setTimeout(function () {
-                        typewriter(badge, 95, function () {
-                            typewriter(title, 75, function () {
-                                e.target.classList.add('tw-title-done');
-                            });
-                        });
-                    }, 200);
-                });
-            }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
-            io.observe(header);
-        })();
+  <!-- Footer -->
+  <footer class="relative pt-20 pb-16 px-[6%] border-t border-primary/20 bg-gradient-to-b from-surface to-background">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-70"></div>
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <div>
+          <a href="index.html" class="inline-block mb-6">
+            <span class="font-display text-xl tracking-wider"><span class="text-primary">EVO</span><span class="text-white/90 ml-2">BRASIL</span></span>
+          </a>
+          <p class="text-evo-muted leading-relaxed max-w-xs">Automatizadores e portas. Qualidade que faz a diferença.</p>
+        </div>
+        <div>
+          <h5 class="text-primary text-xs font-bold tracking-[0.25em] mb-6">NAVEGAR</h5>
+          <div class="flex flex-col gap-3">
+            <a href="index.html#automatizadores" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Automatizadores</a>
+            <a href="index.html#portas" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Portas</a>
+            <a href="portfolio.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Galeria</a>
+            <a href="quem-somos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Quem Somos</a>
+          </div>
+        </div>
+        <div>
+          <h5 class="text-primary text-xs font-bold tracking-[0.25em] mb-6">CONTATO</h5>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 text-sm">
+              <span class="text-primary text-xs tracking-wider uppercase min-w-[52px]">E-mail</span>
+              <a href="mailto:contato@evobrasil.com.br" class="text-evo-muted hover:text-primary transition-colors">contato@evobrasil.com.br</a>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+              <span class="text-primary text-xs tracking-wider uppercase min-w-[52px]">Tel</span>
+              <a href="tel:+5511999999999" class="text-evo-muted hover:text-primary transition-colors">(11) 99999-9999</a>
+            </div>
+          </div>
+          <div class="flex gap-4 mt-6">
+            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">WA</a>
+            <a href="https://instagram.com/evobrasil" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">IG</a>
+            <a href="https://facebook.com/evobrasil" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">FB</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t border-evo/50 text-center">
+        <p class="text-evo-muted/60 text-sm tracking-wider">© <span id="year"></span> EVO Brasil. Qualidade que abre portas — todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
 
-        ScrollReveal().reveal('.automatizador-slide-left', {
-            origin: 'left',
-            distance: '80px',
-            duration: 650,
-            opacity: 0,
-            scale: 0.98,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            delay: 50,
-            viewFactor: 0.2,
-            afterReveal: function (el) { el.classList.add('revealed'); }
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      var nav = document.getElementById('nav');
+      function onScroll() { nav.classList.toggle('nav-scrolled', window.scrollY > 50); }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    })();
+    (function () {
+      var toggle = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var iconMenu = document.getElementById('icon-menu');
+      var iconClose = document.getElementById('icon-close');
+      if (toggle && menu) {
+        toggle.addEventListener('click', function () {
+          menu.classList.toggle('hidden');
+          if (iconMenu && iconClose) {
+            iconMenu.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+          }
         });
-        ScrollReveal().reveal('.automatizador-slide-right', {
-            origin: 'right',
-            distance: '80px',
-            duration: 650,
-            opacity: 0,
-            scale: 0.98,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            delay: 100,
-            viewFactor: 0.2,
-            afterReveal: function (el) { el.classList.add('revealed'); }
-        });
-        ScrollReveal().reveal('.slogan-evo', {
-            distance: '40px',
-            duration: 600,
-            opacity: 0.3,
-            origin: 'bottom',
-            delay: 150,
-            viewFactor: 0.25,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
-        });
-        ScrollReveal().reveal('.portas-destaque-texto .portas-destaque-titulo', { origin: 'left', distance: '40px', duration: 550, opacity: 0.8, viewFactor: 0.35 });
-        ScrollReveal().reveal('.portas-destaque-sub', { origin: 'left', distance: '30px', duration: 500, delay: 60, opacity: 0.7, viewFactor: 0.35 });
-        ScrollReveal().reveal('.portas-destaque-carousel', { origin: 'right', distance: '35px', duration: 550, opacity: 0.7, viewFactor: 0.25 });
-
-        (function () {
-            var carousel = document.querySelector('.portas-destaque-carousel');
-            if (!carousel) return;
-            var inner = carousel.querySelector('.portas-destaque-carousel-inner');
-            var slides = carousel.querySelectorAll('.porta-destaque-slide');
-            var dots = carousel.querySelectorAll('.portas-dot');
-            var prev = carousel.querySelector('.portas-carousel-prev');
-            var next = carousel.querySelector('.portas-carousel-next');
-            var total = slides.length;
-            var index = 0;
-
-            function goTo(i) {
-                index = (i + total) % total;
-                inner.style.transform = 'translateX(-' + (index * 20) + '%)';
-                for (var j = 0; j < dots.length; j++) {
-                    dots[j].classList.toggle('active', j === index);
-                }
-            }
-
-            if (prev) prev.addEventListener('click', function () { goTo(index - 1); });
-            if (next) next.addEventListener('click', function () { goTo(index + 1); });
-            for (var k = 0; k < dots.length; k++) {
-                (function (idx) {
-                    dots[idx].addEventListener('click', function () { goTo(idx); });
-                })(k);
-            }
-        })();
-    </script>
+      }
+    })();
+    (function () {
+      var slides = 5;
+      var current = 0;
+      var slideEl = document.getElementById('portas-slide');
+      var dotsEl = document.getElementById('portas-dots');
+      var prevBtn = document.getElementById('portas-prev');
+      var nextBtn = document.getElementById('portas-next');
+      function update() {
+        if (slideEl) slideEl.style.transform = 'translateX(-' + current * 100 + '%)';
+        if (dotsEl) {
+          dotsEl.innerHTML = '';
+          for (var i = 0; i < slides; i++) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'w-2 h-2 rounded-full transition-all ' + (i === current ? 'bg-primary w-6' : 'bg-evo-muted hover:bg-evo-muted');
+            btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+            btn.addEventListener('click', function (j) { return function () { current = j; update(); }; }(i));
+            dotsEl.appendChild(btn);
+          }
+        }
+      }
+      if (prevBtn) prevBtn.addEventListener('click', function () { current = (current - 1 + slides) % slides; update(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { current = (current + 1) % slides; update(); });
+      update();
+    })();
+  </script>
 </body>
-
 </html>
