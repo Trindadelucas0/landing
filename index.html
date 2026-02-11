@@ -39,16 +39,16 @@
   <!-- Header -->
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-[5%] md:px-[6%] py-4 sm:py-5 flex items-center justify-between gap-4">
-      <a href="index.html" class="flex items-center group min-h-[44px] shrink-0">
-        <span class="font-display text-xl sm:text-2xl md:text-3xl tracking-wider">
-          <span class="text-primary">EVO</span>
-          <span class="text-white/90 ml-1 sm:ml-2">BRASIL</span>
+      <a href="index.html" id="nav-logo-link" class="nav-logo-link flex items-center shrink-0">
+        <span class="nav-logo-parallax" aria-hidden="true">
+          <img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO Brasil" class="nav-logo-img" />
         </span>
       </a>
       <div class="hidden md:flex items-center gap-8">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="quem-somos.html" class="nav-link">Quem Somos</a>
         <a href="portfolio.html" class="nav-link">Galeria</a>
+        <a href="produtos.html" class="nav-link">Produtos</a>
         <a href="contato.html" class="nav-link">Contato</a>
       </div>
       <button type="button" id="menu-toggle" class="md:hidden relative z-50 p-2 text-white" aria-label="Abrir menu">
@@ -63,6 +63,7 @@
       <a href="index.html" class="active">Home</a>
       <a href="quem-somos.html">Quem Somos</a>
       <a href="portfolio.html">Galeria</a>
+      <a href="produtos.html">Produtos</a>
       <a href="contato.html">Contato</a>
     </div>
     <p class="absolute bottom-12 left-8 right-8 text-evo-muted text-sm tracking-wider">Qualidade que faz a diferença</p>
@@ -364,6 +365,7 @@
             <a href="index.html#automatizadores" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Automatizadores</a>
             <a href="index.html#portas" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Portas</a>
             <a href="portfolio.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Galeria</a>
+            <a href="produtos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Produtos</a>
             <a href="quem-somos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Quem Somos</a>
           </div>
         </div>
@@ -396,7 +398,12 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     (function () {
       var nav = document.getElementById('nav');
-      function onScroll() { nav.classList.toggle('nav-scrolled', window.scrollY > 50); }
+      function onScroll() {
+        nav.classList.toggle('nav-scrolled', window.scrollY > 50);
+        var y = window.scrollY;
+        var scale = 1.35 + Math.min(y * 0.00035, 0.2);
+        document.documentElement.style.setProperty('--nav-logo-scale', scale);
+      }
       window.addEventListener('scroll', onScroll);
       onScroll();
     })();

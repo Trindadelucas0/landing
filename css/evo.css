@@ -141,6 +141,51 @@ img { object-fit: contain; }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
 
+/* Nav logo: grande, zoom no centro do PNG, parallax invertido (zoom para frente no scroll) */
+:root { --nav-logo-scale: 1.35; }
+.nav-logo-link {
+  position: relative;
+  height: 72px;
+  min-height: 72px;
+  max-height: 72px;
+  width: 280px;
+  overflow: visible;
+  justify-content: flex-start;
+}
+@media (min-width: 768px) {
+  .nav-logo-link { height: 80px; min-height: 80px; max-height: 80px; width: 360px; }
+}
+.nav-logo-parallax {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 104px;
+  overflow: visible;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .nav-logo-parallax { width: 360px; height: 128px; }
+}
+.nav-logo-img {
+  height: 104px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(var(--nav-logo-scale));
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+@media (min-width: 768px) {
+  .nav-logo-img { height: 128px; }
+}
+
 /* Buttons - área de toque mínima 44px */
 .btn-primary {
   display: inline-flex;
