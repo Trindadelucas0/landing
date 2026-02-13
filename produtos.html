@@ -24,6 +24,35 @@
     .hero-catalogo { min-height: 50vh; min-height: 50dvh; }
     .hero-catalogo h1 { animation: fade-in 0.8s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px); word-break: break-word; overflow-wrap: break-word; }
     @media (max-width: 380px) { .hero-catalogo h1 { font-size: 1.75rem !important; line-height: 1.2; } }
+    /* Wrapper do carrossel: hint + fade na direita no mobile */
+    .strip-wrapper {
+      position: relative;
+    }
+    .strip-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0 0.75rem;
+      font-size: 0.8125rem;
+      color: hsl(0 0% 55%);
+      -webkit-tap-highlight-color: transparent;
+      transition: opacity 0.4s ease;
+    }
+    .strip-hint svg { flex-shrink: 0; animation: strip-hint-arrow 1.5s ease-in-out infinite; }
+    @keyframes strip-hint-arrow {
+      0%, 100% { transform: translateX(0); opacity: 0.7; }
+      50% { transform: translateX(4px); opacity: 1; }
+    }
+    @media (min-width: 640px) { .strip-hint { display: none; } }
+    .strip-fade {
+      pointer-events: none;
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 2.5rem;
+      background: linear-gradient(to right, transparent, hsl(3 0% 1.2%));
+    }
+    @media (min-width: 640px) { .strip-fade { display: none; } }
     /* Carrossel horizontal: toque suave e snap */
     .catalogo-strip {
       overflow-x: auto; overflow-y: hidden;
@@ -32,16 +61,16 @@
       scrollbar-width: none;
     }
     .catalogo-strip::-webkit-scrollbar { display: none; }
-    /* Cards: largura responsiva (mobile primeiro) */
+    /* Cards: no mobile menor que o viewport para mostrar "peek" do próximo */
     .catalogo-card {
-      flex: 0 0 min(280px, 85vw);
-      width: min(280px, 85vw);
+      flex: 0 0 min(280px, 78vw);
+      width: min(280px, 78vw);
       min-width: 0;
       scroll-snap-align: start;
       scroll-snap-stop: always;
       -webkit-tap-highlight-color: transparent;
     }
-    @media (min-width: 400px) { .catalogo-card { flex: 0 0 280px; width: 280px; } }
+    @media (min-width: 400px) { .catalogo-card { flex: 0 0 min(280px, 82vw); width: min(280px, 82vw); } }
     @media (min-width: 640px) { .catalogo-card { flex: 0 0 320px; width: 320px; } }
     @media (min-width: 1024px) { .catalogo-card { flex: 0 0 360px; width: 360px; } }
     /* Texto do card: não estourar em telas pequenas */
@@ -66,24 +95,6 @@
       touch-action: manipulation; flex-shrink: 0;
     }
     .strip-nav:hover { background: hsl(var(--primary) / 0.3); border-color: hsl(var(--primary)); color: hsl(var(--primary)); }
-    /* Categorias: scroll horizontal, toque e sticky abaixo da nav */
-    .categorias-sticky { top: max(4.5rem, calc(72px + env(safe-area-inset-top))); }
-    .categorias-wrap {
-      overflow-x: auto; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .categorias-wrap::-webkit-scrollbar { display: none; }
-    .categoria-tab {
-      padding: 0.75rem 1rem; min-height: 48px;
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; border-bottom: 2px solid transparent;
-      color: hsl(0 0% 55%); transition: all 0.3s;
-      flex-shrink: 0; -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-    @media (min-width: 640px) { .categoria-tab { padding: 0.75rem 1.5rem; font-size: 0.8rem; letter-spacing: 0.15em; } }
-    .categoria-tab:hover { color: white; }
-    .categoria-tab.active { color: hsl(var(--primary)); border-color: hsl(var(--primary)); }
     /* Título da seção + setas: empilhar ou wrap no mobile */
     .strip-section-header { flex-wrap: wrap; gap: 0.75rem; }
     .strip-section-header h2 { font-size: 1.125rem; word-break: break-word; }
@@ -146,26 +157,21 @@
       </div>
     </section>
 
-    <!-- Categorias (tabs) -->
-    <section class="categorias-sticky py-4 sm:py-6 border-b border-evo/30 sticky z-30 bg-evo-background/95 backdrop-blur-sm safe-top">
-      <div class="categorias-wrap flex gap-2 pb-2">
-        <button type="button" class="categoria-tab active shrink-0" data-cat="todos">Todos</button>
-        <button type="button" class="categoria-tab shrink-0" data-cat="automatizadores">Automatizadores</button>
-        <button type="button" class="categoria-tab shrink-0" data-cat="controles">Controles & Centrais</button>
-        <button type="button" class="categoria-tab shrink-0" data-cat="acessorios">Acessórios</button>
-      </div>
-    </section>
-
     <!-- Carrossel 1: Automatizadores DC/AC -->
-    <section class="py-8 sm:py-12 md:py-16" data-categoria="automatizadores">
-      <div class="flex items-center justify-between gap-3 mb-6 sm:mb-8 strip-section-header">
+    <section class="py-8 sm:py-12 md:py-16">
+      <div class="flex items-center justify-between gap-3 mb-4 sm:mb-8 strip-section-header">
         <h2 class="font-display text-white tracking-wider uppercase">Automatizadores</h2>
         <div class="flex gap-2 shrink-0">
           <button type="button" class="strip-nav strip-prev" data-strip="strip-1" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
           <button type="button" class="strip-nav strip-next" data-strip="strip-1" aria-label="Próximo"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-      <div id="strip-1" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <p class="strip-hint md:hidden" aria-hidden="true">
+        <span>Deslize para ver mais</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </p>
+      <div class="strip-wrapper relative -mx-4 sm:mx-0">
+        <div id="strip-1" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 px-4 sm:px-0">
         <article class="catalogo-card premium-card p-0 overflow-hidden group reveal reveal-scale">
           <div class="relative overflow-hidden card-mini-carousel" data-card="1">
             <div class="card-mini-track aspect-[4/3]">
@@ -194,19 +200,26 @@
             <p class="text-evo-muted text-sm leading-relaxed">Robusto e projetado para uso intensivo. Condomínios, indústrias e portões de grande porte. Motor potente, freio de segurança e estrutura reforçada para suportar operações contínuas sem desgaste.</p>
           </div>
         </article>
+        </div>
+        <div class="strip-fade" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- Carrossel 2: Controles e Centrais -->
-    <section class="py-8 sm:py-12 md:py-16 border-t border-evo/20" data-categoria="controles">
-      <div class="flex items-center justify-between gap-3 mb-6 sm:mb-8 strip-section-header">
+    <section class="py-8 sm:py-12 md:py-16 border-t border-evo/20">
+      <div class="flex items-center justify-between gap-3 mb-4 sm:mb-8 strip-section-header">
         <h2 class="font-display text-white tracking-wider uppercase">Controles e Centrais</h2>
         <div class="flex gap-2 shrink-0">
           <button type="button" class="strip-nav strip-prev" data-strip="strip-2" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
           <button type="button" class="strip-nav strip-next" data-strip="strip-2" aria-label="Próximo"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-      <div id="strip-2" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <p class="strip-hint md:hidden" aria-hidden="true">
+        <span>Deslize para ver mais</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </p>
+      <div class="strip-wrapper relative -mx-4 sm:mx-0">
+        <div id="strip-2" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 px-4 sm:px-0">
         <article class="catalogo-card premium-card p-0 overflow-hidden group reveal reveal-scale">
           <div class="relative overflow-hidden card-mini-carousel" data-card="3">
             <div class="card-mini-track aspect-[4/3]">
@@ -256,19 +269,26 @@
             <p class="text-evo-muted text-sm leading-relaxed">Central de comando analógica na frequência 433 MHz. Compatibilidade ampla, facilidade de programação e operação estável. Ideal para quem busca simplicidade e custo-benefício.</p>
           </div>
         </article>
+        </div>
+        <div class="strip-fade" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- Carrossel 3: Acessórios e Mais -->
-    <section class="py-8 sm:py-12 md:py-16 border-t border-evo/20" data-categoria="acessorios">
-      <div class="flex items-center justify-between gap-3 mb-6 sm:mb-8 strip-section-header">
+    <section class="py-8 sm:py-12 md:py-16 border-t border-evo/20">
+      <div class="flex items-center justify-between gap-3 mb-4 sm:mb-8 strip-section-header">
         <h2 class="font-display text-white tracking-wider uppercase">Acessórios</h2>
         <div class="flex gap-2 shrink-0">
           <button type="button" class="strip-nav strip-prev" data-strip="strip-3" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
           <button type="button" class="strip-nav strip-next" data-strip="strip-3" aria-label="Próximo"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-      <div id="strip-3" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <p class="strip-hint md:hidden" aria-hidden="true">
+        <span>Deslize para ver mais</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </p>
+      <div class="strip-wrapper relative -mx-4 sm:mx-0">
+        <div id="strip-3" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 px-4 sm:px-0">
         <article class="catalogo-card premium-card p-0 overflow-hidden group reveal reveal-scale">
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/CAIXA%20Sensor%20anti%20esmagamento.png" alt="Sensor anti esmagamento EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
@@ -329,6 +349,8 @@
             <p class="text-evo-muted text-sm leading-relaxed">Linha promocional EVO para momentos especiais. Presente exclusivo para parceiros e clientes. Qualidade EVO em cada detalhe.</p>
           </div>
         </article>
+        </div>
+        <div class="strip-fade" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -530,21 +552,14 @@
       goTo(0);
     });
 
-    /* Filtro por categoria */
-    document.querySelectorAll('.categoria-tab').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        document.querySelectorAll('.categoria-tab').forEach(function (t) { t.classList.remove('active'); });
-        tab.classList.add('active');
-        var cat = tab.getAttribute('data-cat');
-        document.querySelectorAll('section[data-categoria]').forEach(function (sec) {
-          if (cat === 'todos' || sec.getAttribute('data-categoria') === cat) {
-            sec.style.display = '';
-          } else {
-            sec.style.display = 'none';
-          }
-        });
-      });
+    /* Esconder dica "Deslize" após o usuário rolar (mobile) */
+    document.querySelectorAll('.catalogo-strip').forEach(function (strip) {
+      strip.addEventListener('scroll', function () {
+        var hint = strip.closest('section').querySelector('.strip-hint');
+        if (hint && hint.offsetParent !== null) hint.style.opacity = '0';
+      }, { passive: true });
     });
+
   </script>
   <script src="js/reveal.js"></script>
 </body>
