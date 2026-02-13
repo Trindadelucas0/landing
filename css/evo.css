@@ -53,6 +53,12 @@ img, video {
   display: block;
 }
 img { object-fit: contain; }
+/* Automatizadores: carrossel de imagens e zoom ao clicar */
+.automatizador-img-wrap { cursor: zoom-in; }
+.automatizador-carousel .automatizador-slide-1 { opacity: 1; }
+.automatizador-carousel .automatizador-slide-2 { opacity: 0; }
+.automatizador-zoom-modal { backdrop-filter: blur(8px); }
+.automatizador-zoom-modal:not(.hidden) { display: flex !important; }
 /* Background de imagem (hero): desktop - mostra parte inferior do produto */
 .hero-bg-img {
   background-color: #030303;

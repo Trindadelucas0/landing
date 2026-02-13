@@ -115,9 +115,9 @@
           <div class="premium-card reveal reveal-left">
             <div class="flex flex-col lg:flex-row">
               <div class="lg:w-1/2 p-5 sm:p-8 lg:p-12 bg-evo-surface flex items-center justify-center border-b lg:border-b-0 lg:border-r border-evo/30">
-                <div class="automatizador-img-wrap group w-full max-w-sm aspect-square flex items-center justify-center shrink-0 relative">
-                  <img src="img/evo/AUTOMATIZADOR_DC.png" alt="Automatizador DC EVO" class="automatizador-img w-full h-full object-contain" />
-                  <img src="img/evo/AUTOMATIZADOR_DC_2.png" alt="Automatizador DC EVO - vista 2" class="automatizador-img-alt absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                <div class="automatizador-carousel automatizador-img-wrap w-full max-w-lg sm:max-w-xl aspect-square flex items-center justify-center shrink-0 relative cursor-pointer cursor-zoom-in overflow-hidden rounded-lg" data-img1="img/evo/AUTOMATIZADOR_DC.png" data-img2="img/evo/AUTOMATIZADOR_DC_2.png" role="button" tabindex="0" aria-label="Clique para ampliar a imagem">
+                  <img src="img/evo/AUTOMATIZADOR_DC.png" alt="Automatizador DC EVO" class="automatizador-slide automatizador-slide-1 absolute inset-0 w-full h-full object-contain transition-opacity duration-500" />
+                  <img src="img/evo/AUTOMATIZADOR_DC_2.png" alt="Automatizador DC EVO - vista 2" class="automatizador-slide automatizador-slide-2 absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-500" />
                 </div>
               </div>
               <div class="lg:w-1/2 p-5 sm:p-8 lg:p-12">
@@ -155,9 +155,9 @@
           <div class="premium-card reveal reveal-right">
             <div class="flex flex-col lg:flex-row">
               <div class="lg:w-1/2 p-5 sm:p-8 lg:p-12 bg-evo-surface flex items-center justify-center border-b lg:border-b-0 lg:border-r border-evo/30">
-                <div class="automatizador-img-wrap group w-full max-w-sm aspect-square flex items-center justify-center shrink-0 relative">
-                  <img src="img/evo/AUTOMATIZADOR_AC.png" alt="Automatizador AC EVO" class="automatizador-img w-full h-full object-contain" />
-                  <img src="img/evo/AUTOMATIZADOR_AC2.png" alt="Automatizador AC EVO - vista 2" class="automatizador-img-alt absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                <div class="automatizador-carousel automatizador-img-wrap w-full max-w-lg sm:max-w-xl aspect-square flex items-center justify-center shrink-0 relative cursor-pointer cursor-zoom-in overflow-hidden rounded-lg" data-img1="img/evo/AUTOMATIZADOR_AC.png" data-img2="img/evo/AUTOMATIZADOR_AC2.png" role="button" tabindex="0" aria-label="Clique para ampliar a imagem">
+                  <img src="img/evo/AUTOMATIZADOR_AC.png" alt="Automatizador AC EVO" class="automatizador-slide automatizador-slide-1 absolute inset-0 w-full h-full object-contain transition-opacity duration-500" />
+                  <img src="img/evo/AUTOMATIZADOR_AC2.png" alt="Automatizador AC EVO - vista 2" class="automatizador-slide automatizador-slide-2 absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-500" />
                 </div>
               </div>
               <div class="lg:w-1/2 p-5 sm:p-8 lg:p-12">
@@ -393,6 +393,13 @@
     </div>
   </footer>
 
+  <div id="automatizador-zoom-modal" class="automatizador-zoom-modal fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+    <button type="button" class="automatizador-zoom-close absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" aria-label="Fechar">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <img id="automatizador-zoom-img" src="" alt="Imagem ampliada" class="max-w-full max-h-[90vh] w-auto h-auto object-contain" />
+  </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     (function () {
@@ -476,6 +483,57 @@
       if (prevBtn) prevBtn.addEventListener('click', function () { current = (current - 1 + slides) % slides; update(); });
       if (nextBtn) nextBtn.addEventListener('click', function () { current = (current + 1) % slides; update(); });
       update();
+    })();
+    (function () {
+      var carousels = document.querySelectorAll('.automatizador-carousel');
+      var modal = document.getElementById('automatizador-zoom-modal');
+      var modalImg = document.getElementById('automatizador-zoom-img');
+      var closeBtn = modal && modal.querySelector('.automatizador-zoom-close');
+      carousels.forEach(function (car) {
+        var slide1 = car.querySelector('.automatizador-slide-1');
+        var slide2 = car.querySelector('.automatizador-slide-2');
+        var img1 = car.getAttribute('data-img1');
+        var img2 = car.getAttribute('data-img2');
+        var idx = 0;
+        setInterval(function () {
+          idx = 1 - idx;
+          if (slide1 && slide2) {
+            slide1.style.opacity = idx === 0 ? '1' : '0';
+            slide2.style.opacity = idx === 1 ? '1' : '0';
+          }
+        }, 2500);
+        car.addEventListener('click', function () {
+          var src = idx === 0 ? img1 : img2;
+          if (modal && modalImg && src) {
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+        car.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            car.click();
+          }
+        });
+      });
+      function closeModal() {
+        if (modal) {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+          document.body.style.overflow = '';
+        }
+      }
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) closeModal();
+        });
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeModal();
+      });
     })();
   </script>
   <script src="js/reveal.js"></script>
