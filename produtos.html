@@ -20,27 +20,79 @@
   </script>
   <link rel="stylesheet" href="css/evo.css" />
   <style>
-    /* Hero compacto e diferente */
-    .hero-catalogo { min-height: 50vh; }
-    .hero-catalogo h1 { animation: fade-in 0.8s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px); }
-    /* Carrossel horizontal de cards */
-    .catalogo-strip { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    /* Hero compacto e responsivo */
+    .hero-catalogo { min-height: 50vh; min-height: 50dvh; }
+    .hero-catalogo h1 { animation: fade-in 0.8s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px); word-break: break-word; overflow-wrap: break-word; }
+    @media (max-width: 380px) { .hero-catalogo h1 { font-size: 1.75rem !important; line-height: 1.2; } }
+    /* Carrossel horizontal: toque suave e snap */
+    .catalogo-strip {
+      overflow-x: auto; overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
     .catalogo-strip::-webkit-scrollbar { display: none; }
-    .catalogo-card { flex: 0 0 280px; width: 280px; scroll-snap-align: start; scroll-snap-stop: always; }
+    /* Cards: largura responsiva (mobile primeiro) */
+    .catalogo-card {
+      flex: 0 0 min(280px, 85vw);
+      width: min(280px, 85vw);
+      min-width: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      -webkit-tap-highlight-color: transparent;
+    }
+    @media (min-width: 400px) { .catalogo-card { flex: 0 0 280px; width: 280px; } }
     @media (min-width: 640px) { .catalogo-card { flex: 0 0 320px; width: 320px; } }
     @media (min-width: 1024px) { .catalogo-card { flex: 0 0 360px; width: 360px; } }
+    /* Texto do card: não estourar em telas pequenas */
+    .catalogo-card .text-evo-muted { font-size: 0.8125rem; line-height: 1.5; word-break: break-word; overflow-wrap: break-word; }
+    @media (min-width: 640px) { .catalogo-card .text-evo-muted { font-size: 0.875rem; } }
     /* Mini carousel dentro do card */
     .card-mini-track { display: flex; transition: transform 0.4s ease; }
-    .card-mini-slide { flex: 0 0 100%; }
-    .card-mini-dots button { width: 6px; height: 6px; border-radius: 50%; background: hsl(0 0% 100% / 0.3); border: none; padding: 0; transition: all 0.3s; }
+    .card-mini-slide { flex: 0 0 100%; min-width: 0; }
+    .card-mini-dots button {
+      width: 8px; height: 8px; min-width: 28px; min-height: 28px;
+      border-radius: 50%; background: hsl(0 0% 100% / 0.3); border: none; padding: 0;
+      transition: all 0.3s; -webkit-tap-highlight-color: transparent;
+      display: flex; align-items: center; justify-content: center;
+    }
     .card-mini-dots button.active { background: hsl(var(--primary)); transform: scale(1.2); }
-    /* Setas do carrossel principal */
-    .strip-nav { width: 48px; height: 48px; border-radius: 50%; background: hsl(0 0% 100% / 0.08); border: 1px solid hsl(0 0% 100% / 0.15); color: white; display: flex; align-items: center; justify-content: center; transition: all 0.3s; -webkit-tap-highlight-color: transparent; }
+    /* Setas do carrossel: área de toque 48px */
+    .strip-nav {
+      width: 48px; height: 48px; min-width: 48px; min-height: 48px;
+      border-radius: 50%; background: hsl(0 0% 100% / 0.08); border: 1px solid hsl(0 0% 100% / 0.15);
+      color: white; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation; flex-shrink: 0;
+    }
     .strip-nav:hover { background: hsl(var(--primary) / 0.3); border-color: hsl(var(--primary)); color: hsl(var(--primary)); }
-    /* Categorias em tabs */
-    .categoria-tab { padding: 0.75rem 1.5rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; border-bottom: 2px solid transparent; color: hsl(0 0% 55%); transition: all 0.3s; }
+    /* Categorias: scroll horizontal e toque */
+    .categorias-wrap {
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .categorias-wrap::-webkit-scrollbar { display: none; }
+    .categoria-tab {
+      padding: 0.75rem 1rem; min-height: 48px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; border-bottom: 2px solid transparent;
+      color: hsl(0 0% 55%); transition: all 0.3s;
+      flex-shrink: 0; -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    @media (min-width: 640px) { .categoria-tab { padding: 0.75rem 1.5rem; font-size: 0.8rem; letter-spacing: 0.15em; } }
     .categoria-tab:hover { color: white; }
     .categoria-tab.active { color: hsl(var(--primary)); border-color: hsl(var(--primary)); }
+    /* Título da seção + setas: empilhar ou wrap no mobile */
+    .strip-section-header { flex-wrap: wrap; gap: 0.75rem; }
+    .strip-section-header h2 { font-size: 1.125rem; word-break: break-word; }
+    @media (min-width: 640px) { .strip-section-header h2 { font-size: 1.5rem; } }
+    /* Grid Explore: itens e rótulos */
+    .catalogo-grid-item p { font-size: 0.6875rem; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+    @media (min-width: 640px) { .catalogo-grid-item p { font-size: 0.75rem; } }
+    .catalogo-grid-item .aspect-square { min-height: 0; }
+    /* CTA e footer: safe area */
+    .cta-produtos { padding-bottom: max(4rem, env(safe-area-inset-bottom)); }
   </style>
 </head>
 <body class="bg-evo-background text-evo-foreground min-h-screen">
@@ -77,19 +129,19 @@
 
   <main>
     <!-- Hero compacto - diferente do portfolio -->
-    <section class="hero-catalogo pt-28 sm:pt-36 pb-12 sm:pb-16 flex flex-col justify-center">
-      <div class="max-w-4xl">
-        <p class="text-primary text-xs font-bold tracking-[0.35em] uppercase mb-4 reveal reveal-up">Catálogo</p>
-        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.1] mb-6">
+    <section class="hero-catalogo pt-24 sm:pt-28 md:pt-36 pb-10 sm:pb-16 flex flex-col justify-center">
+      <div class="max-w-4xl w-full">
+        <p class="text-primary text-[10px] sm:text-xs font-bold tracking-[0.3em] sm:tracking-[0.35em] uppercase mb-3 sm:mb-4 reveal reveal-up">Catálogo</p>
+        <h1 class="font-display text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.1] mb-4 sm:mb-6">
           Linha completa de<br /><span class="text-primary">produtos EVO</span>
         </h1>
-        <p class="text-evo-muted max-w-xl text-sm sm:text-base leading-relaxed reveal reveal-up">Automatizadores, portas de enrolar e acessórios. Navegue pelo catálogo e encontre a solução ideal para seu projeto.</p>
+        <p class="text-evo-muted max-w-xl text-xs sm:text-sm md:text-base leading-relaxed reveal reveal-up">Automatizadores, portas de enrolar e acessórios. Navegue pelo catálogo e encontre a solução ideal para seu projeto.</p>
       </div>
     </section>
 
     <!-- Categorias (tabs) -->
-    <section class="py-6 border-b border-evo/30 sticky top-0 z-30 bg-evo-background/95 backdrop-blur-sm">
-      <div class="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
+    <section class="py-4 sm:py-6 border-b border-evo/30 sticky top-0 z-30 bg-evo-background/95 backdrop-blur-sm safe-top">
+      <div class="categorias-wrap flex gap-2 pb-2">
         <button type="button" class="categoria-tab active shrink-0" data-cat="todos">Todos</button>
         <button type="button" class="categoria-tab shrink-0" data-cat="automatizadores">Automatizadores</button>
         <button type="button" class="categoria-tab shrink-0" data-cat="controles">Controles & Centrais</button>
@@ -98,15 +150,15 @@
     </section>
 
     <!-- Carrossel 1: Automatizadores DC/AC -->
-    <section class="py-12 sm:py-16" data-categoria="automatizadores">
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="font-display text-xl sm:text-2xl text-white tracking-wider uppercase">Automatizadores</h2>
-        <div class="flex gap-2">
+    <section class="py-8 sm:py-12 md:py-16" data-categoria="automatizadores">
+      <div class="flex items-center justify-between gap-3 mb-6 sm:mb-8 strip-section-header">
+        <h2 class="font-display text-white tracking-wider uppercase">Automatizadores</h2>
+        <div class="flex gap-2 shrink-0">
           <button type="button" class="strip-nav strip-prev" data-strip="strip-1" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
           <button type="button" class="strip-nav strip-next" data-strip="strip-1" aria-label="Próximo"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-      <div id="strip-1" class="catalogo-strip flex gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div id="strip-1" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
         <article class="catalogo-card premium-card p-0 overflow-hidden group reveal reveal-scale">
           <div class="relative overflow-hidden card-mini-carousel" data-card="1">
             <div class="card-mini-track aspect-[4/3]">
@@ -139,15 +191,15 @@
     </section>
 
     <!-- Carrossel 2: Controles e Centrais -->
-    <section class="py-12 sm:py-16 border-t border-evo/20" data-categoria="controles">
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="font-display text-xl sm:text-2xl text-white tracking-wider uppercase">Controles e Centrais</h2>
-        <div class="flex gap-2">
+    <section class="py-8 sm:py-12 md:py-16 border-t border-evo/20" data-categoria="controles">
+      <div class="flex items-center justify-between gap-3 mb-6 sm:mb-8 strip-section-header">
+        <h2 class="font-display text-white tracking-wider uppercase">Controles e Centrais</h2>
+        <div class="flex gap-2 shrink-0">
           <button type="button" class="strip-nav strip-prev" data-strip="strip-2" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
           <button type="button" class="strip-nav strip-next" data-strip="strip-2" aria-label="Próximo"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-      <div id="strip-2" class="catalogo-strip flex gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div id="strip-2" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
         <article class="catalogo-card premium-card p-0 overflow-hidden group reveal reveal-scale">
           <div class="relative overflow-hidden card-mini-carousel" data-card="3">
             <div class="card-mini-track aspect-[4/3]">
@@ -201,15 +253,15 @@
     </section>
 
     <!-- Carrossel 3: Acessórios e Mais -->
-    <section class="py-12 sm:py-16 border-t border-evo/20" data-categoria="acessorios">
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="font-display text-xl sm:text-2xl text-white tracking-wider uppercase">Acessórios</h2>
-        <div class="flex gap-2">
+    <section class="py-8 sm:py-12 md:py-16 border-t border-evo/20" data-categoria="acessorios">
+      <div class="flex items-center justify-between gap-3 mb-6 sm:mb-8 strip-section-header">
+        <h2 class="font-display text-white tracking-wider uppercase">Acessórios</h2>
+        <div class="flex gap-2 shrink-0">
           <button type="button" class="strip-nav strip-prev" data-strip="strip-3" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
           <button type="button" class="strip-nav strip-next" data-strip="strip-3" aria-label="Próximo"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
-      <div id="strip-3" class="catalogo-strip flex gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div id="strip-3" class="catalogo-strip flex gap-3 sm:gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
         <article class="catalogo-card premium-card p-0 overflow-hidden group reveal reveal-scale">
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/CAIXA%20Sensor%20anti%20esmagamento.png" alt="Sensor anti esmagamento EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
@@ -274,34 +326,34 @@
     </section>
 
     <!-- Grid adicional - todos os produtos em destaque -->
-    <section class="py-16 sm:py-24 border-t border-evo/30">
-      <h2 class="font-display text-2xl sm:text-3xl text-white tracking-wider uppercase text-center mb-12">Explore o catálogo</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 reveal-stagger">
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+    <section class="py-10 sm:py-16 md:py-24 border-t border-evo/30">
+      <h2 class="font-display text-xl sm:text-2xl md:text-3xl text-white tracking-wider uppercase text-center mb-8 sm:mb-12">Explore o catálogo</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4 reveal-stagger">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/AUTOMATIZADOR_DC.png" alt="Automatizador DC" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Automatizador DC</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Automatizador DC</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/AUTOMATIZADOR_AC.png" alt="Automatizador AC" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Automatizador AC</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Automatizador AC</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/CONTROLE%20CONVENCIONAL%20DOS%20AUTOMATIZADORES.png" alt="Controle Convencional" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Controle Convencional</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Controle Convencional</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/Evo%20Smart%20garagem.png" alt="Evo Smart Garagem" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Evo Smart Garagem</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Evo Smart Garagem</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
           <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
             <img src="img/evo/Central%20Wifi%20Evo%20Smart.png" alt="Central Wifi Evo Smart" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
@@ -313,31 +365,31 @@
           </div>
           <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Sensor Anti Esmagamento</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/SENSOR%20INTELIGENTE%20DE%20ABERTURA%20EVO.png" alt="Sensor Inteligente" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Sensor Inteligente</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Sensor Inteligente</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/NOBREAK%20AC.png" alt="Nobreak AC" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Nobreak AC</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Nobreak AC</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/NOBREAK%20PARA%20MOTOR%20DC.png" alt="Nobreak DC" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Nobreak DC</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Nobreak DC</p>
         </a>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="py-16 sm:py-24 text-center border-t border-evo/20">
-      <p class="text-evo-muted mb-6">Não encontrou o que procura?</p>
-      <a href="contato.html" class="btn-primary">Fale com a EVO</a>
+    <section class="py-12 sm:py-16 md:py-24 text-center border-t border-evo/20 cta-produtos">
+      <p class="text-evo-muted text-sm sm:text-base mb-4 sm:mb-6">Não encontrou o que procura?</p>
+      <a href="contato.html" class="btn-primary min-h-[48px] px-8 py-4">Fale com a EVO</a>
     </section>
   </main>
 
@@ -407,16 +459,21 @@
       }
     })();
 
-    /* Navegação dos carrosséis horizontais */
+    /* Navegação dos carrosséis horizontais (largura responsiva) */
+    function getStripCardWidth() {
+      var w = window.innerWidth;
+      if (w >= 1024) return 360;
+      if (w >= 640) return 320;
+      if (w >= 400) return 280;
+      return Math.min(280, Math.floor(w * 0.85));
+    }
     document.querySelectorAll('.strip-nav').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var stripId = btn.getAttribute('data-strip');
         var strip = document.getElementById(stripId);
         if (!strip) return;
-        var cardWidth = 320;
-        if (window.innerWidth >= 1024) cardWidth = 360;
-        else if (window.innerWidth < 640) cardWidth = 280;
-        var gap = 16;
+        var cardWidth = getStripCardWidth();
+        var gap = window.innerWidth >= 640 ? 16 : 12;
         var scroll = cardWidth + gap;
         if (btn.classList.contains('strip-prev')) scroll = -scroll;
         strip.scrollBy({ left: scroll, behavior: 'smooth' });
