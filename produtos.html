@@ -66,7 +66,8 @@
       touch-action: manipulation; flex-shrink: 0;
     }
     .strip-nav:hover { background: hsl(var(--primary) / 0.3); border-color: hsl(var(--primary)); color: hsl(var(--primary)); }
-    /* Categorias: scroll horizontal e toque */
+    /* Categorias: scroll horizontal, toque e sticky abaixo da nav */
+    .categorias-sticky { top: max(4.5rem, calc(72px + env(safe-area-inset-top))); }
     .categorias-wrap {
       overflow-x: auto; -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
@@ -93,9 +94,15 @@
     .catalogo-grid-item .aspect-square { min-height: 0; }
     /* CTA e footer: safe area */
     .cta-produtos { padding-bottom: max(4rem, env(safe-area-inset-bottom)); }
+    /* Página produtos: mobile-first e safe areas */
+    .page-produtos main { padding-bottom: env(safe-area-inset-bottom); }
+    .page-produtos .hero-catalogo { padding-top: max(5rem, calc(72px + env(safe-area-inset-top))); }
+    .page-produtos footer { padding-bottom: max(4rem, calc(4rem + env(safe-area-inset-bottom))); }
+    .catalogo-card .card-content { padding: 1rem 1.25rem; }
+    @media (min-width: 640px) { .catalogo-card .card-content { padding: 1.25rem; } }
   </style>
 </head>
-<body class="bg-evo-background text-evo-foreground min-h-screen">
+<body class="bg-evo-background text-evo-foreground min-h-screen overflow-x-hidden page-produtos">
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-[5%] md:px-[6%] py-4 sm:py-5 flex items-center justify-between gap-4">
       <a href="index.html" id="nav-logo-link" class="nav-logo-link flex items-center shrink-0">
@@ -140,7 +147,7 @@
     </section>
 
     <!-- Categorias (tabs) -->
-    <section class="py-4 sm:py-6 border-b border-evo/30 sticky top-0 z-30 bg-evo-background/95 backdrop-blur-sm safe-top">
+    <section class="categorias-sticky py-4 sm:py-6 border-b border-evo/30 sticky z-30 bg-evo-background/95 backdrop-blur-sm safe-top">
       <div class="categorias-wrap flex gap-2 pb-2">
         <button type="button" class="categoria-tab active shrink-0" data-cat="todos">Todos</button>
         <button type="button" class="categoria-tab shrink-0" data-cat="automatizadores">Automatizadores</button>
@@ -167,7 +174,7 @@
             </div>
             <div class="card-mini-dots absolute bottom-2 left-0 right-0 flex justify-center gap-1.5"></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Linha DC</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Automatizador DC</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Tecnologia de corrente contínua: silencioso, eficiente e com vida útil prolongada. Ideal para portões residenciais e comerciais de médio porte. Freio eletromagnético, inversão de lado e acionamento manual de emergência.</p>
@@ -181,7 +188,7 @@
             </div>
             <div class="card-mini-dots absolute bottom-2 left-0 right-0 flex justify-center gap-1.5"></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Linha AC</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Automatizador AC</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Robusto e projetado para uso intensivo. Condomínios, indústrias e portões de grande porte. Motor potente, freio de segurança e estrutura reforçada para suportar operações contínuas sem desgaste.</p>
@@ -208,7 +215,7 @@
             </div>
             <div class="card-mini-dots absolute bottom-2 left-0 right-0 flex justify-center gap-1.5"></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Controle</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Controle Convencional</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Acionamento remoto confiável e simples. Compatível com toda a linha de automatizadores EVO. Alcance amplo, codificação de segurança e bateria de longa duração.</p>
@@ -223,7 +230,7 @@
             </div>
             <div class="card-mini-dots absolute bottom-2 left-0 right-0 flex justify-center gap-1.5"></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Smart</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Evo Smart Garagem</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Controle inteligente via Wi-Fi. Abra e feche seu portão pelo celular, de qualquer lugar. App intuitivo, múltiplos usuários e histórico de acessos. Tecnologia que simplifica o seu dia a dia.</p>
@@ -233,7 +240,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/Central%20Wifi%20Evo%20Smart.png" alt="Central Wifi Evo Smart" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Central</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Central Wifi Evo Smart</h3>
             <p class="text-evo-muted text-sm leading-relaxed">O cérebro da automação conectada. Integração Wi-Fi, comandos por voz e monitoramento em tempo real. Conecte sua casa ou empresa à tecnologia EVO Smart.</p>
@@ -243,7 +250,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/Central%20Anal%C3%B3gica%20433.png" alt="Central Analógica 433" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Central</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Central Analógica 433</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Central de comando analógica na frequência 433 MHz. Compatibilidade ampla, facilidade de programação e operação estável. Ideal para quem busca simplicidade e custo-benefício.</p>
@@ -266,7 +273,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/CAIXA%20Sensor%20anti%20esmagamento.png" alt="Sensor anti esmagamento EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Segurança</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Sensor Anti Esmagamento</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Proteção essencial para pessoas e veículos. Detecta obstáculos e interrompe o fechamento instantaneamente. Evita acidentes e danos. Obrigatório em condomínios e áreas de grande circulação.</p>
@@ -276,7 +283,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/SENSOR%20INTELIGENTE%20DE%20ABERTURA%20EVO.png" alt="Sensor inteligente de abertura EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Sensor</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Sensor Inteligente de Abertura</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Detecta a aproximação de veículos ou pedestres e aciona a abertura automaticamente. Conforto e praticidade para garagens, condomínios e lojas. Tecnologia de detecção precisa.</p>
@@ -286,7 +293,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/NOBREAK%20AC.png" alt="Nobreak AC EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Energia</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Nobreak AC</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Funcionamento garantido mesmo sem energia elétrica. Ideal para automatizadores AC. Evita que o portão fique travado em caso de queda de luz. Tranquilidade e continuidade operacional.</p>
@@ -296,7 +303,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/NOBREAK%20PARA%20MOTOR%20DC.png" alt="Nobreak para motor DC EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Energia</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Nobreak para Motor DC</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Backup de energia específico para automatizadores DC. Mantém o portão operando em falta de luz. Compacto, eficiente e indispensável para residências e empresas.</p>
@@ -306,7 +313,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/BOLSA%20PERSONALIZADA%20EVO.png" alt="Bolsa personalizada EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Promocional</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Bolsa Personalizada EVO</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Produto promocional com a marca EVO. Qualidade e identidade visual para presentear parceiros e clientes. Leve a EVO para todos os lugares.</p>
@@ -316,7 +323,7 @@
           <div class="relative overflow-hidden">
             <div class="aspect-[4/3] bg-evo-surface flex items-center justify-center p-4"><img src="img/evo/kit%20churrasco.png" alt="Kit churrasco EVO" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" /></div>
           </div>
-          <div class="p-5">
+          <div class="card-content">
             <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">Promocional</span>
             <h3 class="font-display text-lg text-white mt-1 mb-2">Kit Churrasco EVO</h3>
             <p class="text-evo-muted text-sm leading-relaxed">Linha promocional EVO para momentos especiais. Presente exclusivo para parceiros e clientes. Qualidade EVO em cada detalhe.</p>
@@ -354,16 +361,16 @@
           <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Evo Smart Garagem</p>
         </a>
         <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/Central%20Wifi%20Evo%20Smart.png" alt="Central Wifi Evo Smart" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Central Wifi</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Central Wifi</p>
         </a>
-        <a href="contato.html" class="block group reveal reveal-scale">
-          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-4">
+        <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
+          <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
             <img src="img/evo/CAIXA%20Sensor%20anti%20esmagamento.png" alt="Sensor Anti Esmagamento" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
-          <p class="mt-2 text-xs font-semibold text-evo-muted group-hover:text-primary transition-colors">Sensor Anti Esmagamento</p>
+          <p class="mt-1.5 sm:mt-2 font-semibold text-evo-muted group-hover:text-primary transition-colors">Sensor Anti Esmagamento</p>
         </a>
         <a href="contato.html" class="block group reveal reveal-scale catalogo-grid-item">
           <div class="aspect-square rounded-lg overflow-hidden bg-evo-surface-elevated border border-evo/30 hover:border-primary/40 transition-colors flex items-center justify-center p-3 sm:p-4">
@@ -389,7 +396,7 @@
     <!-- CTA -->
     <section class="py-12 sm:py-16 md:py-24 text-center border-t border-evo/20 cta-produtos">
       <p class="text-evo-muted text-sm sm:text-base mb-4 sm:mb-6">Não encontrou o que procura?</p>
-      <a href="contato.html" class="btn-primary min-h-[48px] px-8 py-4">Fale com a EVO</a>
+      <a href="contato.html" class="btn-primary w-full sm:w-auto min-h-[52px] px-8 py-4 inline-flex justify-center">Fale com a EVO</a>
     </section>
   </main>
 
@@ -405,12 +412,12 @@
         </div>
         <div class="reveal reveal-up">
           <h5 class="text-primary text-xs font-bold tracking-[0.25em] mb-6">NAVEGAR</h5>
-          <div class="flex flex-col gap-3">
-            <a href="index.html#automatizadores" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Automatizadores</a>
-            <a href="index.html#portas" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Portas</a>
-            <a href="portfolio.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Galeria</a>
-            <a href="produtos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Produtos</a>
-            <a href="quem-somos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide">Quem Somos</a>
+          <div class="flex flex-col gap-1 sm:gap-3">
+            <a href="index.html#automatizadores" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide py-2.5 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center">Automatizadores</a>
+            <a href="index.html#portas" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide py-2.5 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center">Portas</a>
+            <a href="portfolio.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide py-2.5 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center">Galeria</a>
+            <a href="produtos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide py-2.5 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center">Produtos</a>
+            <a href="quem-somos.html" class="text-evo-muted hover:text-primary transition-colors duration-300 text-sm tracking-wide py-2.5 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center">Quem Somos</a>
           </div>
         </div>
         <div class="reveal reveal-up">
@@ -510,6 +517,16 @@
       wrap.addEventListener('mouseleave', function () {
         if (wrap._interval) clearInterval(wrap._interval);
       });
+      /* Swipe no mobile para trocar imagem */
+      var touchStartX = 0, touchEndX = 0;
+      wrap.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+      }, { passive: true });
+      wrap.addEventListener('touchend', function (e) {
+        touchEndX = e.changedTouches ? e.changedTouches[0].screenX : e.touches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); }
+      }, { passive: true });
       goTo(0);
     });
 

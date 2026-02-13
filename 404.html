@@ -13,23 +13,153 @@
       theme: {
         extend: {
           fontFamily: { display: ['Archivo Black', 'sans-serif'], body: ['Outfit', 'sans-serif'] },
-          colors: { primary: '#ff4d00', background: '#030303' }
+          colors: { primary: '#ff4d00', background: '#030303', surface: '#090909', foreground: '#fafafa', muted: 'hsl(0, 0%, 55%)' }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="css/evo.css" />
   <style>
-    .error-404 h1 { animation: scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s forwards; opacity: 0; transform: scale(0.8); }
-    .error-404 p { animation: fade-in 0.6s ease-out 0.3s forwards; opacity: 0; }
-    .error-404 .btn-primary { animation: fade-in 0.6s ease-out 0.5s forwards; opacity: 0; }
+    .page-404 {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      padding: max(1.5rem, 5vw) max(1rem, 5%);
+      padding-top: max(5rem, calc(80px + env(safe-area-inset-top)));
+      padding-bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom)));
+      box-sizing: border-box;
+    }
+    .page-404 .brand {
+      flex-shrink: 0;
+      margin-bottom: auto;
+    }
+    .page-404 .brand a {
+      display: inline-block;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.25rem, 6vw, 1.5rem);
+      letter-spacing: 0.08em;
+      color: hsl(0, 0%, 98%);
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .page-404 .brand span { color: #ff4d00; }
+    .page-404 .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem 0 2rem;
+    }
+    .page-404 .code {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(4rem, 22vw, 8rem);
+      line-height: 1;
+      color: #ff4d00;
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+      animation: scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    .page-404 .title {
+      font-size: clamp(1rem, 4.5vw, 1.25rem);
+      font-weight: 600;
+      color: hsl(0, 0%, 98%);
+      margin-bottom: 0.5rem;
+      animation: fadeIn 0.5s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+    .page-404 .message {
+      font-size: clamp(0.875rem, 3.5vw, 1rem);
+      line-height: 1.5;
+      color: hsl(0, 0%, 55%);
+      max-width: 20rem;
+      margin: 0 auto 2rem;
+      animation: fadeIn 0.5s ease-out 0.3s forwards;
+      opacity: 0;
+    }
+    .page-404 .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 20rem;
+      animation: fadeIn 0.5s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+    .page-404 .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #ff4d00;
+      color: #fff;
+      border: 2px solid #ff4d00;
+      border-radius: 0.375rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      width: 100%;
+    }
+    .page-404 .btn-main:hover {
+      background: hsl(18, 100%, 55%);
+      border-color: hsl(18, 100%, 55%);
+      transform: translateY(-2px);
+    }
+    .page-404 .btn-main:active { transform: translateY(0); }
+    .page-404 .btn-sec {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.75rem 1rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: hsl(0, 0%, 70%);
+      text-decoration: none;
+      transition: color 0.25s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .page-404 .btn-sec:hover { color: #ff4d00; }
+    @keyframes scaleIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @media (min-width: 640px) {
+      .page-404 { padding-left: 6%; padding-right: 6%; }
+      .page-404 .actions { flex-direction: row; justify-content: center; max-width: none; }
+      .page-404 .btn-main { width: auto; min-width: 12rem; }
+    }
   </style>
 </head>
-<body class="bg-evo-background text-evo-foreground min-h-screen flex items-center justify-center px-4 sm:px-6 safe-bottom">
-  <div class="text-center error-404 w-full max-w-md">
-    <h1 class="font-display text-7xl sm:text-8xl lg:text-9xl text-primary mb-3 sm:mb-4">404</h1>
-    <p class="text-base sm:text-xl text-evo-muted mb-6 sm:mb-8 px-2">Página não encontrada</p>
-    <a href="index.html" class="btn-primary">Voltar ao Início</a>
+<body class="bg-evo-background text-evo-foreground min-h-screen overflow-x-hidden">
+  <div class="page-404">
+    <header class="brand">
+      <a href="index.html" aria-label="EVO - Voltar ao início"><span>EVO</span></a>
+    </header>
+
+    <main class="content" role="main">
+      <p class="code" aria-hidden="true">404</p>
+      <h1 class="title">Página não encontrada</h1>
+      <p class="message">O endereço que você acessou não existe ou foi movido. Use o botão abaixo para voltar ao site.</p>
+
+      <div class="actions">
+        <a href="index.html" class="btn-main">Voltar ao início</a>
+        <a href="contato.html" class="btn-sec">Fale com a EVO</a>
+      </div>
+    </main>
   </div>
 </body>
 </html>
