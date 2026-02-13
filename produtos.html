@@ -560,6 +560,38 @@
       }, { passive: true });
     });
 
+    /* Carrossel automático: todos os cards passando suave a cada 2s */
+    function stopStripAutoPlay(strip) {
+      if (strip._autoPlay) { clearInterval(strip._autoPlay); strip._autoPlay = null; }
+      if (strip._touchTimeout) { clearTimeout(strip._touchTimeout); strip._touchTimeout = null; }
+    }
+    function startStripAutoPlay(strip) {
+      stopStripAutoPlay(strip);
+      var gap = window.innerWidth >= 640 ? 16 : 12;
+      var fullStep = getStripCardWidth() + gap;
+      var step = Math.round(fullStep * 0.35);
+      if (step < 16) step = 16;
+      strip._autoPlay = setInterval(function () {
+        var maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (maxScroll <= 0) return;
+        var next = strip.scrollLeft + step;
+        if (next >= maxScroll - 2) {
+          strip.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          strip.scrollBy({ left: step, behavior: 'smooth' });
+        }
+      }, 2000);
+    }
+    document.querySelectorAll('.catalogo-strip').forEach(function (strip) {
+      startStripAutoPlay(strip);
+      strip.addEventListener('mouseenter', function () { stopStripAutoPlay(strip); });
+      strip.addEventListener('mouseleave', function () { startStripAutoPlay(strip); });
+      strip.addEventListener('touchstart', function () {
+        stopStripAutoPlay(strip);
+        strip._touchTimeout = setTimeout(function () { startStripAutoPlay(strip); }, 6000);
+      }, { passive: true });
+    });
+
   </script>
   <script src="js/reveal.js"></script>
 </body>
