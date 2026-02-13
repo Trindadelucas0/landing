@@ -1,4 +1,4 @@
-/* EVO BRASIL - Design system (HTML estático, sem Node) */
+/* EVO - Design system (HTML estático, sem Node) */
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;900&display=swap');
 
 :root {
@@ -610,6 +610,23 @@ nav button[aria-label],
 }
 
 /* Hero: título não estourar em telas muito pequenas */
+.hero-evo-logo {
+  height: 4rem;
+  width: auto;
+  max-width: 90vw;
+}
+@media (min-width: 640px) {
+  .hero-evo-logo { height: 5rem; }
+}
+@media (min-width: 768px) {
+  .hero-evo-logo { height: 6rem; }
+}
+@media (min-width: 1024px) {
+  .hero-evo-logo { height: 8rem; }
+}
+@media (min-width: 1280px) {
+  .hero-evo-logo { height: 10rem; }
+}
 .hero-title,
 .font-display.text-6xl,
 .font-display.text-7xl,
