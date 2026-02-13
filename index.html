@@ -93,10 +93,10 @@
     <section id="stats" class="w-full py-16 sm:py-20 lg:py-24 px-[6%] bg-black border-y border-primary/25">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 reveal-stagger">
-          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">10+</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p></div>
-          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">5000+</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p></div>
-          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">100%</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p></div>
-          <div class="stat-item py-6 reveal reveal-up"><span class="font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight">24h</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="10" data-suffix="+">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="5000" data-suffix="+">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="100" data-suffix="%">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p></div>
+          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="24" data-suffix="h">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p></div>
         </div>
       </div>
     </section>
@@ -393,6 +393,40 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      var stats = document.getElementById('stats');
+      var counters = document.querySelectorAll('.stat-counter');
+      var done = false;
+      function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        var duration = 1200;
+        var start = 0;
+        var startTime = null;
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var progress = Math.min(elapsed / duration, 1);
+          progress = 1 - Math.pow(1 - progress, 2);
+          var current = Math.floor(progress * target);
+          el.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(step);
+      }
+      function checkStats() {
+        if (done || !stats) return;
+        var rect = stats.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          done = true;
+          counters.forEach(animateCounter);
+        }
+      }
+      window.addEventListener('scroll', checkStats);
+      window.addEventListener('load', checkStats);
+      checkStats();
+    })();
     (function () {
       var nav = document.getElementById('nav');
       function onScroll() {
