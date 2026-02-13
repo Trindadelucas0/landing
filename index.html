@@ -40,7 +40,7 @@
   <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top bg-gradient-to-b from-black/95 via-black/60 to-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-[5%] md:px-[6%] py-4 sm:py-5 flex items-center justify-between gap-4">
       <a href="index.html" id="nav-logo-link" class="nav-logo-link flex items-center shrink-0">
-        <span class="nav-logo-parallax" aria-hidden="true">
+        <span class="nav-logo-wrap" aria-hidden="true">
           <img src="img/logo/LOGO%20EVO%20PNG.png" alt="EVO Brasil" class="nav-logo-img" />
         </span>
       </a>
@@ -72,9 +72,9 @@
   <main>
     <!-- Hero -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-evo-gradient-hero">
-      <div class="hero-bg-img absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 sm:opacity-20" style="background-image: url('img/motor/imagem-motor01.png');" role="img" aria-hidden="true"></div>
-      <div class="absolute inset-0 bg-evo-glow"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent"></div>
+      <div class="hero-bg-img absolute inset-0 bg-center bg-no-repeat opacity-70 sm:opacity-75" style="background-image: url('img/evo/AUTOMATIZADOR_AC2.png');" role="img" aria-hidden="true"></div>
+      <div class="absolute inset-0 bg-evo-glow opacity-50"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent"></div>
       <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto w-full">
         <span class="badge-premium mb-6 sm:mb-8 block hero-badge">Automatizadores & Portas</span>
         <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight mb-4 sm:mb-6 hero-title">
@@ -400,9 +400,6 @@
       var nav = document.getElementById('nav');
       function onScroll() {
         nav.classList.toggle('nav-scrolled', window.scrollY > 50);
-        var y = window.scrollY;
-        var scale = 1.35 + Math.min(y * 0.00035, 0.2);
-        document.documentElement.style.setProperty('--nav-logo-scale', scale);
       }
       window.addEventListener('scroll', onScroll);
       onScroll();

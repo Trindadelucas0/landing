@@ -53,21 +53,14 @@ img, video {
   display: block;
 }
 img { object-fit: contain; }
-/* Background de imagem (hero etc): adaptado para mobile */
-.hero-bg-img,
-[style*="background-image"] {
-  background-size: cover;
-  background-position: center;
+/* Background de imagem (hero): mostra a parte inferior do produto, zoom menor */
+.hero-bg-img {
+  background-color: #030303;
+  background-size: 76%;
+  background-position: center 230%;
   background-repeat: no-repeat;
-}
-@media (max-width: 639px) {
-  .hero-bg-img,
-  section [style*="background-image"] {
-    background-size: cover;
-    background-position: 50% 50%;
-    min-height: 100%;
-    min-width: 100%;
-  }
+  min-height: 100%;
+  min-width: 100%;
 }
 
 .font-display { font-family: 'Archivo Black', sans-serif; }
@@ -141,8 +134,7 @@ img { object-fit: contain; }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
 
-/* Nav logo: grande, zoom no centro do PNG, parallax invertido (zoom para frente no scroll) */
-:root { --nav-logo-scale: 1.35; }
+/* Nav logo: tamanho fixo, sem parallax */
 .nav-logo-link {
   position: relative;
   height: 72px;
@@ -155,7 +147,7 @@ img { object-fit: contain; }
 @media (min-width: 768px) {
   .nav-logo-link { height: 80px; min-height: 80px; max-height: 80px; width: 360px; }
 }
-.nav-logo-parallax {
+.nav-logo-wrap {
   position: absolute;
   left: 0;
   top: 50%;
@@ -169,7 +161,7 @@ img { object-fit: contain; }
   pointer-events: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-parallax { width: 360px; height: 128px; }
+  .nav-logo-wrap { width: 360px; height: 128px; }
 }
 .nav-logo-img {
   height: 104px;
@@ -177,10 +169,6 @@ img { object-fit: contain; }
   max-width: none;
   object-fit: contain;
   object-position: center;
-  transform: scale(var(--nav-logo-scale));
-  transform-origin: center center;
-  will-change: transform;
-  transition: transform 0.15s ease-out;
 }
 @media (min-width: 768px) {
   .nav-logo-img { height: 128px; }
