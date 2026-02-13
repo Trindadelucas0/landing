@@ -29,7 +29,7 @@
       position: relative;
     }
     .strip-hint {
-      
+
       display: flex;
       align-items: center;
       justify-content: center;
@@ -510,7 +510,7 @@
       });
     });
 
-    /* Mini carrosséis nos cards */
+    /* Mini carrosséis nos cards: troca de imagem a cada 1,5 s */
     document.querySelectorAll('.card-mini-carousel').forEach(function (wrap) {
       var track = wrap.querySelector('.card-mini-track');
       var slides = wrap.querySelectorAll('.card-mini-slide');
@@ -531,15 +531,21 @@
         track.style.transform = 'translateX(-' + (current * 100) + '%)';
         dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
       }
+      var section = wrap.closest('section');
+      var stripEl = section ? section.querySelector('.catalogo-strip') : null;
+      var stripId = stripEl ? stripEl.id : '';
+      var intervalMs = (stripId === 'strip-1') ? 1500 : 2000;
+      function startCardAutoAdvance() {
+        wrap._cardInterval = setInterval(function () { goTo(current + 1); }, intervalMs);
+      }
+      function stopCardAutoAdvance() {
+        if (wrap._cardInterval) { clearInterval(wrap._cardInterval); wrap._cardInterval = null; }
+      }
       dots.forEach(function (d) {
         d.addEventListener('click', function () { goTo(parseInt(d.dataset.index, 10)); });
       });
-      wrap.addEventListener('mouseenter', function () {
-        wrap._interval = setInterval(function () { goTo(current + 1); }, 3000);
-      });
-      wrap.addEventListener('mouseleave', function () {
-        if (wrap._interval) clearInterval(wrap._interval);
-      });
+      wrap.addEventListener('mouseenter', function () { stopCardAutoAdvance(); });
+      wrap.addEventListener('mouseleave', function () { startCardAutoAdvance(); });
       /* Swipe no mobile para trocar imagem */
       var touchStartX = 0, touchEndX = 0;
       wrap.addEventListener('touchstart', function (e) {
@@ -551,6 +557,7 @@
         if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); }
       }, { passive: true });
       goTo(0);
+      startCardAutoAdvance();
     });
 
     /* Esconder dica "Deslize" após o usuário rolar (mobile) */
