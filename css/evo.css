@@ -71,7 +71,7 @@ img { object-fit: contain; }
 /* Mobile: imagem maior, mais destaque */
 @media (max-width: 639px) {
   .hero-bg-img {
-    background-size: 95%;
+    background-size: 110%;
     background-position: center 55%;
   }
 }
