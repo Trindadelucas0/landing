@@ -62,16 +62,16 @@ img { object-fit: contain; }
 /* Background de imagem (hero): desktop - mostra parte inferior do produto */
 .hero-bg-img {
   background-color: #030303;
-  background-size: 45%;
+  background-size: 72%;
   background-position: center 230%;
   background-repeat: no-repeat;
   min-height: 100%;
   min-width: 100%;
 }
-/* Mobile: imagem menor, menos zoom */
+/* Mobile: imagem maior, mais destaque */
 @media (max-width: 639px) {
   .hero-bg-img {
-    background-size: 62%;
+    background-size: 95%;
     background-position: center 55%;
   }
 }
