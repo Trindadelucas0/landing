@@ -104,15 +104,17 @@
     </section>
 
     <!-- Stats -->
-    <section id="stats" class="w-full py-16 sm:py-20 lg:py-24 px-[6%] bg-black border-y border-primary/25">
+    <section id="stats" class="w-full py-16 sm:py-20 lg:py-24 px-[6%] relative overflow-hidden bg-black border-y border-primary/25">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
       <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 reveal-stagger">
-          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="10" data-suffix="+">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p></div>
-          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="5000" data-suffix="+">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p></div>
-          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="100" data-suffix="%">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p></div>
-          <div class="stat-item py-6 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="24" data-suffix="h">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p></div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 reveal-stagger">
+          <div class="stat-item py-6 px-2 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="10" data-suffix="+">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Anos de Mercado</p></div>
+          <div class="stat-item py-6 px-2 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="5000" data-suffix="+">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Projetos Entregues</p></div>
+          <div class="stat-item py-6 px-2 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="100" data-suffix="%">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Qualidade</p></div>
+          <div class="stat-item py-6 px-2 reveal reveal-up"><span class="stat-counter font-display text-4xl sm:text-5xl lg:text-6xl text-primary tracking-tight" data-target="24" data-suffix="h">0</span><p class="mt-3 text-xs sm:text-sm text-evo-muted tracking-[0.2em] uppercase font-semibold">Suporte</p></div>
         </div>
       </div>
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
     </section>
 
     <!-- Automatizadores -->
@@ -213,10 +215,11 @@
     </section>
 
     <!-- Quote / Slogan -->
-    <section class="py-20 lg:py-28 px-[6%] bg-evo-surface">
-      <div class="max-w-3xl mx-auto reveal reveal-up">
+    <section class="py-20 lg:py-28 px-[6%] relative overflow-hidden bg-evo-surface">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,hsl(18_100%_50%/0.04),transparent_70%)] pointer-events-none"></div>
+      <div class="max-w-3xl mx-auto relative z-10 reveal reveal-up">
         <div class="quote-block">
-          <p class="text-lg lg:text-xl text-white/85 leading-relaxed tracking-wide font-light">
+          <p class="text-lg lg:text-xl text-white/90 leading-relaxed tracking-wide font-light">
             Inovação que abre portas, <strong class="text-primary font-bold">qualidade</strong> que permanece. Na <strong class="text-primary font-bold">EVO</strong>, cada solução carrega nosso compromisso com a <strong class="text-primary font-bold">excelência</strong>.
           </p>
         </div>
@@ -329,17 +332,22 @@
     </section>
 
     <!-- Linha EVO -->
-    <section class="py-20 px-[6%] text-center border-t border-evo/50">
-      <h2 class="section-title mb-8 reveal reveal-up">Linha Completa</h2>
-      <p class="text-evo-muted max-w-xl mx-auto reveal reveal-fade text-base sm:text-lg" data-delay="1">Automatizadores, portas, controles e acessórios. Tudo o que você precisa para o seu projeto em um só lugar.</p>
+    <section class="py-20 sm:py-24 px-[6%] relative overflow-hidden">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+      <div class="section-highlight reveal reveal-up">
+        <h2 class="section-title mb-6 text-white">Linha Completa</h2>
+        <p class="text-evo-muted text-base sm:text-lg leading-relaxed reveal reveal-fade" data-delay="1">Do motor ao controle no celular: uma linha pensada para o seu projeto sair do papel sem você precisar procurar em outro lugar.</p>
+      </div>
     </section>
 
     <!-- Mega CTA -->
     <section class="py-24 lg:py-32 px-[6%] text-center relative overflow-hidden">
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(18_100%_50%/0.08),transparent_70%)]"></div>
-      <div class="relative z-10 max-w-3xl mx-auto reveal reveal-scale">
-        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white tracking-wider mb-6">QUALIDADE <span class="text-primary drop-shadow-[0_0_30px_rgba(255,77,0,0.4)] animate-glow-pulse">EVO</span></h2>
-        <p class="text-lg lg:text-xl text-evo-muted mb-10">Referência nacional em automação e segurança. Tecnologia, confiabilidade e suporte dedicado para residências, condomínios e empresas em todo o Brasil.</p>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(18_100%_50%/0.06),transparent_65%)]"></div>
+      <div class="cta-block relative z-10 reveal reveal-scale">
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white tracking-wider mb-4 sm:mb-6">QUALIDADE <span class="text-primary drop-shadow-[0_0_30px_rgba(255,77,0,0.4)] animate-glow-pulse">EVO</span></h2>
+        <p class="text-base sm:text-lg lg:text-xl text-evo-muted leading-relaxed max-w-2xl mx-auto">Quem escolhe EVO escolhe tranquilidade: produtos que duram, instalação certa e uma equipe que realmente responde.</p>
+        <p class="text-white/90 text-sm sm:text-base mt-4">Dúvida, orçamento ou projeto especial — estamos aqui.</p>
+        <div class="cta-divider" aria-hidden="true"></div>
         <a href="contato.html" class="btn-primary text-base px-10 py-5">Fale Conosco</a>
       </div>
     </section>
