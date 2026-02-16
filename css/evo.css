@@ -725,6 +725,11 @@ footer .grid {
 }
 
 /* ========== MOBILE-FIRST (telefone) ========== */
+/* Fonte um pouco maior no mobile para melhor leitura */
+@media (max-width: 639px) {
+  html { font-size: 17px; }
+  body { font-size: 1rem; }
+}
 /* Evitar quebra de layout: nada ultrapassa a tela */
 body, main, section, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl, .max-w-xl {
   max-width: 100%;
