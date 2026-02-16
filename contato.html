@@ -90,8 +90,8 @@
       </form>
     </div>
 
-    <div id="form-success" class="max-w-xl mx-auto mt-8 p-6 rounded-xl border border-primary/30 bg-primary/5 text-center hidden reveal reveal-scale">
-      <p class="text-white font-medium">Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
+    <div id="form-error" class="max-w-xl mx-auto mt-8 p-6 rounded-xl border border-red-500/30 bg-red-500/10 text-center hidden">
+      <p class="text-white font-medium">Não foi possível enviar. Tente novamente ou nos chame no WhatsApp.</p>
     </div>
 
     <div class="max-w-3xl mx-auto mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
@@ -176,13 +176,90 @@
     })();
     (function () {
       var form = document.getElementById('form-contato');
-      var successEl = document.getElementById('form-success');
-      if (form && successEl) {
+      var errorEl = document.getElementById('form-error');
+      var submitBtn = form && form.querySelector('button[type="submit"]');
+      var SHEET_MONKEY_URL = 'https://api.sheetmonkey.io/form/9LxAc7GbneWB5786A8tytS';
+      var SUCCESS_PAGE = 'contato-sucesso.html';
+      var WHATSAPP_NUMBER = '5538998100827';
+
+      function buildWhatsAppText(data) {
+        var lines = [
+          '*Contato pelo site EVO*',
+          '',
+          'Nome: ' + (data.nome || ''),
+          'E-mail: ' + (data.email || ''),
+          'Telefone: ' + (data.telefone || ''),
+          'Mensagem: ' + (data.mensagem || '')
+        ];
+        return encodeURIComponent(lines.join('\n'));
+      }
+      function redirectToSuccess() {
+        window.location.href = SUCCESS_PAGE;
+      }
+      function submitViaIframe(data) {
+        var iframe = document.createElement('iframe');
+        iframe.name = 'sheetmonkey-iframe';
+        iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden';
+        document.body.appendChild(iframe);
+        var f = document.createElement('form');
+        f.method = 'POST';
+        f.action = SHEET_MONKEY_URL;
+        f.target = 'sheetmonkey-iframe';
+        ['nome', 'email', 'telefone', 'mensagem'].forEach(function (key) {
+          var val = (data && data[key]) || (form.querySelector('[name="' + key + '"]') || {}).value;
+          if (val) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = val;
+            f.appendChild(input);
+          }
+        });
+        document.body.appendChild(f);
+        f.submit();
+        setTimeout(function () {
+          document.body.removeChild(f);
+          document.body.removeChild(iframe);
+        }, 1500);
+      }
+
+      if (form) {
         form.addEventListener('submit', function (e) {
           e.preventDefault();
-          form.classList.add('hidden');
-          successEl.classList.remove('hidden');
-          form.reset();
+          var nome = (form.querySelector('#nome') || {}).value || '';
+          var email = (form.querySelector('#email') || {}).value || '';
+          var telefone = (form.querySelector('#telefone') || {}).value || '';
+          var mensagem = (form.querySelector('#mensagem') || {}).value || '';
+          var dados = { nome: nome, email: email, telefone: telefone, mensagem: mensagem };
+          var formData = new FormData(form);
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+          }
+          if (errorEl) errorEl.classList.add('hidden');
+
+          var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + buildWhatsAppText(dados);
+          window.open(waUrl, '_blank', 'noopener');
+
+          fetch(SHEET_MONKEY_URL, { method: 'POST', body: formData })
+            .then(function (res) {
+              if (res.ok) {
+                redirectToSuccess();
+                return;
+              }
+              throw new Error('Erro');
+            })
+            .catch(function () {
+              submitViaIframe(dados);
+              setTimeout(redirectToSuccess, 800);
+            })
+            .finally(function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar Mensagem';
+              }
+            });
         });
       }
     })();
