@@ -150,15 +150,15 @@ img { object-fit: contain; }
 /* Nav logo: tamanho fixo, sem parallax */
 .nav-logo-link {
   position: relative;
-  height: 96px;
-  min-height: 96px;
-  max-height: 96px;
-  width: 320px;
+  height: 120px;
+  min-height: 120px;
+  max-height: 120px;
+  width: 380px;
   overflow: visible;
   justify-content: flex-start;
 }
 @media (min-width: 768px) {
-  .nav-logo-link { height: 112px; min-height: 112px; max-height: 112px; width: 440px; }
+  .nav-logo-link { height: 140px; min-height: 140px; max-height: 140px; width: 520px; }
 }
 .nav-logo-wrap {
   position: absolute;
@@ -168,17 +168,17 @@ img { object-fit: contain; }
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 320px;
-  height: 140px;
+  width: 380px;
+  height: 175px;
   overflow: visible;
   pointer-events: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-wrap { width: 440px; height: 176px; }
+  .nav-logo-wrap { width: 520px; height: 220px; }
 }
 .nav-logo-img {
   display: block;
-  height: 140px;
+  height: 175px;
   width: auto;
   max-width: none;
   object-fit: contain;
@@ -187,7 +187,7 @@ img { object-fit: contain; }
   transform: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-img { height: 176px; }
+  .nav-logo-img { height: 220px; }
 }
 
 /* Buttons - área de toque mínima 44px */
@@ -629,9 +629,8 @@ a.btn-primary { touch-action: manipulation; }
 
 /* Nav scrolled state (via JS) */
 nav.nav-scrolled {
-  background: hsl(var(--background) / 0.95);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid hsl(var(--primary) / 0.1);
+  /* Mantém o mesmo visual transparente ao rolar – sem escurecer */
+  backdrop-filter: blur(8px);
 }
 
 /* Utility colors (para uso com layout Tailwind CDN) */
