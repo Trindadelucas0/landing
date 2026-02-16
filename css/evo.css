@@ -675,6 +675,31 @@ nav button[aria-label],
   touch-action: manipulation;
 }
 
+/* Mobile: garantir que o menu toggle apareça sempre (não ser empurrado pelo logo) */
+@media (max-width: 767px) {
+  #menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .nav-logo-link {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: calc(100vw - 80px);
+  }
+  .nav-logo-wrap {
+    max-width: 100%;
+  }
+  .nav-logo-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 52px;
+  }
+}
+
 /* Hero: título não estourar em telas muito pequenas */
 .hero-evo-logo {
   height: 4rem;
