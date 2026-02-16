@@ -681,11 +681,11 @@ nav button[aria-label],
   touch-action: manipulation;
 }
 
-/* Mobile: nav responsivo, nada colado nas bordas */
+/* Mobile: nav responsivo, menu toggle mais ao centro (não colado na direita) */
 @media (max-width: 767px) {
   nav#nav > div {
     padding-left: max(1rem, env(safe-area-inset-left, 0.75rem));
-    padding-right: max(1.25rem, calc(1rem + env(safe-area-inset-right, 0)));
+    padding-right: max(2.5rem, calc(2rem + env(safe-area-inset-right, 0)));
     box-sizing: border-box;
   }
   #menu-toggle {
@@ -695,14 +695,14 @@ nav button[aria-label],
     flex-shrink: 0;
     visibility: visible !important;
     opacity: 1 !important;
-    margin-right: 0;
+    margin-right: 1.5rem;
     margin-left: auto;
   }
   .nav-logo-link {
     flex-shrink: 1;
     min-width: 0;
-    /* Reserva espaço para o botão (44px) + padding direito (min 20px) */
-    max-width: calc(100% - 44px - 1.25rem);
+    /* Reserva espaço para o botão (44px) + margem + padding direito */
+    max-width: calc(100% - 44px - 1.5rem - 2.5rem);
     height: 200px;
     min-height: 200px;
     max-height: 200px;
