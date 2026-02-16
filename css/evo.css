@@ -610,9 +610,12 @@ a.btn-primary { touch-action: manipulation; }
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-/* Nav sempre por cima do overlay do menu (botão fechar e logo sempre visíveis) */
+/* Nav literalmente transparente (sem fundo) */
 nav#nav {
   z-index: 100;
+  background: transparent !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .mobile-menu a {
   display: block;
@@ -633,10 +636,11 @@ nav#nav {
   .mobile-menu { display: none !important; }
 }
 
-/* Nav scrolled state (via JS) */
+/* Nav scrolled state (via JS) – continua transparente ao rolar */
 nav.nav-scrolled {
-  /* Mantém o mesmo visual transparente ao rolar – sem escurecer */
-  backdrop-filter: blur(8px);
+  background: transparent !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Utility colors (para uso com layout Tailwind CDN) */
@@ -829,13 +833,13 @@ section .max-w-xl { width: 100%; }
 
 /* Footer: fonte maior em todos os dispositivos + quebra de texto */
 footer a, footer p { word-break: break-word; overflow-wrap: break-word; }
-footer p { font-size: 1.25rem; line-height: 1.6; }
-footer a:not([class*="text-"]) { font-size: 1.25rem; }
-footer .text-sm { font-size: 1.25rem !important; }
-footer .text-xs { font-size: 1.125rem !important; }
-footer .text-xl { font-size: 1.75rem !important; }
-footer .font-display { font-size: 1.75rem !important; }
-footer .social-link { font-size: 1.25rem !important; }
+footer p { font-size: 1.375rem; line-height: 1.6; }
+footer a:not([class*="text-"]) { font-size: 1.375rem; }
+footer .text-sm { font-size: 1.375rem !important; }
+footer .text-xs { font-size: 1.25rem !important; }
+footer .text-xl { font-size: 2rem !important; }
+footer .font-display { font-size: 2rem !important; }
+footer .social-link { font-size: 1.375rem !important; }
 
 /* Garantir que nenhum filho cause scroll horizontal */
 section { overflow-x: hidden; }
