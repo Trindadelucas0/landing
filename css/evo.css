@@ -686,7 +686,7 @@ nav button[aria-label],
     flex-shrink: 0;
     visibility: visible !important;
     opacity: 1 !important;
-    margin-right: max(1rem, env(safe-area-inset-right, 0));
+    margin-right: max(1.25rem, calc(1rem + env(safe-area-inset-right, 0)));
     margin-left: auto;
   }
   .nav-logo-link {
