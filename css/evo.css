@@ -595,20 +595,24 @@ a.btn-primary { touch-action: manipulation; }
 .animate-glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
 .animate-float-soft { animation: floatSoft 4s ease-in-out infinite; }
 
-/* Mobile menu */
+/* Mobile menu: fica ATRÁS da nav para não sobrepor o header (logo + botão fechar) */
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: 50;
   background: hsl(var(--background) / 0.98);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  padding-top: max(5rem, calc(80px + env(safe-area-inset-top)));
+  padding-top: max(14rem, calc(230px + env(safe-area-inset-top)));
   padding-left: max(1.5rem, 5vw);
   padding-right: max(1.5rem, 5vw);
   padding-bottom: env(safe-area-inset-bottom);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+/* Nav sempre por cima do overlay do menu (botão fechar e logo sempre visíveis) */
+nav#nav {
+  z-index: 100;
 }
 .mobile-menu a {
   display: block;
