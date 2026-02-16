@@ -59,7 +59,7 @@ img { object-fit: contain; }
 .automatizador-carousel .automatizador-slide-2 { opacity: 0; }
 .automatizador-zoom-modal { backdrop-filter: blur(8px); }
 .automatizador-zoom-modal:not(.hidden) { display: flex !important; }
-/* Background de imagem (hero): desktop - mostra parte inferior do produto */
+/* Background de imagem (hero): fica atrás do nav/menu */
 .hero-bg-img {
   background-color: #030303;
   background-size: 72%;
@@ -67,6 +67,8 @@ img { object-fit: contain; }
   background-repeat: no-repeat;
   min-height: 100%;
   min-width: 100%;
+  z-index: 0;
+  position: absolute;
 }
 /* Mobile: imagem maior, mais destaque */
 @media (max-width: 639px) {
@@ -675,7 +677,7 @@ nav button[aria-label],
   touch-action: manipulation;
 }
 
-/* Mobile: logo bem grande + espaço para o menu toggle */
+/* Mobile: logo bem grande + menu toggle sempre visível à direita */
 @media (max-width: 767px) {
   #menu-toggle {
     display: flex !important;
@@ -684,7 +686,8 @@ nav button[aria-label],
     flex-shrink: 0;
     visibility: visible !important;
     opacity: 1 !important;
-    margin-right: 4rem;
+    margin-right: max(1rem, env(safe-area-inset-right, 0));
+    margin-left: auto;
   }
   .nav-logo-link {
     flex-shrink: 1;
