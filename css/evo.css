@@ -150,15 +150,15 @@ img { object-fit: contain; }
 /* Nav logo: tamanho fixo, sem parallax */
 .nav-logo-link {
   position: relative;
-  height: 120px;
-  min-height: 120px;
-  max-height: 120px;
-  width: 380px;
+  height: 140px;
+  min-height: 140px;
+  max-height: 140px;
+  width: 420px;
   overflow: visible;
   justify-content: flex-start;
 }
 @media (min-width: 768px) {
-  .nav-logo-link { height: 140px; min-height: 140px; max-height: 140px; width: 520px; }
+  .nav-logo-link { height: 180px; min-height: 180px; max-height: 180px; width: 620px; }
 }
 .nav-logo-wrap {
   position: absolute;
@@ -168,17 +168,17 @@ img { object-fit: contain; }
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 380px;
-  height: 175px;
+  width: 420px;
+  height: 200px;
   overflow: visible;
   pointer-events: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-wrap { width: 520px; height: 220px; }
+  .nav-logo-wrap { width: 620px; height: 280px; }
 }
 .nav-logo-img {
   display: block;
-  height: 175px;
+  height: 200px;
   width: auto;
   max-width: none;
   object-fit: contain;
@@ -187,7 +187,7 @@ img { object-fit: contain; }
   transform: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-img { height: 220px; }
+  .nav-logo-img { height: 280px; }
 }
 
 /* Buttons - área de toque mínima 44px */
@@ -675,7 +675,7 @@ nav button[aria-label],
   touch-action: manipulation;
 }
 
-/* Mobile: garantir que o menu toggle apareça sempre (não ser empurrado pelo logo) */
+/* Mobile: logo bem grande + espaço para o menu toggle */
 @media (max-width: 767px) {
   #menu-toggle {
     display: flex !important;
@@ -688,15 +688,25 @@ nav button[aria-label],
   .nav-logo-link {
     flex-shrink: 1;
     min-width: 0;
-    max-width: calc(100vw - 80px);
+    /* Mais largura para a logo (reserva só 56px para o botão) */
+    max-width: calc(100vw - 56px);
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
   }
   .nav-logo-wrap {
     max-width: 100%;
+    height: 200px;
+    min-height: 200px;
   }
   .nav-logo-img {
+    width: auto;
+    height: 200px !important;
+    min-height: 200px;
+    max-height: none !important;
     max-width: 100%;
-    height: auto;
-    max-height: 52px;
+    object-fit: contain;
+    object-position: left center;
   }
 }
 
