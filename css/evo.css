@@ -827,11 +827,15 @@ section .max-w-xl { width: 100%; }
   .quote-block p { font-size: 0.9375rem; line-height: 1.6; }
 }
 
-/* Footer: links e texto não quebram mal */
+/* Footer: fonte maior em todos os dispositivos + quebra de texto */
 footer a, footer p { word-break: break-word; overflow-wrap: break-word; }
-@media (max-width: 639px) {
-  footer .text-sm { font-size: 0.8125rem; }
-}
+footer p { font-size: 1.125rem; line-height: 1.6; }
+footer a:not([class*="text-"]) { font-size: 1.125rem; }
+footer .text-sm { font-size: 1.125rem !important; }
+footer .text-xs { font-size: 1rem !important; }
+footer .text-xl { font-size: 1.5rem !important; }
+footer .font-display { font-size: 1.5rem !important; }
+footer .social-link { font-size: 1.125rem !important; }
 
 /* Garantir que nenhum filho cause scroll horizontal */
 section { overflow-x: hidden; }
