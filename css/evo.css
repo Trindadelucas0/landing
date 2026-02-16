@@ -831,15 +831,33 @@ section .max-w-xl { width: 100%; }
   .quote-block p { font-size: 0.9375rem; line-height: 1.6; }
 }
 
-/* Footer: fonte maior em todos os dispositivos + quebra de texto */
+/* Footer: fonte responsiva (menor no mobile, um pouco maior no desktop) + quebra de texto */
 footer a, footer p { word-break: break-word; overflow-wrap: break-word; }
-footer p { font-size: 1.375rem; line-height: 1.6; }
-footer a:not([class*="text-"]) { font-size: 1.375rem; }
-footer .text-sm { font-size: 1.375rem !important; }
-footer .text-xs { font-size: 1.25rem !important; }
-footer .text-xl { font-size: 2rem !important; }
-footer .font-display { font-size: 2rem !important; }
-footer .social-link { font-size: 1.375rem !important; }
+footer p { font-size: 0.9375rem; line-height: 1.6; }
+footer a:not([class*="text-"]) { font-size: 0.9375rem; }
+footer .text-sm { font-size: 0.9375rem !important; }
+footer .text-xs { font-size: 0.75rem !important; }
+footer .text-xl { font-size: 1.125rem !important; }
+footer .font-display { font-size: 1.125rem !important; }
+footer .social-link { font-size: 0.9375rem !important; }
+@media (min-width: 640px) {
+  footer p { font-size: 1rem; }
+  footer a:not([class*="text-"]) { font-size: 1rem; }
+  footer .text-sm { font-size: 1rem !important; }
+  footer .text-xs { font-size: 0.8125rem !important; }
+  footer .text-xl { font-size: 1.25rem !important; }
+  footer .font-display { font-size: 1.25rem !important; }
+  footer .social-link { font-size: 1rem !important; }
+}
+@media (min-width: 1024px) {
+  footer p { font-size: 1.0625rem; }
+  footer a:not([class*="text-"]) { font-size: 1.0625rem; }
+  footer .text-sm { font-size: 1.0625rem !important; }
+  footer .text-xs { font-size: 0.875rem !important; }
+  footer .text-xl { font-size: 1.375rem !important; }
+  footer .font-display { font-size: 1.375rem !important; }
+  footer .social-link { font-size: 1.0625rem !important; }
+}
 
 /* Garantir que nenhum filho cause scroll horizontal */
 section { overflow-x: hidden; }
