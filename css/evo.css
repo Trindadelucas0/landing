@@ -677,8 +677,13 @@ nav button[aria-label],
   touch-action: manipulation;
 }
 
-/* Mobile: logo bem grande + menu toggle sempre visível à direita */
+/* Mobile: nav responsivo, nada colado nas bordas */
 @media (max-width: 767px) {
+  nav#nav > div {
+    padding-left: max(1rem, env(safe-area-inset-left, 0.75rem));
+    padding-right: max(1.25rem, calc(1rem + env(safe-area-inset-right, 0)));
+    box-sizing: border-box;
+  }
   #menu-toggle {
     display: flex !important;
     align-items: center;
@@ -686,14 +691,14 @@ nav button[aria-label],
     flex-shrink: 0;
     visibility: visible !important;
     opacity: 1 !important;
-    margin-right: max(1.25rem, calc(1rem + env(safe-area-inset-right, 0)));
+    margin-right: 0;
     margin-left: auto;
   }
   .nav-logo-link {
     flex-shrink: 1;
     min-width: 0;
-    /* Mais largura para a logo (reserva só 56px para o botão) */
-    max-width: calc(100vw - 56px);
+    /* Reserva espaço para o botão (44px) + padding direito (min 20px) */
+    max-width: calc(100% - 44px - 1.25rem);
     height: 200px;
     min-height: 200px;
     max-height: 200px;
