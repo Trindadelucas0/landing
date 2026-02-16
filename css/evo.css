@@ -150,15 +150,15 @@ img { object-fit: contain; }
 /* Nav logo: tamanho fixo, sem parallax */
 .nav-logo-link {
   position: relative;
-  height: 72px;
-  min-height: 72px;
-  max-height: 72px;
-  width: 280px;
+  height: 96px;
+  min-height: 96px;
+  max-height: 96px;
+  width: 320px;
   overflow: visible;
   justify-content: flex-start;
 }
 @media (min-width: 768px) {
-  .nav-logo-link { height: 80px; min-height: 80px; max-height: 80px; width: 360px; }
+  .nav-logo-link { height: 112px; min-height: 112px; max-height: 112px; width: 440px; }
 }
 .nav-logo-wrap {
   position: absolute;
@@ -168,17 +168,17 @@ img { object-fit: contain; }
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 280px;
-  height: 104px;
+  width: 320px;
+  height: 140px;
   overflow: visible;
   pointer-events: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-wrap { width: 360px; height: 128px; }
+  .nav-logo-wrap { width: 440px; height: 176px; }
 }
 .nav-logo-img {
   display: block;
-  height: 104px;
+  height: 140px;
   width: auto;
   max-width: none;
   object-fit: contain;
@@ -187,7 +187,7 @@ img { object-fit: contain; }
   transform: none;
 }
 @media (min-width: 768px) {
-  .nav-logo-img { height: 128px; }
+  .nav-logo-img { height: 176px; }
 }
 
 /* Buttons - área de toque mínima 44px */
