@@ -723,6 +723,16 @@ nav.nav-scrolled {
   -webkit-backdrop-filter: none;
 }
 
+/* Desktop: reposiciona links do nav mais para a esquerda */
+@media (min-width: 768px) {
+  nav#nav > div {
+    justify-content: flex-start;
+  }
+  .nav-desktop-links {
+    margin-left: clamp(1.5rem, 5vw, 5rem);
+  }
+}
+
 /* Utility colors (para uso com layout Tailwind CDN) */
 .bg-evo-background { background: hsl(var(--background)); }
 .bg-evo-surface { background: hsl(var(--surface)); }
