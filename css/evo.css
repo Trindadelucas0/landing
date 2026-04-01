@@ -382,6 +382,52 @@ a.btn-primary { touch-action: manipulation; }
   background: hsl(var(--primary) / 0.08);
 }
 
+/* Botao flutuante WhatsApp (somente mobile) */
+.whatsapp-float-mobile {
+  position: fixed;
+  left: max(0.9rem, calc(env(safe-area-inset-left) + 0.75rem));
+  bottom: max(0.9rem, calc(env(safe-area-inset-bottom) + 0.75rem));
+  width: auto;
+  height: auto;
+  padding: 0.72rem 0.85rem;
+  min-width: 56px;
+  min-height: 56px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(142 70% 35% / 0.55);
+  background: linear-gradient(165deg, hsl(142 74% 37%) 0%, hsl(142 72% 29%) 100%);
+  color: hsl(0 0% 100%);
+  box-shadow: 0 10px 28px hsl(0 0% 0% / 0.45), 0 0 20px hsl(142 70% 35% / 0.25);
+  z-index: 120;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.whatsapp-float-mobile__number {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  line-height: 1;
+}
+.whatsapp-float-mobile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px hsl(0 0% 0% / 0.5), 0 0 24px hsl(142 70% 35% / 0.3);
+  filter: brightness(1.05);
+}
+.whatsapp-float-mobile:active {
+  transform: translateY(0);
+}
+@media (max-width: 767px) {
+  .whatsapp-float-mobile { display: inline-flex; }
+}
+@media (min-width: 768px) {
+  .whatsapp-float-mobile { display: none !important; }
+}
+
 /* Quote block */
 .quote-block {
   position: relative;
@@ -595,48 +641,82 @@ a.btn-primary { touch-action: manipulation; }
 .animate-glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
 .animate-float-soft { animation: floatSoft 4s ease-in-out infinite; }
 
-/* Mobile menu: fica ATRÁS da nav para não sobrepor o header (logo + botão fechar) */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* Mobile menu com transição suave e melhor hierarquia visual */
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 50;
-  background: hsl(var(--background) / 0.98);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding-top: max(14rem, calc(230px + env(safe-area-inset-top)));
-  padding-left: max(1.5rem, 5vw);
-  padding-right: max(1.5rem, 5vw);
-  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 90;
+  background: linear-gradient(180deg, hsl(var(--background) / 0.98) 0%, hsl(var(--surface) / 0.98) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding-top: max(6.75rem, calc(5.75rem + env(safe-area-inset-top)));
+  padding-left: max(1.25rem, 6vw);
+  padding-right: max(1.25rem, 6vw);
+  padding-bottom: max(1.25rem, calc(1.25rem + env(safe-area-inset-bottom)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
 }
-/* Nav literalmente transparente (sem fundo) */
+.mobile-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.mobile-menu > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Nav com leve vidro para melhorar contraste em mobile */
 nav#nav {
   z-index: 100;
   background: transparent !important;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
+
 .mobile-menu a {
   display: block;
   font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(1.25rem, 5vw, 1.5rem);
-  letter-spacing: 0.05em;
-  padding: 1rem 0;
-  min-height: 48px;
-  border-bottom: 1px solid hsl(var(--border) / 0.5);
-  color: hsl(var(--foreground) / 0.8);
+  font-size: clamp(1.05rem, 4.4vw, 1.35rem);
+  letter-spacing: 0.04em;
+  padding: 0.95rem 0.25rem;
+  min-height: 46px;
+  border-bottom: 1px solid hsl(var(--border) / 0.45);
+  color: hsl(var(--foreground) / 0.86);
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.25s ease, transform 0.25s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .mobile-menu a:hover,
-.mobile-menu a.active { color: hsl(var(--primary)); }
+.mobile-menu a.active {
+  color: hsl(var(--primary));
+}
+.mobile-menu a:hover {
+  transform: translateX(4px);
+}
+
+@media (max-width: 767px) {
+  .mobile-menu,
+  .mobile-menu.hidden {
+    display: block !important;
+  }
+}
 @media (min-width: 768px) {
   .mobile-menu { display: none !important; }
 }
 
-/* Nav scrolled state (via JS) – continua transparente ao rolar */
+/* Nav scrolled state (via JS) */
 nav.nav-scrolled {
   background: transparent !important;
   backdrop-filter: none;
@@ -688,8 +768,10 @@ nav button[aria-label],
 /* Mobile: nav responsivo, menu toggle mais ao centro (não colado na direita) */
 @media (max-width: 767px) {
   nav#nav > div {
-    padding-left: max(1rem, env(safe-area-inset-left, 0.75rem));
-    padding-right: max(2.5rem, calc(2rem + env(safe-area-inset-right, 0)));
+    padding-left: max(0.85rem, env(safe-area-inset-left, 0.75rem));
+    padding-right: max(0.85rem, calc(0.85rem + env(safe-area-inset-right, 0)));
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
     box-sizing: border-box;
   }
   #menu-toggle {
@@ -699,27 +781,30 @@ nav button[aria-label],
     flex-shrink: 0;
     visibility: visible !important;
     opacity: 1 !important;
-    margin-right: 1.5rem;
+    margin-right: 0;
     margin-left: auto;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background: hsl(var(--surface) / 0.72);
   }
   .nav-logo-link {
     flex-shrink: 1;
     min-width: 0;
-    /* Reserva espaço para o botão (44px) + margem + padding direito */
-    max-width: calc(100% - 44px - 1.5rem - 2.5rem);
-    height: 200px;
-    min-height: 200px;
-    max-height: 200px;
+    max-width: calc(100% - 56px - 0.65rem);
+    height: 96px;
+    min-height: 96px;
+    max-height: 96px;
   }
   .nav-logo-wrap {
     max-width: 100%;
-    height: 200px;
-    min-height: 200px;
+    width: min(70vw, 280px);
+    height: 110px;
+    min-height: 110px;
   }
   .nav-logo-img {
     width: auto;
-    height: 200px !important;
-    min-height: 200px;
+    height: 110px !important;
+    min-height: 110px;
     max-height: none !important;
     max-width: 100%;
     object-fit: contain;
