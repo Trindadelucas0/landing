@@ -8,20 +8,6 @@
   <meta name="description" content="Sua mensagem foi recebida pela EVO. Entraremos em contato em breve." />
   <meta name="theme-color" content="#ff4d00" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <a
-    href="https://wa.me/5561991050322"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="whatsapp-float-mobile"
-    aria-label="Abrir conversa no WhatsApp: (61) 99105-0322"
-    title="Falar no WhatsApp: (61) 99105-0322"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-7 h-7 fill-current">
-      <path d="M16.75 13.96c-.25-.13-1.47-.72-1.7-.8-.23-.09-.4-.13-.57.13-.17.25-.65.8-.8.96-.15.17-.3.19-.55.07-.25-.13-1.06-.39-2.02-1.26-.74-.66-1.24-1.48-1.39-1.73-.15-.26-.02-.4.11-.53.11-.11.25-.3.37-.44.12-.15.16-.26.24-.43.08-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.88-.21-.5-.43-.43-.58-.44h-.5c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.77 2.7 4.29 3.79.6.26 1.06.41 1.43.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/>
-      <path d="M12.05 2C6.54 2 2.05 6.49 2.05 12c0 1.94.55 3.8 1.6 5.41L2 22l4.74-1.56A9.93 9.93 0 0 0 12.05 22C17.56 22 22.05 17.51 22.05 12S17.56 2 12.05 2Zm0 18.19c-1.66 0-3.29-.44-4.72-1.29l-.34-.2-2.81.93.92-2.74-.22-.35a8.12 8.12 0 0 1-1.25-4.34c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.16-8.16 8.16Z"/>
-    </svg>
-    <span class="whatsapp-float-mobile__number">(61) 99105-0322</span>
-  </a>
   <script>
     tailwind.config = {
       theme: {
@@ -66,16 +52,27 @@
     <p class="absolute bottom-12 left-8 right-8 text-evo-muted text-sm tracking-wider">Tecnologia que move</p>
   </div>
 
-  <main class="pt-24 sm:pt-32 pb-16 sm:pb-20 min-h-[70vh] flex flex-col items-center justify-center px-4">
-    <div class="max-w-lg mx-auto text-center">
-      <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
-        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+  <main class="pt-28 sm:pt-32 pb-16 sm:pb-20 min-h-[72vh] flex items-center justify-center px-4 sm:px-6 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_65%_45%_at_50%_30%,hsl(18_100%_50%/0.12),transparent_65%)]"></div>
+    <section class="relative z-10 w-full max-w-xl rounded-2xl border border-primary/25 bg-[linear-gradient(180deg,hsl(0_0%_8%/0.96)_0%,hsl(0_0%_5%/0.96)_100%)] shadow-[0_20px_60px_rgba(0,0,0,0.45)] px-5 sm:px-8 py-8 sm:py-10">
+      <div class="w-16 h-16 rounded-full bg-primary/20 border border-primary/35 flex items-center justify-center mx-auto mb-6 shadow-[0_0_32px_rgba(255,77,0,0.35)]">
+        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 13l4 4L19 7"/></svg>
       </div>
-      <h1 class="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase mb-3">Dados enviados!</h1>
-      <p class="text-evo-muted text-base sm:text-lg leading-relaxed mb-8">Assim que a equipe EVO receber, entrará em contato.</p>
-      <a href="index.html" class="btn-primary inline-block">Voltar ao início</a>
-      <a href="contato.html" class="btn-outline inline-block ml-3 mt-3 sm:mt-0">Enviar outra mensagem</a>
-    </div>
+
+      <p class="text-primary text-[11px] sm:text-xs font-bold tracking-[0.28em] uppercase text-center mb-3">Mensagem confirmada</p>
+      <h1 class="font-display text-2xl sm:text-3xl text-white tracking-[0.08em] uppercase text-center leading-tight mb-4">Recebemos seu contato</h1>
+      <p class="text-evo-muted text-sm sm:text-base leading-relaxed text-center max-w-md mx-auto">Obrigado por falar com a EVO. Nosso time comercial vai analisar sua solicitação e responder em breve.</p>
+
+      <div class="mt-6 sm:mt-7 rounded-xl border border-white/10 bg-black/25 px-4 sm:px-5 py-4">
+        <p class="text-white/90 text-sm sm:text-base font-medium">Próximo passo</p>
+        <p class="text-evo-muted text-sm leading-relaxed mt-1">Atendimento humano e retorno rápido por WhatsApp, telefone ou e-mail, conforme o canal informado.</p>
+      </div>
+
+      <div class="mt-7 sm:mt-8 flex flex-col gap-3">
+        <a href="index.html" class="btn-primary w-full">Voltar ao início</a>
+        <a href="contato.html" class="btn-outline w-full">Enviar outra mensagem</a>
+      </div>
+    </section>
   </main>
 
   <footer class="relative pt-20 pb-16 px-[6%] border-t border-primary/20 bg-gradient-to-b from-surface to-background mt-20">
@@ -85,9 +82,24 @@
       <p class="text-evo-muted text-sm tracking-wider">© <span id="year"></span> EVO. Todos os direitos reservados.</p>
     </div>
   </footer>
+  <a
+    href="https://wa.me/5561991050322"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="whatsapp-float-mobile"
+    aria-label="Ir para o WhatsApp"
+    title="Ir para o WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-7 h-7 fill-current">
+      <path d="M16.75 13.96c-.25-.13-1.47-.72-1.7-.8-.23-.09-.4-.13-.57.13-.17.25-.65.8-.8.96-.15.17-.3.19-.55.07-.25-.13-1.06-.39-2.02-1.26-.74-.66-1.24-1.48-1.39-1.73-.15-.26-.02-.4.11-.53.11-.11.25-.3.37-.44.12-.15.16-.26.24-.43.08-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.88-.21-.5-.43-.43-.58-.44h-.5c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.77 2.7 4.29 3.79.6.26 1.06.41 1.43.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/>
+      <path d="M12.05 2C6.54 2 2.05 6.49 2.05 12c0 1.94.55 3.8 1.6 5.41L2 22l4.74-1.56A9.93 9.93 0 0 0 12.05 22C17.56 22 22.05 17.51 22.05 12S17.56 2 12.05 2Zm0 18.19c-1.66 0-3.29-.44-4.72-1.29l-.34-.2-2.81.93.92-2.74-.22-.35a8.12 8.12 0 0 1-1.25-4.34c0-4.5 3.66-8.16 8.16-8.16s8.16 3.66 8.16 8.16-3.66 8.16-8.16 8.16Z"/>
+    </svg>
+    <span class="whatsapp-float-mobile__number">Ir para o WhatsApp</span>
+  </a>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="js/whatsapp-float.js"></script>
   <script src="js/mobile-menu.js"></script>
   <script src="js/reveal.js"></script>
 </body>
