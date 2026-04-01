@@ -897,7 +897,7 @@ footer .grid {
 /* ========== MOBILE-FIRST (telefone) ========== */
 /* Fonte um pouco maior no mobile para melhor leitura */
 @media (max-width: 639px) {
-  html { font-size: 17px; }
+  html { font-size: 16px; }
   body { font-size: 1rem; }
 }
 /* Evitar quebra de layout: nada ultrapassa a tela */
@@ -947,6 +947,18 @@ section .max-w-xl { width: 100%; }
 @media (max-width: 639px) {
   .quote-block { padding: 1.25rem 1rem; }
   .quote-block p { font-size: 0.9375rem; line-height: 1.6; }
+}
+
+/* Utilitarios mobile para blocos com titulo/texto extensos */
+.mobile-copy-wrap {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+@media (max-width: 639px) {
+  .mobile-label-tight { letter-spacing: 0.16em !important; }
+}
+@media (min-width: 640px) {
+  .mobile-label-tight { letter-spacing: 0.3em !important; }
 }
 
 /* Footer: fonte responsiva (menor no mobile, um pouco maior no desktop) + quebra de texto */

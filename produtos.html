@@ -29,6 +29,7 @@
     /* Wrapper do carrossel: hint + fade na direita no mobile */
     .strip-wrapper {
       position: relative;
+      overflow-x: clip;
     }
     .strip-hint {
 
@@ -61,13 +62,15 @@
       overflow-x: auto; overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
       scroll-snap-type: x mandatory;
+      scroll-padding-inline: 1rem;
+      overscroll-behavior-x: contain;
       scrollbar-width: none;
     }
     .catalogo-strip::-webkit-scrollbar { display: none; }
     /* Cards: no mobile menor que o viewport para mostrar "peek" do próximo */
     .catalogo-card {
-      flex: 0 0 min(280px, 78vw);
-      width: min(280px, 78vw);
+      flex: 0 0 clamp(240px, 82vw, 280px);
+      width: clamp(240px, 82vw, 280px);
       min-width: 0;
       scroll-snap-align: start;
       scroll-snap-stop: always;
@@ -103,8 +106,17 @@
     .strip-section-header h2 { font-size: 1.125rem; word-break: break-word; }
     @media (min-width: 640px) { .strip-section-header h2 { font-size: 1.5rem; } }
     /* Grid Explore: itens e rótulos */
-    .catalogo-grid-item p { font-size: 0.6875rem; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
-    @media (min-width: 640px) { .catalogo-grid-item p { font-size: 0.75rem; } }
+    .catalogo-grid-item p { font-size: 0.6875rem; line-height: 1.35; overflow: hidden; max-width: 100%; overflow-wrap: anywhere; }
+    @media (max-width: 639px) {
+      .catalogo-grid-item p {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        min-height: 2.2em;
+      }
+    }
+    @media (min-width: 640px) { .catalogo-grid-item p { font-size: 0.75rem; text-overflow: ellipsis; white-space: nowrap; } }
     .catalogo-grid-item .aspect-square { min-height: 0; }
     /* CTA e footer: safe area */
     .cta-produtos { padding-bottom: max(4rem, env(safe-area-inset-bottom)); }
