@@ -42,6 +42,13 @@
     .page-contato .premium-card h3 { font-size: 0.875rem !important; }
     .page-contato .premium-card a { font-size: 1rem !important; }
     @media (min-width: 640px) { .page-contato .premium-card a { font-size: 1.0625rem !important; } }
+    .page-contato .premium-card a[href^="mailto:"] {
+      display: inline-block;
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
     .page-contato #form-error p { font-size: 1rem; }
   </style>
 </head>
@@ -116,7 +123,7 @@
     <div class="max-w-3xl mx-auto mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
       <div class="premium-card p-6 text-center reveal reveal-up">
         <h3 class="font-display text-primary text-xs tracking-[0.15em] uppercase mb-3">E-mail</h3>
-        <a href="mailto:contato@evobrasil.com.br" class="text-evo-muted hover:text-white transition-colors text-sm">contato@automabrasautomacao.com</a>
+        <a href="mailto:contato@automabrasautomacao.com" class="text-evo-muted hover:text-white transition-colors text-sm">contato@automabrasautomacao.com</a>
       </div>
       <div class="premium-card p-6 text-center reveal reveal-up">
         <h3 class="font-display text-primary text-xs tracking-[0.15em] uppercase mb-3">Telefone</h3>
@@ -202,13 +209,22 @@
       var WHATSAPP_NUMBER = '5538998100827';
 
       function buildWhatsAppText(data) {
+        var nome = ((data && data.nome) || '').trim();
+        var email = ((data && data.email) || '').trim();
+        var telefone = ((data && data.telefone) || '').trim();
+        var mensagem = ((data && data.mensagem) || '').trim();
         var lines = [
-          '*Contato pelo site EVO*',
+          '*Nova mensagem pelo site - EVO*',
           '',
-          'Nome: ' + (data.nome || ''),
-          'E-mail: ' + (data.email || ''),
-          'Telefone: ' + (data.telefone || ''),
-          'Mensagem: ' + (data.mensagem || '')
+          '*Dados do contato*',
+          '- Nome: ' + (nome || 'Nao informado'),
+          '- E-mail: ' + (email || 'Nao informado'),
+          '- Telefone: ' + (telefone || 'Nao informado'),
+          '',
+          '*Mensagem*',
+          (mensagem || 'Nao informada'),
+          '',
+          '_Enviado automaticamente pelo formulario de contato do site._'
         ];
         return encodeURIComponent(lines.join('\n'));
       }
